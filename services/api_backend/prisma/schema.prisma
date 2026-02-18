@@ -1,0 +1,228 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  MODERATOR
+  ADMIN
+}
+
+enum EventType {
+  INSPECTION
+  VARROA_MEASUREMENT
+  TREATMENT
+  FEEDING
+  HARVEST
+  NOTE
+  TASK_CREATED
+  TASK_DONE
+  COMMUNITY_IMPORT
+  DELETE
+}
+
+enum EventSource {
+  MANUAL
+  VOICE
+  COMMUNITY
+  RULE
+}
+
+enum TaskStatus {
+  PENDING
+  DONE
+  CANCELLED
+}
+
+model User {
+  id            String   @id @default(uuid()) @db.Uuid
+  email         String   @unique
+  passwordHash  String   @map("password_hash")
+  displayName   String?  @map("display_name")
+  role          Role     @default(USER)
+  region        String?
+  elevationBand String?  @map("elevation_band")
+  language      String   @default("de")
+  fcmToken      String?  @map("fcm_token")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  deletedAt     DateTime? @map("deleted_at")
+
+  sites          Site[]
+  hives          Hive[]
+  events         Event[]
+  tasks          Task[]
+  communityPosts CommunityPost[]
+  comments       CommunityComment[]
+  reports        Report[]
+
+  @@map("users")
+}
+
+model Site {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  name      String
+  location  String?
+  latitude  Float?
+  longitude Float?
+  elevation Int?
+  notes     String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  user   User   @relation(fields: [userId], references: [id])
+  hives  Hive[]
+  events Event[]
+  tasks  Task[]
+
+  @@index([userId])
+  @@map("sites")
+}
+
+model Hive {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String   @map("user_id") @db.Uuid
+  siteId     String   @map("site_id") @db.Uuid
+  number     Int
+  name       String?
+  queenYear  Int?     @map("queen_year")
+  queenColor String?  @map("queen_color")
+  queenMarked Boolean @default(false) @map("queen_marked")
+  notes      String?
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  deletedAt  DateTime? @map("deleted_at")
+
+  user   User   @relation(fields: [userId], references: [id])
+  site   Site   @relation(fields: [siteId], references: [id])
+  events Event[]
+  tasks  Task[]
+
+  @@index([userId])
+  @@index([siteId])
+  @@map("hives")
+}
+
+model Event {
+  id              String      @id @default(uuid()) @db.Uuid
+  clientEventId   String      @map("client_event_id")
+  userId          String      @map("user_id") @db.Uuid
+  hiveId          String?     @map("hive_id") @db.Uuid
+  siteId          String      @map("site_id") @db.Uuid
+  type            EventType
+  occurredAtLocal String      @map("occurred_at_local")
+  occurredAtUtc   DateTime    @map("occurred_at_utc")
+  payload         Json        @default("{}")
+  attachments     Json        @default("[]")
+  source          EventSource @default(MANUAL)
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+
+  user User  @relation(fields: [userId], references: [id])
+  hive Hive? @relation(fields: [hiveId], references: [id])
+  site Site  @relation(fields: [siteId], references: [id])
+
+  @@unique([userId, clientEventId])
+  @@index([userId, occurredAtUtc])
+  @@index([hiveId, occurredAtUtc])
+  @@index([siteId, occurredAtUtc])
+  @@index([userId, updatedAt])
+  @@map("events")
+}
+
+model Task {
+  id           String     @id @default(uuid()) @db.Uuid
+  clientTaskId String?    @map("client_task_id")
+  userId       String     @map("user_id") @db.Uuid
+  hiveId       String?    @map("hive_id") @db.Uuid
+  siteId       String?    @map("site_id") @db.Uuid
+  title        String
+  description  String?
+  status       TaskStatus @default(PENDING)
+  dueAt        DateTime?  @map("due_at")
+  recurDays    Int?       @map("recur_days")
+  source       EventSource @default(MANUAL)
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  user User  @relation(fields: [userId], references: [id])
+  hive Hive? @relation(fields: [hiveId], references: [id])
+  site Site? @relation(fields: [siteId], references: [id])
+
+  @@index([userId, status])
+  @@index([userId, dueAt])
+  @@index([userId, updatedAt])
+  @@map("tasks")
+}
+
+model CommunityPost {
+  id            String   @id @default(uuid()) @db.Uuid
+  userId        String   @map("user_id") @db.Uuid
+  region        String
+  elevationBand String   @map("elevation_band")
+  title         String
+  body          String
+  tags          String[] @default([])
+  photoUrls     String[] @default([]) @map("photo_urls")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  deletedAt     DateTime? @map("deleted_at")
+
+  user     User               @relation(fields: [userId], references: [id])
+  comments CommunityComment[]
+  reports  Report[]
+
+  @@index([region, elevationBand, createdAt])
+  @@map("community_posts")
+}
+
+model CommunityComment {
+  id        String   @id @default(uuid()) @db.Uuid
+  postId    String   @map("post_id") @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  body      String
+  photoUrl  String?  @map("photo_url")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  post    CommunityPost @relation(fields: [postId], references: [id])
+  user    User          @relation(fields: [userId], references: [id])
+  reports Report[]
+
+  @@index([postId, createdAt])
+  @@map("community_comments")
+}
+
+model Report {
+  id        String  @id @default(uuid()) @db.Uuid
+  userId    String  @map("user_id") @db.Uuid
+  postId    String? @map("post_id") @db.Uuid
+  commentId String? @map("comment_id") @db.Uuid
+  reason    String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user    User              @relation(fields: [userId], references: [id])
+  post    CommunityPost?    @relation(fields: [postId], references: [id])
+  comment CommunityComment? @relation(fields: [commentId], references: [id])
+
+  @@map("reports")
+}
+
+model ZoneProfile {
+  id               String @id @default(uuid()) @db.Uuid
+  region           String
+  elevationBand    String @map("elevation_band")
+  seasonStartMonth Int    @map("season_start_month")
+  seasonStartDay   Int    @map("season_start_day")
+  weeklyFocus      Json   @default("{}") @map("weekly_focus")
+
+  @@unique([region, elevationBand])
+  @@map("zone_profiles")
+}

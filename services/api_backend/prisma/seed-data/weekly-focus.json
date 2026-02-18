@@ -1,0 +1,2518 @@
+{
+  "suedtirol": {
+    "low": {
+      "1": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch auf Verstopfung kontrollieren (Totenfall, Eis)",
+          "Von aussen beobachten: Keine Beuten oeffnen",
+          "Maeuseschutz pruefen",
+          "Futtervorrat abschaetzen (Gewicht anheben)"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso per ostruzioni (api morte, ghiaccio)",
+          "Osservare dall'esterno: non aprire le arnie",
+          "Verificare la protezione contro i topi",
+          "Stimare le scorte di cibo (sollevare l'arnia)"
+        ]
+      },
+      "2": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Totenfall beobachten: normal sind einige hundert Bienen",
+          "Futtervorrat pruefen – bei Bedarf Notfuetterung (Futterteig)",
+          "Varroa-Windel kontrollieren wenn vorhanden"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Osservare le api morte: qualche centinaio e' normale",
+          "Verificare le scorte – nutrizione d'emergenza se necessario (candito)",
+          "Controllare il cassetto antivarroa se presente"
+        ]
+      },
+      "3": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch freihalten",
+          "Wetter beobachten: erste warme Tage moeglich",
+          "Reinigungsfluege beobachten",
+          "Futterstand kontrollieren"
+        ],
+        "tips_it": [
+          "Mantenere l'ingresso libero",
+          "Osservare il meteo: possibili prime giornate calde",
+          "Osservare i voli di purificazione",
+          "Controllare le scorte di cibo"
+        ]
+      },
+      "4": {
+        "title_de": "Winterruhe – erste Reinigungsfluege",
+        "title_it": "Riposo invernale – primi voli di purificazione",
+        "tips_de": [
+          "Reinigungsfluege beobachten",
+          "Kotspritzer auf Beuten koennen auf Nosema hinweisen",
+          "Tote Bienen vor Flugloch entfernen",
+          "Futtervorrat kontrollieren"
+        ],
+        "tips_it": [
+          "Osservare i voli di purificazione",
+          "Tracce di feci sulle arnie possono indicare Nosema",
+          "Rimuovere le api morte davanti all'ingresso",
+          "Controllare le scorte di cibo"
+        ]
+      },
+      "5": {
+        "title_de": "Spaetewinter – Polleneintrag beginnt",
+        "title_it": "Fine inverno – inizia l'apporto di polline",
+        "tips_de": [
+          "Auf Polleneintrag achten (Hasel, Erle)",
+          "Erste Bruttaetigkeit beginnt",
+          "Futtervorrat kritisch: jetzt beginnt der Verbrauch zu steigen",
+          "Fluglochbeobachtung: Volkstaerke einschaetzen"
+        ],
+        "tips_it": [
+          "Osservare l'apporto di polline (nocciolo, ontano)",
+          "Inizia la prima attivita' di covata",
+          "Scorte critiche: il consumo inizia ad aumentare",
+          "Osservazione all'ingresso: stimare la forza della colonia"
+        ]
+      },
+      "6": {
+        "title_de": "Uebergang zum Vorfruhling",
+        "title_it": "Transizione a fine inverno",
+        "tips_de": [
+          "Weiterhin nicht oeffnen wenn moeglich",
+          "Futtervorrat abschaetzen (Gewicht)",
+          "Notfuetterung mit Futterteig bei leichten Voelkern",
+          "Weidenblüte beobachten"
+        ],
+        "tips_it": [
+          "Non aprire ancora se possibile",
+          "Stimare le scorte (peso)",
+          "Nutrizione d'emergenza con candito per colonie leggere",
+          "Osservare la fioritura del salice"
+        ]
+      },
+      "7": {
+        "title_de": "Vorfrühling",
+        "title_it": "Inizio primavera",
+        "tips_de": [
+          "Weidenblüte – wichtige erste Pollenquelle",
+          "Volkstaerke am Flugloch einschaetzen",
+          "Bodenschieber/Windel kontrollieren",
+          "Material für Auswinterung vorbereiten"
+        ],
+        "tips_it": [
+          "Fioritura del salice – prima importante fonte di polline",
+          "Stimare la forza della colonia dall'ingresso",
+          "Controllare il cassetto/fondo",
+          "Preparare il materiale per il controllo primaverile"
+        ]
+      },
+      "8": {
+        "title_de": "Vorfrühling – Vorbereitungen",
+        "title_it": "Inizio primavera – preparativi",
+        "tips_de": [
+          "Auswinterungsmaterial bereitstellen",
+          "Raehmchen mit Mittelwaenden vorbereiten",
+          "Beuten reinigen und desinfizieren (Reservebeuten)",
+          "Erste Kirschen und Weiden bluehen"
+        ],
+        "tips_it": [
+          "Preparare il materiale per i controlli primaverili",
+          "Preparare i telaini con fogli cerei",
+          "Pulire e disinfettare le arnie (riserva)",
+          "Prime fioriture di ciliegi e salici"
+        ]
+      },
+      "9": {
+        "title_de": "Vorfrühling – Auswinterung vorbereiten",
+        "title_it": "Inizio primavera – preparare il controllo",
+        "tips_de": [
+          "Warmen Tag abwarten für erste Durchsicht",
+          "Futtervorrat kritisch prüfen",
+          "Maeusegitter entfernen wenn Temperatur steigt",
+          "Beutenboden reinigen wenn moeglich"
+        ],
+        "tips_it": [
+          "Aspettare una giornata calda per la prima ispezione",
+          "Controllare criticamente le scorte",
+          "Rimuovere la griglia anti-topi quando la temperatura sale",
+          "Pulire il fondo dell'arnia se possibile"
+        ]
+      },
+      "10": {
+        "title_de": "Auswinterung – erste Durchsicht",
+        "title_it": "Controllo primaverile – prima ispezione",
+        "tips_de": [
+          "Erste Durchsicht bei mind. 15°C: Weiselrichtigkeit prüfen",
+          "Brut vorhanden? Stifte sichtbar?",
+          "Futtervorrat beurteilen – mind. 5 kg noetig",
+          "Schwache Voelker vereinigen oder zuhaengen",
+          "Totenfall am Boden entfernen, Boden reinigen"
+        ],
+        "tips_it": [
+          "Prima ispezione a min. 15°C: verificare la presenza della regina",
+          "Covata presente? Uova visibili?",
+          "Valutare le scorte – servono almeno 5 kg",
+          "Unire o rinforzare le colonie deboli",
+          "Rimuovere le api morte dal fondo, pulire"
+        ]
+      },
+      "11": {
+        "title_de": "Frühjahrsentwicklung",
+        "title_it": "Sviluppo primaverile",
+        "tips_de": [
+          "Volksentwicklung beobachten",
+          "Futterwaben am Rand belassen",
+          "Bei Bedarf Mittelwand geben",
+          "Drohnenrahmen einhaengen (Varroa-Falle)"
+        ],
+        "tips_it": [
+          "Osservare lo sviluppo della colonia",
+          "Lasciare i favi con scorte ai lati",
+          "Aggiungere fogli cerei se necessario",
+          "Inserire il telaino da fuco (trappola varroa)"
+        ]
+      },
+      "12": {
+        "title_de": "Frühjahrsentwicklung – Raumgabe",
+        "title_it": "Sviluppo primaverile – ampliamento",
+        "tips_de": [
+          "Raum geben: Mittelwaende oder ausgebaute Waben",
+          "Drohnenrahmen kontrollieren – verdeckelt? Ausschneiden!",
+          "Volkstaerke beurteilen",
+          "Loewenzahn und Obstblüte beginnt"
+        ],
+        "tips_it": [
+          "Dare spazio: fogli cerei o favi costruiti",
+          "Controllare il telaino da fuco – opercolato? Tagliare!",
+          "Valutare la forza della colonia",
+          "Inizia la fioritura di tarassaco e frutteti"
+        ]
+      },
+      "13": {
+        "title_de": "Obstblüte",
+        "title_it": "Fioritura dei frutteti",
+        "tips_de": [
+          "Obstblüte nutzen – starke Voelker tragen gut ein",
+          "Honigraum aufsetzen wenn Voelker stark genug",
+          "Absperrgitter nicht vergessen",
+          "Drohnenbrut schneiden"
+        ],
+        "tips_it": [
+          "Sfruttare la fioritura – le colonie forti raccolgono bene",
+          "Aggiungere il melario quando le colonie sono forti",
+          "Non dimenticare l'escludi-regina",
+          "Tagliare la covata da fuco"
+        ]
+      },
+      "14": {
+        "title_de": "Vollfrühling – Honigraum",
+        "title_it": "Piena primavera – melario",
+        "tips_de": [
+          "Honigraum kontrollieren",
+          "Schwarmstimmung beobachten: Weiselzellen?",
+          "Drohnenrahmen ausschneiden (alle 3 Wochen)",
+          "Wabenhygiene: alte Waben entfernen"
+        ],
+        "tips_it": [
+          "Controllare il melario",
+          "Osservare l'umore di sciamatura: celle reali?",
+          "Tagliare telaino da fuco (ogni 3 settimane)",
+          "Igiene dei favi: rimuovere i favi vecchi"
+        ]
+      },
+      "15": {
+        "title_de": "Vollfrühling – Schwarmvorbeugung",
+        "title_it": "Piena primavera – prevenzione sciamatura",
+        "tips_de": [
+          "Erste Schwarmzellen moeglich – genau kontrollieren!",
+          "Genuegend Raum geben (Honigraum, Brutraum)",
+          "Junge Koeniginnen einweiseln wenn geplant",
+          "Drohnenbrut schneiden"
+        ],
+        "tips_it": [
+          "Prime celle reali possibili – controllare attentamente!",
+          "Dare spazio sufficiente (melario, nido)",
+          "Introdurre regine giovani se previsto",
+          "Tagliare la covata da fuco"
+        ]
+      },
+      "16": {
+        "title_de": "Schwarmzeit beginnt",
+        "title_it": "Inizia la stagione di sciamatura",
+        "tips_de": [
+          "Ab jetzt wöchentliche Schwarmkontrolle!",
+          "Alle 7 Tage: Weiselzellen suchen und brechen",
+          "Jungvolkbildung (Ableger) zur Schwarmvorbeugung",
+          "Honigraum erweitern wenn nötig",
+          "Drohnenbrut schneiden"
+        ],
+        "tips_it": [
+          "Da ora controllo sciamatura settimanale!",
+          "Ogni 7 giorni: cercare e distruggere celle reali",
+          "Formare nuclei per prevenire la sciamatura",
+          "Ampliare il melario se necessario",
+          "Tagliare la covata da fuco"
+        ]
+      },
+      "17": {
+        "title_de": "Schwarmkontrolle",
+        "title_it": "Controllo sciamatura",
+        "tips_de": [
+          "Wöchentliche Schwarmkontrolle durchführen",
+          "Weiselzellen brechen oder Ableger bilden",
+          "Honigraum kontrollieren: genug Platz?",
+          "Flugloch vergroessern bei starken Voelkern"
+        ],
+        "tips_it": [
+          "Effettuare il controllo sciamatura settimanale",
+          "Distruggere celle reali o formare nuclei",
+          "Controllare il melario: spazio sufficiente?",
+          "Allargare l'ingresso per colonie forti"
+        ]
+      },
+      "18": {
+        "title_de": "Schwarmkontrolle – Ablegerbildung",
+        "title_it": "Controllo sciamatura – formazione nuclei",
+        "tips_de": [
+          "Schwarmkontrolle! Weiselzellen?",
+          "Ableger bilden mit verdeckelter Brut",
+          "Honigraum: zweite Zarge aufsetzen wenn nötig",
+          "Akazie/Robinie blüht – guter Nektar"
+        ],
+        "tips_it": [
+          "Controllo sciamatura! Celle reali?",
+          "Formare nuclei con covata opercolata",
+          "Melario: aggiungere secondo se necessario",
+          "Fioritura dell'acacia/robinia – buon nettare"
+        ]
+      },
+      "19": {
+        "title_de": "Hauptschwarmzeit",
+        "title_it": "Piena stagione di sciamatura",
+        "tips_de": [
+          "Höhepunkt der Schwarmzeit!",
+          "Konsequent alle 7 Tage kontrollieren",
+          "Schwarmfangkasten aufstellen",
+          "Weiselzellen brechen oder kontrolliert vermehren"
+        ],
+        "tips_it": [
+          "Culmine della stagione di sciamatura!",
+          "Controllare sistematicamente ogni 7 giorni",
+          "Posizionare trappole per sciami",
+          "Distruggere celle reali o moltiplicare in modo controllato"
+        ]
+      },
+      "20": {
+        "title_de": "Schwarmkontrolle – Königinnenzucht",
+        "title_it": "Controllo sciamatura – allevamento regine",
+        "tips_de": [
+          "Wöchentliche Schwarmkontrolle",
+          "Königinnenzucht: Umlarven oder Zellen verwenden",
+          "Ableger pflegen: Futter kontrollieren",
+          "Honigraum bei Bedarf erweitern"
+        ],
+        "tips_it": [
+          "Controllo sciamatura settimanale",
+          "Allevamento regine: traslarvo o utilizzo celle",
+          "Curare i nuclei: controllare le scorte",
+          "Ampliare il melario se necessario"
+        ]
+      },
+      "21": {
+        "title_de": "Schwarmzeit – Trachtbeobachtung",
+        "title_it": "Sciamatura – osservazione del raccolto",
+        "tips_de": [
+          "Schwarmkontrolle fortführen",
+          "Tracht beobachten: Gewichtszunahme messen",
+          "Drohnenbrut weiterhin schneiden",
+          "Auf verdeckelten Honig achten"
+        ],
+        "tips_it": [
+          "Proseguire il controllo sciamatura",
+          "Osservare il raccolto: misurare l'aumento di peso",
+          "Continuare a tagliare la covata da fuco",
+          "Verificare il miele opercolato"
+        ]
+      },
+      "22": {
+        "title_de": "Schwarmzeit – Tracht",
+        "title_it": "Sciamatura – raccolto",
+        "tips_de": [
+          "Schwarmkontrolle noch nötig",
+          "Honigräume kontrollieren: verdeckelt?",
+          "Erste Honigernte möglich (Obstblüten-/Blütenhonig)",
+          "Jungvölker: Weiselrichtigkeit prüfen"
+        ],
+        "tips_it": [
+          "Controllo sciamatura ancora necessario",
+          "Controllare melari: opercolato?",
+          "Prima raccolta possibile (miele di fiori)",
+          "Nuclei: verificare la presenza della regina"
+        ]
+      },
+      "23": {
+        "title_de": "Frühtracht-Ernte",
+        "title_it": "Raccolta del primo raccolto",
+        "tips_de": [
+          "Blütenhonig ernten wenn mind. 2/3 verdeckelt",
+          "Honig schleudern und lagern",
+          "Honigraum wieder aufsetzen für Sommertracht",
+          "Schwarmkontrolle langsam ausklingen"
+        ],
+        "tips_it": [
+          "Raccogliere il miele di fiori se almeno 2/3 opercolato",
+          "Smelare e conservare il miele",
+          "Rimettere il melario per il raccolto estivo",
+          "Il controllo sciamatura inizia a diminuire"
+        ]
+      },
+      "24": {
+        "title_de": "Sommertracht – Ernte vorbereiten",
+        "title_it": "Raccolto estivo – preparare la raccolta",
+        "tips_de": [
+          "Sommertracht: Linde, Kastanie, Wald",
+          "Honigraum kontrollieren",
+          "Schwarmkontrolle kann reduziert werden",
+          "Erste Varroa-Kontrolle: Gemülldiagnose"
+        ],
+        "tips_it": [
+          "Raccolto estivo: tiglio, castagno, bosco",
+          "Controllare il melario",
+          "Il controllo sciamatura puo' essere ridotto",
+          "Primo controllo varroa: diagnosi dal cassetto"
+        ]
+      },
+      "25": {
+        "title_de": "Sommertracht – Varroa-Monitoring",
+        "title_it": "Raccolto estivo – monitoraggio varroa",
+        "tips_de": [
+          "Varroa-Kontrolle durchführen (Puderzucker oder Alkoholwaschung)",
+          "Natuerlichen Milbenfall zaehlen",
+          "Honigraum kontrollieren",
+          "Bei hohem Befall: Behandlung nach Ernte planen"
+        ],
+        "tips_it": [
+          "Effettuare il controllo varroa (zucchero a velo o lavaggio con alcol)",
+          "Contare la caduta naturale degli acari",
+          "Controllare il melario",
+          "In caso di forte infestazione: pianificare il trattamento dopo la raccolta"
+        ]
+      },
+      "26": {
+        "title_de": "Sommertracht – Ernte",
+        "title_it": "Raccolto estivo – raccolta",
+        "tips_de": [
+          "Letzte Schwarmkontrolle der Saison",
+          "Sommerhonig ernten wenn reif",
+          "Bienenfluchten einlegen (Abend vorher)",
+          "Varroa: Befallsgrad notieren"
+        ],
+        "tips_it": [
+          "Ultimo controllo sciamatura della stagione",
+          "Raccogliere il miele estivo se maturo",
+          "Inserire gli apiscampi (la sera prima)",
+          "Varroa: annotare il grado di infestazione"
+        ]
+      },
+      "27": {
+        "title_de": "Honigernte – Sommerbehandlung vorbereiten",
+        "title_it": "Raccolta miele – preparare il trattamento estivo",
+        "tips_de": [
+          "Honigernte abschliessen",
+          "Honigräume abnehmen",
+          "Sommerbehandlung vorbereiten (Ameisensäure)",
+          "Varroa-Befallsgrad messen"
+        ],
+        "tips_it": [
+          "Concludere la raccolta del miele",
+          "Rimuovere i melari",
+          "Preparare il trattamento estivo (acido formico)",
+          "Misurare il grado di infestazione varroa"
+        ]
+      },
+      "28": {
+        "title_de": "Sommerbehandlung",
+        "title_it": "Trattamento estivo",
+        "tips_de": [
+          "Ameisensäure-Behandlung starten (Langzeit oder Kurzzeit)",
+          "Temperatur beachten: ideal 15-25°C",
+          "Auffütterung beginnen nach Honigentnahme",
+          "Ableger: Varroa ebenfalls behandeln"
+        ],
+        "tips_it": [
+          "Iniziare il trattamento con acido formico (lungo o breve)",
+          "Attenzione alla temperatura: ideale 15-25°C",
+          "Iniziare la nutrizione dopo il prelievo del miele",
+          "Nuclei: trattare anche contro la varroa"
+        ]
+      },
+      "29": {
+        "title_de": "Sommerbehandlung – Auffütterung",
+        "title_it": "Trattamento estivo – nutrizione",
+        "tips_de": [
+          "Ameisensäure-Behandlung kontrollieren/beenden",
+          "Auffütterung fortsetzen: Zuckersirup 3:2",
+          "Milbenfall nach Behandlung zählen",
+          "Totenfall beobachten (Behandlungsschäden?)"
+        ],
+        "tips_it": [
+          "Controllare/terminare il trattamento con acido formico",
+          "Proseguire la nutrizione: sciroppo di zucchero 3:2",
+          "Contare la caduta degli acari dopo il trattamento",
+          "Osservare la mortalita' (danni da trattamento?)"
+        ]
+      },
+      "30": {
+        "title_de": "Auffütterung",
+        "title_it": "Nutrizione",
+        "tips_de": [
+          "Auffütterung: Zielgewicht erreichen",
+          "Für Tallage ca. 15-18 kg Winterfutter",
+          "Varroa-Nachkontrolle: Milbenfall < 1/Tag?",
+          "Räuberei vermeiden: nur abends füttern"
+        ],
+        "tips_it": [
+          "Nutrizione: raggiungere il peso obiettivo",
+          "Per fondovalle ca. 15-18 kg di scorte invernali",
+          "Controllo varroa successivo: caduta < 1/giorno?",
+          "Evitare il saccheggio: nutrire solo di sera"
+        ]
+      },
+      "31": {
+        "title_de": "Auffütterung abschliessen",
+        "title_it": "Concludere la nutrizione",
+        "tips_de": [
+          "Auffütterung bis Mitte August abschliessen",
+          "Gewicht kontrollieren: genug Winterfutter?",
+          "Weiselrichtigkeit prüfen: Brut vorhanden?",
+          "Bei erneut hohem Varroabefall: 2. Behandlung erwaegen"
+        ],
+        "tips_it": [
+          "Concludere la nutrizione entro meta' agosto",
+          "Controllare il peso: scorte invernali sufficienti?",
+          "Verificare la regina: covata presente?",
+          "In caso di nuova alta infestazione: considerare 2° trattamento"
+        ]
+      },
+      "32": {
+        "title_de": "Spätsommer – Volkskontrolle",
+        "title_it": "Fine estate – controllo colonie",
+        "tips_de": [
+          "Volkstaerke beurteilen",
+          "Weiselrichtigkeit prüfen",
+          "Auffütterung beenden",
+          "Voelker einengen wenn nötig"
+        ],
+        "tips_it": [
+          "Valutare la forza della colonia",
+          "Verificare la presenza della regina",
+          "Terminare la nutrizione",
+          "Restringere le colonie se necessario"
+        ]
+      },
+      "33": {
+        "title_de": "Spätsommer – Wintervorbereitung",
+        "title_it": "Fine estate – preparazione invernale",
+        "tips_de": [
+          "Schwache Voelker vereinigen",
+          "Drohnenrahmen entfernen",
+          "Rähmchen mit Futter am Rand belassen",
+          "Varroa-Restbefall kontrollieren"
+        ],
+        "tips_it": [
+          "Unire le colonie deboli",
+          "Rimuovere il telaino da fuco",
+          "Lasciare i telaini con scorte ai lati",
+          "Controllare l'infestazione varroa residua"
+        ]
+      },
+      "34": {
+        "title_de": "Herbstvorbereitung",
+        "title_it": "Preparazione autunnale",
+        "tips_de": [
+          "Letzte Volkskontrolle vor dem Herbst",
+          "Flugloch verengen gegen Räuberei und Wespen",
+          "Wespenfallen aufstellen wenn nötig",
+          "Winterfutter-Vorrat sicherstellen"
+        ],
+        "tips_it": [
+          "Ultimo controllo prima dell'autunno",
+          "Restringere l'ingresso contro saccheggio e vespe",
+          "Posizionare trappole per vespe se necessario",
+          "Assicurare le scorte invernali"
+        ]
+      },
+      "35": {
+        "title_de": "Herbstbeginn",
+        "title_it": "Inizio autunno",
+        "tips_de": [
+          "Voelker nicht mehr oeffnen ohne Grund",
+          "Flugloch kontrollieren: Wespendruck?",
+          "Maeusegitter anbringen",
+          "Eventuell Windschutz vorbereiten"
+        ],
+        "tips_it": [
+          "Non aprire piu' le arnie senza motivo",
+          "Controllare l'ingresso: pressione delle vespe?",
+          "Applicare la griglia anti-topi",
+          "Eventualmente preparare la protezione dal vento"
+        ]
+      },
+      "36": {
+        "title_de": "Herbst – Wintervorbereitung",
+        "title_it": "Autunno – preparazione invernale",
+        "tips_de": [
+          "Maeuseschutz kontrollieren",
+          "Futtervorrat prüfen (Gewicht anheben)",
+          "Voelker in Ruhe lassen",
+          "Winterbehandlung (Oxalsäure) planen"
+        ],
+        "tips_it": [
+          "Controllare la protezione anti-topi",
+          "Verificare le scorte (sollevare l'arnia)",
+          "Lasciare le colonie in pace",
+          "Pianificare il trattamento invernale (acido ossalico)"
+        ]
+      },
+      "37": {
+        "title_de": "Herbst – Ruhe",
+        "title_it": "Autunno – riposo",
+        "tips_de": [
+          "Voelker moeglichst nicht stoeren",
+          "Futtervorrat von aussen beurteilen",
+          "Winterbehandlung vorbereiten: Oxalsäure besorgen",
+          "Beuten sturmsicher machen"
+        ],
+        "tips_it": [
+          "Disturbare le colonie il meno possibile",
+          "Valutare le scorte dall'esterno",
+          "Preparare il trattamento invernale: procurare acido ossalico",
+          "Assicurare le arnie contro il vento"
+        ]
+      },
+      "38": {
+        "title_de": "Herbst – Einfuetterung pruefen",
+        "title_it": "Autunno – verificare la nutrizione",
+        "tips_de": [
+          "Nochmals Gewicht kontrollieren",
+          "Bei zu leichten Voelkern: Futterteig auflegen",
+          "Keine Fluessigfuetterung mehr",
+          "Flugloch kontrollieren"
+        ],
+        "tips_it": [
+          "Controllare ancora il peso",
+          "Per colonie troppo leggere: aggiungere candito",
+          "Niente piu' nutrizione liquida",
+          "Controllare l'ingresso"
+        ]
+      },
+      "39": {
+        "title_de": "Herbst – letzte Kontrollen",
+        "title_it": "Autunno – ultimi controlli",
+        "tips_de": [
+          "Beuten wetterfest machen",
+          "Deckel sicher befestigen",
+          "Flugloch auf Winterstellung",
+          "Standort winterfest machen"
+        ],
+        "tips_it": [
+          "Rendere le arnie resistenti alle intemperie",
+          "Fissare bene il coperchio",
+          "Ingresso in posizione invernale",
+          "Preparare il sito per l'inverno"
+        ]
+      },
+      "40": {
+        "title_de": "Spätherbst",
+        "title_it": "Tardo autunno",
+        "tips_de": [
+          "Voelker in Ruhe lassen",
+          "Nur noch Fluglochbeobachtung",
+          "Wintertraube bildet sich",
+          "Oxalsäure-Behandlung planen (brutfreie Phase)"
+        ],
+        "tips_it": [
+          "Lasciare le colonie in pace",
+          "Solo osservazione dall'ingresso",
+          "Si forma il glomere invernale",
+          "Pianificare il trattamento con acido ossalico (fase senza covata)"
+        ]
+      },
+      "41": {
+        "title_de": "Spätherbst – Ruhe",
+        "title_it": "Tardo autunno – riposo",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Auf Spechte achten – Schutz anbringen",
+          "Voelker nicht stören",
+          "Oxalsäure bereithalten"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Attenzione ai picchi – applicare protezione",
+          "Non disturbare le colonie",
+          "Tenere pronto l'acido ossalico"
+        ]
+      },
+      "42": {
+        "title_de": "Spätherbst – Winterruhe beginnt",
+        "title_it": "Tardo autunno – inizia il riposo invernale",
+        "tips_de": [
+          "Letzte Brut schlüpft – brutfreie Phase beginnt",
+          "Optimaler Zeitpunkt für Oxalsäure naht",
+          "Temperaturverlauf beobachten",
+          "Keine Beuten öffnen"
+        ],
+        "tips_it": [
+          "Ultima covata nasce – inizia la fase senza covata",
+          "Si avvicina il momento ottimale per l'acido ossalico",
+          "Osservare l'andamento della temperatura",
+          "Non aprire le arnie"
+        ]
+      },
+      "43": {
+        "title_de": "Winterbehandlung vorbereiten",
+        "title_it": "Preparare il trattamento invernale",
+        "tips_de": [
+          "Brutfreiheit moeglich – kontrollieren (Windel)",
+          "Oxalsäure-Träufelbehandlung vorbereiten",
+          "Ideal: 3 Wochen ohne Brut abwarten",
+          "Wetter: milde Tage über 5°C abwarten"
+        ],
+        "tips_it": [
+          "Assenza di covata possibile – controllare (cassetto)",
+          "Preparare il trattamento gocciolato con acido ossalico",
+          "Ideale: aspettare 3 settimane senza covata",
+          "Meteo: aspettare giornate miti sopra 5°C"
+        ]
+      },
+      "44": {
+        "title_de": "Winterbehandlung – Oxalsäure",
+        "title_it": "Trattamento invernale – acido ossalico",
+        "tips_de": [
+          "Oxalsäure-Behandlung durchführen (Träufeln oder Sublimation)",
+          "Brutfreiheit ideal – einmalige Behandlung",
+          "3,5% Oxalsäure in Zuckerlösung: 5ml pro besetzte Wabengasse",
+          "Nach Behandlung: Milbenfall zählen"
+        ],
+        "tips_it": [
+          "Effettuare il trattamento con acido ossalico (gocciolamento o sublimazione)",
+          "Ideale senza covata – trattamento unico",
+          "Acido ossalico 3,5% in soluzione zuccherina: 5ml per corridoio occupato",
+          "Dopo il trattamento: contare la caduta degli acari"
+        ]
+      },
+      "45": {
+        "title_de": "Winterruhe beginnt",
+        "title_it": "Inizia il riposo invernale",
+        "tips_de": [
+          "Winterbehandlung abgeschlossen?",
+          "Milbenfall nach Behandlung kontrollieren",
+          "Voelker in Ruhe lassen",
+          "Flugloch kontrollieren: frei von Eis/Schnee?"
+        ],
+        "tips_it": [
+          "Trattamento invernale completato?",
+          "Controllare la caduta degli acari dopo il trattamento",
+          "Lasciare le colonie in pace",
+          "Controllare l'ingresso: libero da ghiaccio/neve?"
+        ]
+      },
+      "46": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Voelker nicht stören",
+          "Flugloch kontrollieren",
+          "Wachs einschmelzen und Rähmchen reinigen",
+          "Saison Revue passieren lassen, Notizen ordnen"
+        ],
+        "tips_it": [
+          "Non disturbare le colonie",
+          "Controllare l'ingresso",
+          "Fondere la cera e pulire i telaini",
+          "Rivedere la stagione, ordinare gli appunti"
+        ]
+      },
+      "47": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Werkstattarbeiten: Beuten reparieren und streichen",
+          "Mittelwände giessen oder bestellen",
+          "Flugloch prüfen",
+          "Imkerverein: Weiterbildung besuchen"
+        ],
+        "tips_it": [
+          "Lavori in laboratorio: riparare e verniciare le arnie",
+          "Preparare o ordinare fogli cerei",
+          "Controllare l'ingresso",
+          "Associazione apicoltori: partecipare a corsi"
+        ]
+      },
+      "48": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Raehmchen draehten und Mittelwaende einlöten",
+          "Beutenmaterial kontrollieren und reparieren",
+          "Flugloch kontrollieren",
+          "Buchführung: Stockkarten aktualisieren"
+        ],
+        "tips_it": [
+          "Filare i telaini e saldare i fogli cerei",
+          "Controllare e riparare il materiale",
+          "Controllare l'ingresso",
+          "Contabilita': aggiornare le schede alveari"
+        ]
+      },
+      "49": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Weiterhin Werkstattarbeiten",
+          "Honiglager kontrollieren",
+          "Flugloch prüfen bei Schneelage",
+          "Kommende Saison planen"
+        ],
+        "tips_it": [
+          "Proseguire i lavori in laboratorio",
+          "Controllare le scorte di miele",
+          "Controllare l'ingresso in caso di neve",
+          "Pianificare la prossima stagione"
+        ]
+      },
+      "50": {
+        "title_de": "Winterruhe – Jahresplanung",
+        "title_it": "Riposo invernale – pianificazione annuale",
+        "tips_de": [
+          "Saison planen: Königinnenzucht, Ableger, Wanderungen",
+          "Material bestellen",
+          "Flugloch kontrollieren",
+          "Fortbildungen planen"
+        ],
+        "tips_it": [
+          "Pianificare la stagione: allevamento regine, nuclei, nomadismo",
+          "Ordinare il materiale",
+          "Controllare l'ingresso",
+          "Pianificare corsi di formazione"
+        ]
+      },
+      "51": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Schnee vom Flugloch entfernen",
+          "Ruhe bewahren – Bienen schaffen das",
+          "Imkerliche Fachliteratur lesen"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Rimuovere la neve dall'ingresso",
+          "Mantenere la calma – le api ce la fanno",
+          "Leggere letteratura apistica"
+        ]
+      },
+      "52": {
+        "title_de": "Jahreswechsel – Winterruhe",
+        "title_it": "Fine anno – riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Futtervorrat von aussen einschaetzen",
+          "Neues Bienenjahr planen",
+          "Auf ein gutes neues Bienenjahr!"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Stimare le scorte dall'esterno",
+          "Pianificare il nuovo anno apicolo",
+          "Buon nuovo anno apicolo!"
+        ]
+      }
+    },
+    "mid": {
+      "1": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch auf Verstopfung kontrollieren",
+          "Schnee am Flugloch entfernen",
+          "Voelker nicht stören",
+          "Futtervorrat von aussen abschaetzen"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso per ostruzioni",
+          "Rimuovere la neve dall'ingresso",
+          "Non disturbare le colonie",
+          "Stimare le scorte dall'esterno"
+        ]
+      },
+      "2": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren (Eis, Totenfall)",
+          "Beuten nicht oeffnen",
+          "Maeuseschutz prüfen",
+          "Bei laengerer Kaelte: Futterteig bereithalten"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso (ghiaccio, api morte)",
+          "Non aprire le arnie",
+          "Verificare la protezione anti-topi",
+          "In caso di freddo prolungato: tenere pronto il candito"
+        ]
+      },
+      "3": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch freihalten",
+          "Wetter beobachten",
+          "Erste Reinigungsfluege moeglich an warmen Tagen",
+          "Futtervorrat kontrollieren (Gewicht)"
+        ],
+        "tips_it": [
+          "Mantenere l'ingresso libero",
+          "Osservare il meteo",
+          "Primi voli di purificazione possibili nelle giornate calde",
+          "Controllare le scorte (peso)"
+        ]
+      },
+      "4": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Totenfall beobachten",
+          "Reinigungsfluege an milden Tagen",
+          "Notfuetterung bei leichten Voelkern"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Osservare le api morte",
+          "Voli di purificazione nelle giornate miti",
+          "Nutrizione d'emergenza per colonie leggere"
+        ]
+      },
+      "5": {
+        "title_de": "Spaetewinter",
+        "title_it": "Fine inverno",
+        "tips_de": [
+          "Reinigungsfluege beobachten",
+          "Futtervorrat kritisch – Verbrauch steigt",
+          "Fluglochbeobachtung",
+          "Material vorbereiten"
+        ],
+        "tips_it": [
+          "Osservare i voli di purificazione",
+          "Scorte critiche – il consumo aumenta",
+          "Osservazione dall'ingresso",
+          "Preparare il materiale"
+        ]
+      },
+      "6": {
+        "title_de": "Spaetewinter",
+        "title_it": "Fine inverno",
+        "tips_de": [
+          "Noch nicht oeffnen",
+          "Futtervorrat von aussen beurteilen",
+          "Notfuetterung wenn noetig",
+          "Erste Weidenblüte moeglich in geschuetzten Lagen"
+        ],
+        "tips_it": [
+          "Non aprire ancora",
+          "Valutare le scorte dall'esterno",
+          "Nutrizione d'emergenza se necessario",
+          "Prima fioritura del salice possibile in posizioni riparate"
+        ]
+      },
+      "7": {
+        "title_de": "Vorfrühling",
+        "title_it": "Inizio primavera",
+        "tips_de": [
+          "Weidenblüte beobachten",
+          "Polleneintrag kontrollieren",
+          "Bruttaetigkeit beginnt langsam",
+          "Material fuer Auswinterung vorbereiten"
+        ],
+        "tips_it": [
+          "Osservare la fioritura del salice",
+          "Controllare l'apporto di polline",
+          "L'attivita' di covata inizia lentamente",
+          "Preparare il materiale per il controllo primaverile"
+        ]
+      },
+      "8": {
+        "title_de": "Vorfrühling",
+        "title_it": "Inizio primavera",
+        "tips_de": [
+          "Raehmchen und Mittelwaende vorbereiten",
+          "Beuten reinigen (Reserve)",
+          "Futtervorrat kontrollieren",
+          "Warmen Tag abwarten"
+        ],
+        "tips_it": [
+          "Preparare telaini e fogli cerei",
+          "Pulire le arnie (riserva)",
+          "Controllare le scorte",
+          "Aspettare una giornata calda"
+        ]
+      },
+      "9": {
+        "title_de": "Vorfrühling – Polleneintrag",
+        "title_it": "Inizio primavera – apporto di polline",
+        "tips_de": [
+          "Hasel und Erle blühen",
+          "Polleneintrag beobachten",
+          "Futtervorrat prüfen",
+          "Maeusegitter entfernen bei Bedarf"
+        ],
+        "tips_it": [
+          "Fioritura di nocciolo e ontano",
+          "Osservare l'apporto di polline",
+          "Verificare le scorte",
+          "Rimuovere la griglia anti-topi se necessario"
+        ]
+      },
+      "10": {
+        "title_de": "Frühling naht",
+        "title_it": "La primavera si avvicina",
+        "tips_de": [
+          "Erste Durchsicht bei warmem Wetter vorbereiten",
+          "Beutenboden reinigen",
+          "Futtervorrat kontrollieren",
+          "Weidenblüte als wichtige Pollenquelle"
+        ],
+        "tips_it": [
+          "Preparare la prima ispezione per il bel tempo",
+          "Pulire il fondo dell'arnia",
+          "Controllare le scorte",
+          "Fioritura del salice come importante fonte di polline"
+        ]
+      },
+      "11": {
+        "title_de": "Vorfrühling – Vorbereitung",
+        "title_it": "Inizio primavera – preparazione",
+        "tips_de": [
+          "Warmen Tag abwarten fuer erste Durchsicht",
+          "Futtervorrat kritisch prüfen",
+          "Voelker von aussen beurteilen",
+          "Rahmchen mit Mittelwaenden bereitstellen"
+        ],
+        "tips_it": [
+          "Aspettare una giornata calda per la prima ispezione",
+          "Controllare criticamente le scorte",
+          "Valutare le colonie dall'esterno",
+          "Preparare i telaini con fogli cerei"
+        ]
+      },
+      "12": {
+        "title_de": "Auswinterung – erste Durchsicht",
+        "title_it": "Controllo primaverile – prima ispezione",
+        "tips_de": [
+          "Erste Durchsicht bei mind. 15°C",
+          "Weiselrichtigkeit prüfen: Stifte sichtbar?",
+          "Futtervorrat beurteilen – mind. 5 kg",
+          "Schwache Voelker vereinigen",
+          "Boden reinigen, Totenfall entfernen"
+        ],
+        "tips_it": [
+          "Prima ispezione a min. 15°C",
+          "Verificare la regina: uova visibili?",
+          "Valutare le scorte – minimo 5 kg",
+          "Unire le colonie deboli",
+          "Pulire il fondo, rimuovere le api morte"
+        ]
+      },
+      "13": {
+        "title_de": "Frühjahrsentwicklung",
+        "title_it": "Sviluppo primaverile",
+        "tips_de": [
+          "Volksentwicklung beobachten",
+          "Futterwaben am Rand belassen",
+          "Bei Bedarf Mittelwand geben",
+          "Drohnenrahmen einhängen"
+        ],
+        "tips_it": [
+          "Osservare lo sviluppo della colonia",
+          "Lasciare i favi con scorte ai lati",
+          "Aggiungere fogli cerei se necessario",
+          "Inserire il telaino da fuco"
+        ]
+      },
+      "14": {
+        "title_de": "Frühjahrsentwicklung – Raumgabe",
+        "title_it": "Sviluppo primaverile – ampliamento",
+        "tips_de": [
+          "Raum geben: Mittelwaende einhaengen",
+          "Drohnenrahmen kontrollieren",
+          "Obstblüte beginnt in geschuetzten Lagen",
+          "Volkstaerke beurteilen"
+        ],
+        "tips_it": [
+          "Dare spazio: inserire fogli cerei",
+          "Controllare il telaino da fuco",
+          "Fioritura dei frutteti in posizioni riparate",
+          "Valutare la forza della colonia"
+        ]
+      },
+      "15": {
+        "title_de": "Obstblüte – Honigraum",
+        "title_it": "Fioritura – melario",
+        "tips_de": [
+          "Obstblüte: Honigraum aufsetzen wenn Voelker stark",
+          "Absperrgitter einlegen",
+          "Drohnenbrut schneiden",
+          "Schwarmstimmung beobachten"
+        ],
+        "tips_it": [
+          "Fioritura: aggiungere melario se colonie forti",
+          "Inserire l'escludi-regina",
+          "Tagliare la covata da fuco",
+          "Osservare l'umore di sciamatura"
+        ]
+      },
+      "16": {
+        "title_de": "Vollfrühling",
+        "title_it": "Piena primavera",
+        "tips_de": [
+          "Honigraum kontrollieren",
+          "Weiselzellen kontrollieren – Schwarmvorbeugung",
+          "Drohnenbrut schneiden",
+          "Genug Raum geben"
+        ],
+        "tips_it": [
+          "Controllare il melario",
+          "Controllare celle reali – prevenzione sciamatura",
+          "Tagliare la covata da fuco",
+          "Dare spazio sufficiente"
+        ]
+      },
+      "17": {
+        "title_de": "Vollfrühling – Schwarmvorbeugung",
+        "title_it": "Piena primavera – prevenzione sciamatura",
+        "tips_de": [
+          "Schwarmstimmung? Weiselzellen kontrollieren",
+          "Ableger bilden wenn gewuenscht",
+          "Genug Raum im Brutraum und Honigraum",
+          "Loewenzahn- und Obstblüte nutzen"
+        ],
+        "tips_it": [
+          "Umore di sciamatura? Controllare celle reali",
+          "Formare nuclei se desiderato",
+          "Spazio sufficiente nel nido e melario",
+          "Sfruttare la fioritura di tarassaco e frutteti"
+        ]
+      },
+      "18": {
+        "title_de": "Schwarmzeit beginnt",
+        "title_it": "Inizia la stagione di sciamatura",
+        "tips_de": [
+          "Ab jetzt wöchentliche Schwarmkontrolle!",
+          "Alle 7 Tage: Weiselzellen suchen",
+          "Ablegerbildung zur Schwarmvorbeugung",
+          "Honigraum erweitern",
+          "Drohnenbrut schneiden"
+        ],
+        "tips_it": [
+          "Da ora controllo sciamatura settimanale!",
+          "Ogni 7 giorni: cercare celle reali",
+          "Formare nuclei per prevenire la sciamatura",
+          "Ampliare il melario",
+          "Tagliare la covata da fuco"
+        ]
+      },
+      "19": {
+        "title_de": "Schwarmkontrolle",
+        "title_it": "Controllo sciamatura",
+        "tips_de": [
+          "Wöchentliche Schwarmkontrolle durchführen",
+          "Weiselzellen brechen oder Ableger bilden",
+          "Honigraum kontrollieren",
+          "Flugloch vergroessern bei starken Voelkern"
+        ],
+        "tips_it": [
+          "Effettuare il controllo sciamatura settimanale",
+          "Distruggere celle reali o formare nuclei",
+          "Controllare il melario",
+          "Allargare l'ingresso per colonie forti"
+        ]
+      },
+      "20": {
+        "title_de": "Schwarmkontrolle – Ableger",
+        "title_it": "Controllo sciamatura – nuclei",
+        "tips_de": [
+          "Schwarmkontrolle! Weiselzellen?",
+          "Ableger bilden mit verdeckelter Brut",
+          "Honigraum: zweite Zarge wenn nötig",
+          "Tracht beobachten"
+        ],
+        "tips_it": [
+          "Controllo sciamatura! Celle reali?",
+          "Formare nuclei con covata opercolata",
+          "Melario: secondo se necessario",
+          "Osservare il raccolto"
+        ]
+      },
+      "21": {
+        "title_de": "Hauptschwarmzeit",
+        "title_it": "Piena stagione di sciamatura",
+        "tips_de": [
+          "Höhepunkt der Schwarmzeit!",
+          "Konsequent alle 7 Tage kontrollieren",
+          "Schwarmfangkasten bereitstellen",
+          "Weiselzellen kontrolliert verwenden oder brechen"
+        ],
+        "tips_it": [
+          "Culmine della stagione di sciamatura!",
+          "Controllare sistematicamente ogni 7 giorni",
+          "Preparare trappole per sciami",
+          "Utilizzare o distruggere le celle reali"
+        ]
+      },
+      "22": {
+        "title_de": "Schwarmkontrolle – Königinnenzucht",
+        "title_it": "Controllo sciamatura – allevamento regine",
+        "tips_de": [
+          "Wöchentliche Schwarmkontrolle",
+          "Königinnenzucht moeglich",
+          "Ableger pflegen",
+          "Honigraum kontrollieren"
+        ],
+        "tips_it": [
+          "Controllo sciamatura settimanale",
+          "Allevamento regine possibile",
+          "Curare i nuclei",
+          "Controllare il melario"
+        ]
+      },
+      "23": {
+        "title_de": "Schwarmzeit – Tracht",
+        "title_it": "Sciamatura – raccolto",
+        "tips_de": [
+          "Schwarmkontrolle fortführen",
+          "Tracht beobachten: Gewichtszunahme",
+          "Drohnenbrut schneiden",
+          "Auf verdeckelten Honig achten"
+        ],
+        "tips_it": [
+          "Proseguire il controllo sciamatura",
+          "Osservare il raccolto: aumento di peso",
+          "Tagliare la covata da fuco",
+          "Verificare il miele opercolato"
+        ]
+      },
+      "24": {
+        "title_de": "Schwarmzeit – Ernte naht",
+        "title_it": "Sciamatura – si avvicina la raccolta",
+        "tips_de": [
+          "Schwarmkontrolle noch nötig",
+          "Honigräume kontrollieren",
+          "Erste Ernte moeglich (Blütenhonig)",
+          "Jungvölker: Weiselrichtigkeit"
+        ],
+        "tips_it": [
+          "Controllo sciamatura ancora necessario",
+          "Controllare melari",
+          "Prima raccolta possibile (miele di fiori)",
+          "Nuclei: verificare la regina"
+        ]
+      },
+      "25": {
+        "title_de": "Frühtracht-Ernte",
+        "title_it": "Raccolta del primo raccolto",
+        "tips_de": [
+          "Blütenhonig ernten wenn 2/3 verdeckelt",
+          "Honig schleudern und lagern",
+          "Honigraum wieder aufsetzen",
+          "Schwarmkontrolle ausklingen"
+        ],
+        "tips_it": [
+          "Raccogliere miele di fiori se 2/3 opercolato",
+          "Smelare e conservare",
+          "Rimettere il melario",
+          "Il controllo sciamatura diminuisce"
+        ]
+      },
+      "26": {
+        "title_de": "Sommertracht beginnt",
+        "title_it": "Inizia il raccolto estivo",
+        "tips_de": [
+          "Sommertracht: Linde, Kastanie, Wald",
+          "Honigraum kontrollieren",
+          "Schwarmkontrolle reduzieren",
+          "Erste Varroa-Kontrolle"
+        ],
+        "tips_it": [
+          "Raccolto estivo: tiglio, castagno, bosco",
+          "Controllare il melario",
+          "Ridurre il controllo sciamatura",
+          "Primo controllo varroa"
+        ]
+      },
+      "27": {
+        "title_de": "Sommertracht – Varroa-Monitoring",
+        "title_it": "Raccolto estivo – monitoraggio varroa",
+        "tips_de": [
+          "Varroa-Kontrolle durchführen",
+          "Natuerlichen Milbenfall zaehlen",
+          "Honigraum kontrollieren",
+          "Bei hohem Befall: Behandlung planen"
+        ],
+        "tips_it": [
+          "Effettuare il controllo varroa",
+          "Contare la caduta naturale degli acari",
+          "Controllare il melario",
+          "In caso di forte infestazione: pianificare il trattamento"
+        ]
+      },
+      "28": {
+        "title_de": "Sommertracht – Ernte",
+        "title_it": "Raccolto estivo – raccolta",
+        "tips_de": [
+          "Letzte Schwarmkontrolle",
+          "Sommerhonig ernten wenn reif",
+          "Bienenfluchten einlegen",
+          "Varroa-Befallsgrad notieren"
+        ],
+        "tips_it": [
+          "Ultimo controllo sciamatura",
+          "Raccogliere il miele estivo se maturo",
+          "Inserire gli apiscampi",
+          "Annotare il grado di infestazione varroa"
+        ]
+      },
+      "29": {
+        "title_de": "Honigernte – Sommerbehandlung",
+        "title_it": "Raccolta – trattamento estivo",
+        "tips_de": [
+          "Honigernte abschliessen",
+          "Honigräume abnehmen",
+          "Sommerbehandlung vorbereiten (Ameisensäure)",
+          "Varroa-Befallsgrad messen"
+        ],
+        "tips_it": [
+          "Concludere la raccolta",
+          "Rimuovere i melari",
+          "Preparare il trattamento estivo (acido formico)",
+          "Misurare il grado di infestazione varroa"
+        ]
+      },
+      "30": {
+        "title_de": "Sommerbehandlung",
+        "title_it": "Trattamento estivo",
+        "tips_de": [
+          "Ameisensäure-Behandlung starten",
+          "Temperatur beachten: 15-25°C ideal",
+          "Auffütterung beginnen",
+          "Ableger: Varroa behandeln"
+        ],
+        "tips_it": [
+          "Iniziare il trattamento con acido formico",
+          "Attenzione alla temperatura: 15-25°C ideale",
+          "Iniziare la nutrizione",
+          "Nuclei: trattare la varroa"
+        ]
+      },
+      "31": {
+        "title_de": "Sommerbehandlung – Auffütterung",
+        "title_it": "Trattamento estivo – nutrizione",
+        "tips_de": [
+          "Ameisensäure kontrollieren/beenden",
+          "Auffütterung fortsetzen: Sirup 3:2",
+          "Milbenfall nach Behandlung zählen",
+          "Voelker beobachten"
+        ],
+        "tips_it": [
+          "Controllare/terminare l'acido formico",
+          "Proseguire la nutrizione: sciroppo 3:2",
+          "Contare la caduta degli acari dopo il trattamento",
+          "Osservare le colonie"
+        ]
+      },
+      "32": {
+        "title_de": "Auffütterung",
+        "title_it": "Nutrizione",
+        "tips_de": [
+          "Auffütterung: Zielgewicht erreichen",
+          "Ca. 18-20 kg Winterfutter fuer Mittellage",
+          "Varroa-Nachkontrolle",
+          "Räuberei vermeiden: abends füttern"
+        ],
+        "tips_it": [
+          "Nutrizione: raggiungere il peso obiettivo",
+          "Ca. 18-20 kg di scorte invernali per mezza montagna",
+          "Controllo varroa successivo",
+          "Evitare saccheggio: nutrire di sera"
+        ]
+      },
+      "33": {
+        "title_de": "Auffütterung abschliessen",
+        "title_it": "Concludere la nutrizione",
+        "tips_de": [
+          "Auffütterung abschliessen",
+          "Gewicht kontrollieren",
+          "Weiselrichtigkeit prüfen",
+          "Bei hohem Varroabefall: 2. Behandlung"
+        ],
+        "tips_it": [
+          "Concludere la nutrizione",
+          "Controllare il peso",
+          "Verificare la regina",
+          "In caso di alta infestazione: 2° trattamento"
+        ]
+      },
+      "34": {
+        "title_de": "Spätsommer – Volkskontrolle",
+        "title_it": "Fine estate – controllo colonie",
+        "tips_de": [
+          "Volkstaerke beurteilen",
+          "Weiselrichtigkeit prüfen",
+          "Voelker einengen wenn noetig",
+          "Schwache Voelker vereinigen"
+        ],
+        "tips_it": [
+          "Valutare la forza della colonia",
+          "Verificare la regina",
+          "Restringere se necessario",
+          "Unire le colonie deboli"
+        ]
+      },
+      "35": {
+        "title_de": "Herbstvorbereitung",
+        "title_it": "Preparazione autunnale",
+        "tips_de": [
+          "Flugloch verengen gegen Räuberei/Wespen",
+          "Wespenfallen aufstellen wenn noetig",
+          "Winterfutter-Vorrat sicherstellen",
+          "Maeusegitter anbringen"
+        ],
+        "tips_it": [
+          "Restringere l'ingresso contro saccheggio/vespe",
+          "Posizionare trappole per vespe se necessario",
+          "Assicurare le scorte invernali",
+          "Applicare la griglia anti-topi"
+        ]
+      },
+      "36": {
+        "title_de": "Herbst – Wintervorbereitung",
+        "title_it": "Autunno – preparazione invernale",
+        "tips_de": [
+          "Maeuseschutz kontrollieren",
+          "Futtervorrat prüfen",
+          "Voelker in Ruhe lassen",
+          "Winterbehandlung planen"
+        ],
+        "tips_it": [
+          "Controllare la protezione anti-topi",
+          "Verificare le scorte",
+          "Lasciare le colonie in pace",
+          "Pianificare il trattamento invernale"
+        ]
+      },
+      "37": {
+        "title_de": "Herbst – Ruhe",
+        "title_it": "Autunno – riposo",
+        "tips_de": [
+          "Voelker nicht stoeren",
+          "Futtervorrat von aussen beurteilen",
+          "Oxalsäure besorgen",
+          "Beuten sturmsicher machen"
+        ],
+        "tips_it": [
+          "Non disturbare le colonie",
+          "Valutare le scorte dall'esterno",
+          "Procurare acido ossalico",
+          "Assicurare le arnie contro il vento"
+        ]
+      },
+      "38": {
+        "title_de": "Herbst – Futtercheck",
+        "title_it": "Autunno – controllo scorte",
+        "tips_de": [
+          "Gewicht kontrollieren",
+          "Bei zu leichten Voelkern: Futterteig",
+          "Keine Fluessigfuetterung mehr",
+          "Flugloch kontrollieren"
+        ],
+        "tips_it": [
+          "Controllare il peso",
+          "Per colonie troppo leggere: candito",
+          "Niente piu' nutrizione liquida",
+          "Controllare l'ingresso"
+        ]
+      },
+      "39": {
+        "title_de": "Herbst – letzte Kontrollen",
+        "title_it": "Autunno – ultimi controlli",
+        "tips_de": [
+          "Beuten wetterfest machen",
+          "Deckel sicher befestigen",
+          "Flugloch Winterstellung",
+          "Standort winterfest machen"
+        ],
+        "tips_it": [
+          "Rendere le arnie resistenti alle intemperie",
+          "Fissare il coperchio",
+          "Ingresso in posizione invernale",
+          "Preparare il sito per l'inverno"
+        ]
+      },
+      "40": {
+        "title_de": "Spätherbst",
+        "title_it": "Tardo autunno",
+        "tips_de": [
+          "Voelker in Ruhe lassen",
+          "Fluglochbeobachtung",
+          "Wintertraube bildet sich",
+          "Oxalsäure-Behandlung planen"
+        ],
+        "tips_it": [
+          "Lasciare le colonie in pace",
+          "Osservazione dall'ingresso",
+          "Si forma il glomere",
+          "Pianificare il trattamento con acido ossalico"
+        ]
+      },
+      "41": {
+        "title_de": "Spätherbst – Ruhe",
+        "title_it": "Tardo autunno – riposo",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Spechtschutz anbringen",
+          "Voelker nicht stoeren",
+          "Oxalsäure bereithalten"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Applicare protezione anti-picchio",
+          "Non disturbare le colonie",
+          "Tenere pronto l'acido ossalico"
+        ]
+      },
+      "42": {
+        "title_de": "Winterbehandlung vorbereiten",
+        "title_it": "Preparare il trattamento invernale",
+        "tips_de": [
+          "Brutfreiheit naht",
+          "Oxalsäure-Behandlung vorbereiten",
+          "Temperaturverlauf beobachten",
+          "Keine Beuten oeffnen"
+        ],
+        "tips_it": [
+          "Si avvicina l'assenza di covata",
+          "Preparare il trattamento con acido ossalico",
+          "Osservare la temperatura",
+          "Non aprire le arnie"
+        ]
+      },
+      "43": {
+        "title_de": "Winterbehandlung – Oxalsäure",
+        "title_it": "Trattamento invernale – acido ossalico",
+        "tips_de": [
+          "Brutfreiheit pruefen (Windel kontrollieren)",
+          "Oxalsäure-Behandlung bei Brutfreiheit durchführen",
+          "3,5% Oxalsäure: 5ml pro Wabengasse",
+          "Milbenfall zählen nach Behandlung"
+        ],
+        "tips_it": [
+          "Verificare l'assenza di covata (controllare il cassetto)",
+          "Effettuare il trattamento con acido ossalico in assenza di covata",
+          "Acido ossalico 3,5%: 5ml per corridoio",
+          "Contare la caduta degli acari dopo il trattamento"
+        ]
+      },
+      "44": {
+        "title_de": "Winterbehandlung abschliessen",
+        "title_it": "Concludere il trattamento invernale",
+        "tips_de": [
+          "Winterbehandlung abgeschlossen?",
+          "Milbenfall kontrollieren",
+          "Voelker in Ruhe lassen",
+          "Flugloch pruefen"
+        ],
+        "tips_it": [
+          "Trattamento invernale completato?",
+          "Controllare la caduta degli acari",
+          "Lasciare le colonie in pace",
+          "Controllare l'ingresso"
+        ]
+      },
+      "45": {
+        "title_de": "Winterruhe beginnt",
+        "title_it": "Inizia il riposo invernale",
+        "tips_de": [
+          "Voelker in Ruhe lassen",
+          "Flugloch kontrollieren",
+          "Wachs einschmelzen",
+          "Werkstattarbeiten beginnen"
+        ],
+        "tips_it": [
+          "Lasciare le colonie in pace",
+          "Controllare l'ingresso",
+          "Fondere la cera",
+          "Iniziare i lavori in laboratorio"
+        ]
+      },
+      "46": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Raehmchen reinigen und vorbereiten",
+          "Mittelwaende giessen/bestellen",
+          "Saison Revue passieren lassen"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Pulire e preparare i telaini",
+          "Preparare/ordinare fogli cerei",
+          "Rivedere la stagione"
+        ]
+      },
+      "47": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Werkstattarbeiten: Beuten reparieren",
+          "Flugloch pruefen",
+          "Weiterbildung besuchen",
+          "Neues Material planen"
+        ],
+        "tips_it": [
+          "Lavori in laboratorio: riparare le arnie",
+          "Controllare l'ingresso",
+          "Partecipare a corsi",
+          "Pianificare nuovo materiale"
+        ]
+      },
+      "48": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Raehmchen draehten und Mittelwaende einlöten",
+          "Beutenmaterial kontrollieren",
+          "Flugloch kontrollieren",
+          "Stockkarten aktualisieren"
+        ],
+        "tips_it": [
+          "Filare i telaini e saldare i fogli cerei",
+          "Controllare il materiale",
+          "Controllare l'ingresso",
+          "Aggiornare le schede alveari"
+        ]
+      },
+      "49": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Werkstattarbeiten",
+          "Honiglager kontrollieren",
+          "Flugloch pruefen bei Schnee",
+          "Saison planen"
+        ],
+        "tips_it": [
+          "Lavori in laboratorio",
+          "Controllare le scorte di miele",
+          "Controllare l'ingresso in caso di neve",
+          "Pianificare la stagione"
+        ]
+      },
+      "50": {
+        "title_de": "Winterruhe – Jahresplanung",
+        "title_it": "Riposo invernale – pianificazione",
+        "tips_de": [
+          "Saison planen: Zucht, Ableger, Wanderungen",
+          "Material bestellen",
+          "Flugloch kontrollieren",
+          "Fortbildungen planen"
+        ],
+        "tips_it": [
+          "Pianificare: allevamento, nuclei, nomadismo",
+          "Ordinare il materiale",
+          "Controllare l'ingresso",
+          "Pianificare corsi"
+        ]
+      },
+      "51": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Schnee entfernen",
+          "Ruhe bewahren",
+          "Fachliteratur lesen"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Rimuovere la neve",
+          "Mantenere la calma",
+          "Leggere letteratura apistica"
+        ]
+      },
+      "52": {
+        "title_de": "Jahreswechsel – Winterruhe",
+        "title_it": "Fine anno – riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Futtervorrat einschaetzen",
+          "Neues Bienenjahr planen",
+          "Auf ein gutes neues Bienenjahr!"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Stimare le scorte",
+          "Pianificare il nuovo anno apicolo",
+          "Buon nuovo anno apicolo!"
+        ]
+      }
+    },
+    "high": {
+      "1": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Tiefer Winter in der Hochlage",
+          "Flugloch auf Schnee und Eis kontrollieren",
+          "Voelker nicht stoeren",
+          "Futtervorrat von aussen abschaetzen"
+        ],
+        "tips_it": [
+          "Pieno inverno in alta montagna",
+          "Controllare l'ingresso per neve e ghiaccio",
+          "Non disturbare le colonie",
+          "Stimare le scorte dall'esterno"
+        ]
+      },
+      "2": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch von Schnee freihalten",
+          "Beuten nicht oeffnen",
+          "Maeuseschutz pruefen",
+          "Futterteig bereithalten fuer Notfall"
+        ],
+        "tips_it": [
+          "Mantenere l'ingresso libero dalla neve",
+          "Non aprire le arnie",
+          "Verificare la protezione anti-topi",
+          "Tenere pronto il candito per emergenze"
+        ]
+      },
+      "3": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Noch tiefer Winter",
+          "Flugloch kontrollieren",
+          "Wetter beobachten",
+          "Material vorbereiten (Werkstatt)"
+        ],
+        "tips_it": [
+          "Ancora pieno inverno",
+          "Controllare l'ingresso",
+          "Osservare il meteo",
+          "Preparare il materiale (laboratorio)"
+        ]
+      },
+      "4": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Totenfall beobachten",
+          "Schnee am Stand raeumen",
+          "Werkstattarbeiten"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Osservare le api morte",
+          "Sgomberare la neve nel sito",
+          "Lavori in laboratorio"
+        ]
+      },
+      "5": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Noch Winter in der Hochlage",
+          "Flugloch kontrollieren",
+          "Futtervorrat von aussen abschaetzen",
+          "Vorbereitungen in der Werkstatt"
+        ],
+        "tips_it": [
+          "Ancora inverno in alta montagna",
+          "Controllare l'ingresso",
+          "Stimare le scorte dall'esterno",
+          "Preparativi in laboratorio"
+        ]
+      },
+      "6": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Erste Anzeichen von Vorfrühling in geschuetzten Lagen",
+          "Futtervorrat pruefen",
+          "Raehmchen vorbereiten"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Prime tracce di primavera in posizioni riparate",
+          "Verificare le scorte",
+          "Preparare i telaini"
+        ]
+      },
+      "7": {
+        "title_de": "Spaetewinter",
+        "title_it": "Fine inverno",
+        "tips_de": [
+          "Noch kalt in der Hochlage",
+          "Flugloch kontrollieren",
+          "Futtervorrat abschaetzen",
+          "Material bereitstellen"
+        ],
+        "tips_it": [
+          "Ancora freddo in alta montagna",
+          "Controllare l'ingresso",
+          "Stimare le scorte",
+          "Preparare il materiale"
+        ]
+      },
+      "8": {
+        "title_de": "Spaetewinter",
+        "title_it": "Fine inverno",
+        "tips_de": [
+          "Erste Reinigungsfluege moeglich",
+          "Flugloch kontrollieren",
+          "Futtervorrat pruefen – kritische Phase",
+          "Notfuetterung mit Futterteig wenn noetig"
+        ],
+        "tips_it": [
+          "Primi voli di purificazione possibili",
+          "Controllare l'ingresso",
+          "Verificare le scorte – fase critica",
+          "Nutrizione d'emergenza con candito se necessario"
+        ]
+      },
+      "9": {
+        "title_de": "Spaetewinter – Polleneintrag moeglich",
+        "title_it": "Fine inverno – possibile apporto di polline",
+        "tips_de": [
+          "Erste Weiden moeglich",
+          "Reinigungsfluege an warmen Tagen",
+          "Futtervorrat pruefen",
+          "Maeusegitter eventuell entfernen"
+        ],
+        "tips_it": [
+          "Primi salici possibili",
+          "Voli di purificazione nelle giornate calde",
+          "Verificare le scorte",
+          "Eventualmente rimuovere la griglia anti-topi"
+        ]
+      },
+      "10": {
+        "title_de": "Vorfrühling",
+        "title_it": "Inizio primavera",
+        "tips_de": [
+          "Langsam Vorfrühling in der Hochlage",
+          "Polleneintrag beobachten",
+          "Futtervorrat kontrollieren",
+          "Material fuer Auswinterung vorbereiten"
+        ],
+        "tips_it": [
+          "Lentamente primavera in alta montagna",
+          "Osservare l'apporto di polline",
+          "Controllare le scorte",
+          "Preparare materiale per il controllo primaverile"
+        ]
+      },
+      "11": {
+        "title_de": "Vorfrühling – Schnee schmilzt",
+        "title_it": "Inizio primavera – la neve si scioglie",
+        "tips_de": [
+          "Weiden und Hasel blühen",
+          "Futtervorrat kritisch prüfen",
+          "Fluglochbeobachtung: Volkstaerke",
+          "Warmen Tag abwarten fuer Durchsicht"
+        ],
+        "tips_it": [
+          "Fioriscono salici e noccioli",
+          "Controllare criticamente le scorte",
+          "Osservazione ingresso: forza della colonia",
+          "Aspettare giornata calda per ispezione"
+        ]
+      },
+      "12": {
+        "title_de": "Vorfrühling – Vorbereitung",
+        "title_it": "Inizio primavera – preparazione",
+        "tips_de": [
+          "Noch zu kalt fuer Durchsicht in der Hochlage",
+          "Futtervorrat von aussen kontrollieren",
+          "Notfuetterung wenn noetig",
+          "Beutenboden reinigen wenn moeglich"
+        ],
+        "tips_it": [
+          "Ancora troppo freddo per ispezione in alta montagna",
+          "Controllare le scorte dall'esterno",
+          "Nutrizione d'emergenza se necessario",
+          "Pulire il fondo se possibile"
+        ]
+      },
+      "13": {
+        "title_de": "Frühling naht",
+        "title_it": "La primavera si avvicina",
+        "tips_de": [
+          "Erste Durchsicht bei warmen Tagen vorbereiten",
+          "Futtervorrat kontrollieren",
+          "Weidenblüte wichtig fuer Pollenversorgung",
+          "Maeusegitter entfernen"
+        ],
+        "tips_it": [
+          "Preparare la prima ispezione per le giornate calde",
+          "Controllare le scorte",
+          "Fioritura del salice importante per il polline",
+          "Rimuovere la griglia anti-topi"
+        ]
+      },
+      "14": {
+        "title_de": "Auswinterung – erste Durchsicht",
+        "title_it": "Controllo primaverile – prima ispezione",
+        "tips_de": [
+          "Erste Durchsicht bei mind. 15°C",
+          "Weiselrichtigkeit prüfen",
+          "Futtervorrat beurteilen – mind. 5 kg",
+          "Schwache Voelker vereinigen",
+          "Boden reinigen"
+        ],
+        "tips_it": [
+          "Prima ispezione a min. 15°C",
+          "Verificare la regina",
+          "Valutare le scorte – minimo 5 kg",
+          "Unire le colonie deboli",
+          "Pulire il fondo"
+        ]
+      },
+      "15": {
+        "title_de": "Frühjahrsentwicklung",
+        "title_it": "Sviluppo primaverile",
+        "tips_de": [
+          "Volksentwicklung beobachten",
+          "Futterwaben am Rand belassen",
+          "Mittelwand geben wenn noetig",
+          "Drohnenrahmen einhängen"
+        ],
+        "tips_it": [
+          "Osservare lo sviluppo della colonia",
+          "Lasciare i favi con scorte ai lati",
+          "Aggiungere fogli cerei se necessario",
+          "Inserire il telaino da fuco"
+        ]
+      },
+      "16": {
+        "title_de": "Frühjahrsentwicklung – Raumgabe",
+        "title_it": "Sviluppo primaverile – ampliamento",
+        "tips_de": [
+          "Raum geben: Mittelwaende einhängen",
+          "Drohnenrahmen kontrollieren",
+          "Volkstaerke beurteilen",
+          "Obstblüte beginnt in der Hochlage"
+        ],
+        "tips_it": [
+          "Dare spazio: inserire fogli cerei",
+          "Controllare il telaino da fuco",
+          "Valutare la forza della colonia",
+          "Inizia la fioritura dei frutteti in alta montagna"
+        ]
+      },
+      "17": {
+        "title_de": "Obstblüte – Honigraum",
+        "title_it": "Fioritura – melario",
+        "tips_de": [
+          "Honigraum aufsetzen bei starken Voelkern",
+          "Absperrgitter einlegen",
+          "Drohnenbrut schneiden",
+          "Schwarmstimmung beobachten"
+        ],
+        "tips_it": [
+          "Aggiungere melario per colonie forti",
+          "Inserire l'escludi-regina",
+          "Tagliare la covata da fuco",
+          "Osservare l'umore di sciamatura"
+        ]
+      },
+      "18": {
+        "title_de": "Vollfrühling",
+        "title_it": "Piena primavera",
+        "tips_de": [
+          "Honigraum kontrollieren",
+          "Weiselzellen kontrollieren",
+          "Drohnenbrut schneiden",
+          "Genug Raum geben"
+        ],
+        "tips_it": [
+          "Controllare il melario",
+          "Controllare le celle reali",
+          "Tagliare la covata da fuco",
+          "Dare spazio sufficiente"
+        ]
+      },
+      "19": {
+        "title_de": "Vollfrühling – Schwarmvorbeugung",
+        "title_it": "Piena primavera – prevenzione sciamatura",
+        "tips_de": [
+          "Schwarmstimmung? Weiselzellen kontrollieren",
+          "Ableger bilden wenn gewuenscht",
+          "Genug Raum geben",
+          "Alpenrosenblüte beginnt"
+        ],
+        "tips_it": [
+          "Umore di sciamatura? Controllare celle reali",
+          "Formare nuclei se desiderato",
+          "Dare spazio sufficiente",
+          "Inizia la fioritura del rododendro"
+        ]
+      },
+      "20": {
+        "title_de": "Schwarmzeit beginnt",
+        "title_it": "Inizia la stagione di sciamatura",
+        "tips_de": [
+          "Ab jetzt wöchentliche Schwarmkontrolle!",
+          "Alle 7 Tage: Weiselzellen suchen",
+          "Ablegerbildung zur Schwarmvorbeugung",
+          "Honigraum erweitern",
+          "Drohnenbrut schneiden"
+        ],
+        "tips_it": [
+          "Da ora controllo sciamatura settimanale!",
+          "Ogni 7 giorni: cercare celle reali",
+          "Formare nuclei per prevenire la sciamatura",
+          "Ampliare il melario",
+          "Tagliare la covata da fuco"
+        ]
+      },
+      "21": {
+        "title_de": "Schwarmkontrolle",
+        "title_it": "Controllo sciamatura",
+        "tips_de": [
+          "Wöchentliche Schwarmkontrolle",
+          "Weiselzellen brechen oder Ableger bilden",
+          "Honigraum kontrollieren",
+          "Alpenblumen liefern Nektar"
+        ],
+        "tips_it": [
+          "Controllo sciamatura settimanale",
+          "Distruggere celle reali o formare nuclei",
+          "Controllare il melario",
+          "I fiori alpini forniscono nettare"
+        ]
+      },
+      "22": {
+        "title_de": "Schwarmkontrolle – Ableger",
+        "title_it": "Controllo sciamatura – nuclei",
+        "tips_de": [
+          "Schwarmkontrolle fortführen",
+          "Ableger bilden mit verdeckelter Brut",
+          "Honigraum erweitern",
+          "Tracht beobachten"
+        ],
+        "tips_it": [
+          "Proseguire il controllo sciamatura",
+          "Formare nuclei con covata opercolata",
+          "Ampliare il melario",
+          "Osservare il raccolto"
+        ]
+      },
+      "23": {
+        "title_de": "Hauptschwarmzeit",
+        "title_it": "Piena stagione di sciamatura",
+        "tips_de": [
+          "Höhepunkt der Schwarmzeit in der Hochlage!",
+          "Konsequent kontrollieren",
+          "Schwarmfangkasten bereitstellen",
+          "Weiselzellen kontrolliert nutzen"
+        ],
+        "tips_it": [
+          "Culmine della sciamatura in alta montagna!",
+          "Controllare sistematicamente",
+          "Preparare trappole per sciami",
+          "Utilizzare le celle reali in modo controllato"
+        ]
+      },
+      "24": {
+        "title_de": "Schwarmkontrolle – Königinnenzucht",
+        "title_it": "Controllo sciamatura – allevamento regine",
+        "tips_de": [
+          "Schwarmkontrolle",
+          "Königinnenzucht möglich",
+          "Ableger pflegen: Futter kontrollieren",
+          "Honigraum kontrollieren"
+        ],
+        "tips_it": [
+          "Controllo sciamatura",
+          "Allevamento regine possibile",
+          "Curare i nuclei: controllare le scorte",
+          "Controllare il melario"
+        ]
+      },
+      "25": {
+        "title_de": "Schwarmzeit – Tracht",
+        "title_it": "Sciamatura – raccolto",
+        "tips_de": [
+          "Schwarmkontrolle fortführen",
+          "Tracht beobachten: Gewichtszunahme",
+          "Drohnenbrut schneiden",
+          "Auf verdeckelten Honig achten"
+        ],
+        "tips_it": [
+          "Proseguire il controllo sciamatura",
+          "Osservare il raccolto: aumento di peso",
+          "Tagliare la covata da fuco",
+          "Verificare il miele opercolato"
+        ]
+      },
+      "26": {
+        "title_de": "Schwarmzeit – Ernte naht",
+        "title_it": "Sciamatura – si avvicina la raccolta",
+        "tips_de": [
+          "Schwarmkontrolle noch nötig",
+          "Honigräume kontrollieren: verdeckelt?",
+          "Erste Ernte möglich",
+          "Jungvölker: Weiselrichtigkeit"
+        ],
+        "tips_it": [
+          "Controllo sciamatura ancora necessario",
+          "Controllare melari: opercolato?",
+          "Prima raccolta possibile",
+          "Nuclei: verificare la regina"
+        ]
+      },
+      "27": {
+        "title_de": "Schwarmzeit endet – Ernte",
+        "title_it": "Fine sciamatura – raccolta",
+        "tips_de": [
+          "Letzte Schwarmkontrollen",
+          "Honig ernten wenn 2/3 verdeckelt",
+          "Alpenblumenhonig: einzigartig!",
+          "Honigraum fuer weitere Tracht aufsetzen"
+        ],
+        "tips_it": [
+          "Ultimi controlli sciamatura",
+          "Raccogliere miele se 2/3 opercolato",
+          "Miele di fiori alpini: unico!",
+          "Rimettere il melario per ulteriore raccolto"
+        ]
+      },
+      "28": {
+        "title_de": "Sommertracht – Ernte",
+        "title_it": "Raccolto estivo – raccolta",
+        "tips_de": [
+          "Blüten-/Alpenblumenhonig ernten",
+          "Honigraum fuer Waldhonig belassen",
+          "Erste Varroa-Kontrolle",
+          "Schwarmkontrolle beendet"
+        ],
+        "tips_it": [
+          "Raccogliere miele di fiori alpini",
+          "Lasciare il melario per miele di bosco",
+          "Primo controllo varroa",
+          "Controllo sciamatura terminato"
+        ]
+      },
+      "29": {
+        "title_de": "Sommertracht – Varroa-Monitoring",
+        "title_it": "Raccolto estivo – monitoraggio varroa",
+        "tips_de": [
+          "Varroa-Kontrolle durchführen",
+          "Natuerlichen Milbenfall zaehlen",
+          "Waldhonigtracht moeglich",
+          "Honigraum kontrollieren"
+        ],
+        "tips_it": [
+          "Effettuare il controllo varroa",
+          "Contare la caduta naturale degli acari",
+          "Possibile raccolto di miele di bosco",
+          "Controllare il melario"
+        ]
+      },
+      "30": {
+        "title_de": "Sommertracht – Letzte Ernte",
+        "title_it": "Raccolto estivo – ultima raccolta",
+        "tips_de": [
+          "Letzte Schwarmkontrolle (falls noch noetig)",
+          "Sommerhonig ernten",
+          "Bienenfluchten einlegen",
+          "Varroa-Befallsgrad notieren"
+        ],
+        "tips_it": [
+          "Ultimo controllo sciamatura (se ancora necessario)",
+          "Raccogliere il miele estivo",
+          "Inserire gli apiscampi",
+          "Annotare il grado di infestazione varroa"
+        ]
+      },
+      "31": {
+        "title_de": "Honigernte – Sommerbehandlung vorbereiten",
+        "title_it": "Raccolta – preparare il trattamento estivo",
+        "tips_de": [
+          "Honigernte abschliessen",
+          "Honigräume abnehmen",
+          "Sommerbehandlung vorbereiten (Ameisensäure)",
+          "Varroa messen"
+        ],
+        "tips_it": [
+          "Concludere la raccolta",
+          "Rimuovere i melari",
+          "Preparare il trattamento estivo (acido formico)",
+          "Misurare la varroa"
+        ]
+      },
+      "32": {
+        "title_de": "Sommerbehandlung",
+        "title_it": "Trattamento estivo",
+        "tips_de": [
+          "Ameisensäure-Behandlung starten",
+          "Temperatur beachten: in der Hochlage oft kuehl",
+          "Auffütterung beginnen",
+          "Ableger mitbehandeln"
+        ],
+        "tips_it": [
+          "Iniziare il trattamento con acido formico",
+          "Attenzione alla temperatura: spesso fresco in alta montagna",
+          "Iniziare la nutrizione",
+          "Trattare anche i nuclei"
+        ]
+      },
+      "33": {
+        "title_de": "Sommerbehandlung – Auffütterung",
+        "title_it": "Trattamento estivo – nutrizione",
+        "tips_de": [
+          "Ameisensäure kontrollieren/beenden",
+          "Auffütterung: Sirup 3:2",
+          "Milbenfall zaehlen",
+          "Voelker beobachten"
+        ],
+        "tips_it": [
+          "Controllare/terminare l'acido formico",
+          "Nutrizione: sciroppo 3:2",
+          "Contare la caduta degli acari",
+          "Osservare le colonie"
+        ]
+      },
+      "34": {
+        "title_de": "Auffütterung",
+        "title_it": "Nutrizione",
+        "tips_de": [
+          "Auffütterung: Zielgewicht erreichen",
+          "Hochlage braucht ca. 20-22 kg Winterfutter!",
+          "Varroa-Nachkontrolle",
+          "Räuberei vermeiden"
+        ],
+        "tips_it": [
+          "Nutrizione: raggiungere il peso obiettivo",
+          "L'alta montagna necessita ca. 20-22 kg di scorte!",
+          "Controllo varroa successivo",
+          "Evitare il saccheggio"
+        ]
+      },
+      "35": {
+        "title_de": "Auffütterung abschliessen",
+        "title_it": "Concludere la nutrizione",
+        "tips_de": [
+          "Auffütterung rechtzeitig abschliessen – Winter kommt frueher!",
+          "Gewicht kontrollieren",
+          "Weiselrichtigkeit prüfen",
+          "Flugloch verengen gegen Wespen"
+        ],
+        "tips_it": [
+          "Concludere la nutrizione in tempo – l'inverno arriva prima!",
+          "Controllare il peso",
+          "Verificare la regina",
+          "Restringere l'ingresso contro le vespe"
+        ]
+      },
+      "36": {
+        "title_de": "Herbst – Wintervorbereitung",
+        "title_it": "Autunno – preparazione invernale",
+        "tips_de": [
+          "Maeuseschutz anbringen",
+          "Futtervorrat prüfen",
+          "Voelker in Ruhe lassen",
+          "Winterbehandlung planen"
+        ],
+        "tips_it": [
+          "Applicare la protezione anti-topi",
+          "Verificare le scorte",
+          "Lasciare le colonie in pace",
+          "Pianificare il trattamento invernale"
+        ]
+      },
+      "37": {
+        "title_de": "Herbst – Ruhe",
+        "title_it": "Autunno – riposo",
+        "tips_de": [
+          "Voelker nicht stoeren",
+          "Futtervorrat von aussen beurteilen",
+          "Oxalsäure besorgen",
+          "Beuten sturm- und schneesicher machen"
+        ],
+        "tips_it": [
+          "Non disturbare le colonie",
+          "Valutare le scorte dall'esterno",
+          "Procurare acido ossalico",
+          "Assicurare le arnie contro vento e neve"
+        ]
+      },
+      "38": {
+        "title_de": "Herbst – Futtercheck",
+        "title_it": "Autunno – controllo scorte",
+        "tips_de": [
+          "Gewicht kontrollieren",
+          "Bei zu leichten Voelkern: Futterteig",
+          "Keine Fluessigfuetterung mehr!",
+          "Flugloch kontrollieren"
+        ],
+        "tips_it": [
+          "Controllare il peso",
+          "Per colonie troppo leggere: candito",
+          "Niente piu' nutrizione liquida!",
+          "Controllare l'ingresso"
+        ]
+      },
+      "39": {
+        "title_de": "Herbst – letzte Kontrollen",
+        "title_it": "Autunno – ultimi controlli",
+        "tips_de": [
+          "Beuten wetterfest machen – Hochlage!",
+          "Deckel sicher befestigen (Wind/Schnee)",
+          "Flugloch Winterstellung",
+          "Windschutz aufstellen wenn noetig"
+        ],
+        "tips_it": [
+          "Rendere le arnie resistenti – alta montagna!",
+          "Fissare bene il coperchio (vento/neve)",
+          "Ingresso in posizione invernale",
+          "Posizionare protezione dal vento se necessario"
+        ]
+      },
+      "40": {
+        "title_de": "Spätherbst – Winterbehandlung",
+        "title_it": "Tardo autunno – trattamento invernale",
+        "tips_de": [
+          "Brutfreiheit frueh in der Hochlage!",
+          "Oxalsäure-Behandlung moeglich wenn brutfrei",
+          "Windel kontrollieren",
+          "Temperatur: milde Tage ueber 5°C nutzen"
+        ],
+        "tips_it": [
+          "Assenza di covata precoce in alta montagna!",
+          "Trattamento con acido ossalico possibile se senza covata",
+          "Controllare il cassetto",
+          "Temperatura: sfruttare giornate miti sopra 5°C"
+        ]
+      },
+      "41": {
+        "title_de": "Winterbehandlung – Oxalsäure",
+        "title_it": "Trattamento invernale – acido ossalico",
+        "tips_de": [
+          "Oxalsäure-Behandlung durchführen wenn brutfrei",
+          "3,5% Oxalsäure: 5ml pro Wabengasse",
+          "Milbenfall zaehlen nach Behandlung",
+          "Voelker danach in Ruhe lassen"
+        ],
+        "tips_it": [
+          "Effettuare il trattamento se senza covata",
+          "Acido ossalico 3,5%: 5ml per corridoio",
+          "Contare la caduta degli acari dopo il trattamento",
+          "Lasciare le colonie in pace dopo"
+        ]
+      },
+      "42": {
+        "title_de": "Winterbehandlung abschliessen",
+        "title_it": "Concludere il trattamento invernale",
+        "tips_de": [
+          "Winterbehandlung abgeschlossen?",
+          "Milbenfall kontrollieren",
+          "Voelker in Ruhe lassen",
+          "Flugloch pruefen"
+        ],
+        "tips_it": [
+          "Trattamento invernale completato?",
+          "Controllare la caduta degli acari",
+          "Lasciare le colonie in pace",
+          "Controllare l'ingresso"
+        ]
+      },
+      "43": {
+        "title_de": "Winterruhe beginnt",
+        "title_it": "Inizia il riposo invernale",
+        "tips_de": [
+          "Voelker in Ruhe lassen",
+          "Flugloch von Schnee freihalten",
+          "Werkstattarbeiten beginnen",
+          "Wachs einschmelzen"
+        ],
+        "tips_it": [
+          "Lasciare le colonie in pace",
+          "Mantenere l'ingresso libero dalla neve",
+          "Iniziare i lavori in laboratorio",
+          "Fondere la cera"
+        ]
+      },
+      "44": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Tiefer Winter in der Hochlage",
+          "Flugloch kontrollieren",
+          "Raehmchen reinigen und vorbereiten",
+          "Saison Revue passieren lassen"
+        ],
+        "tips_it": [
+          "Pieno inverno in alta montagna",
+          "Controllare l'ingresso",
+          "Pulire e preparare i telaini",
+          "Rivedere la stagione"
+        ]
+      },
+      "45": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren (Schnee/Eis)",
+          "Voelker nicht stoeren",
+          "Werkstattarbeiten",
+          "Mittelwaende giessen/bestellen"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso (neve/ghiaccio)",
+          "Non disturbare le colonie",
+          "Lavori in laboratorio",
+          "Preparare/ordinare fogli cerei"
+        ]
+      },
+      "46": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Werkstattarbeiten: Beuten reparieren",
+          "Flugloch pruefen",
+          "Weiterbildung besuchen",
+          "Material planen"
+        ],
+        "tips_it": [
+          "Lavori: riparare le arnie",
+          "Controllare l'ingresso",
+          "Partecipare a corsi",
+          "Pianificare il materiale"
+        ]
+      },
+      "47": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Raehmchen draehten",
+          "Mittelwaende einloeten",
+          "Flugloch kontrollieren",
+          "Stockkarten aktualisieren"
+        ],
+        "tips_it": [
+          "Filare i telaini",
+          "Saldare i fogli cerei",
+          "Controllare l'ingresso",
+          "Aggiornare le schede alveari"
+        ]
+      },
+      "48": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Werkstattarbeiten fortsetzen",
+          "Honiglager kontrollieren",
+          "Flugloch bei Schnee freihalten",
+          "Kommende Saison planen"
+        ],
+        "tips_it": [
+          "Proseguire i lavori in laboratorio",
+          "Controllare le scorte di miele",
+          "Mantenere l'ingresso libero dalla neve",
+          "Pianificare la prossima stagione"
+        ]
+      },
+      "49": {
+        "title_de": "Winterruhe – Jahresplanung",
+        "title_it": "Riposo invernale – pianificazione",
+        "tips_de": [
+          "Saison planen: Zucht, Ableger, Wanderungen",
+          "Material bestellen",
+          "Flugloch kontrollieren",
+          "Fortbildungen planen"
+        ],
+        "tips_it": [
+          "Pianificare: allevamento, nuclei, nomadismo",
+          "Ordinare il materiale",
+          "Controllare l'ingresso",
+          "Pianificare corsi"
+        ]
+      },
+      "50": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Schnee entfernen",
+          "Ruhe bewahren",
+          "Fachliteratur lesen"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Rimuovere la neve",
+          "Mantenere la calma",
+          "Leggere letteratura apistica"
+        ]
+      },
+      "51": {
+        "title_de": "Winterruhe",
+        "title_it": "Riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Futtervorrat abschaetzen",
+          "Werkstattarbeiten",
+          "Imkerverein: Jahresversammlung?"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Stimare le scorte",
+          "Lavori in laboratorio",
+          "Associazione apicoltori: assemblea annuale?"
+        ]
+      },
+      "52": {
+        "title_de": "Jahreswechsel – Winterruhe",
+        "title_it": "Fine anno – riposo invernale",
+        "tips_de": [
+          "Flugloch kontrollieren",
+          "Futtervorrat einschaetzen",
+          "Neues Bienenjahr planen",
+          "Auf ein gutes neues Bienenjahr!"
+        ],
+        "tips_it": [
+          "Controllare l'ingresso",
+          "Stimare le scorte",
+          "Pianificare il nuovo anno apicolo",
+          "Buon nuovo anno apicolo!"
+        ]
+      }
+    }
+  }
+}

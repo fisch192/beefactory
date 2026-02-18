@@ -1,28 +1,39 @@
-# build output
-dist/
-# generated types
-.astro/
+# === Playwright MCP screenshots ===
+.playwright-mcp/
 
-# dependencies
-node_modules/
-
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-
-# environment variables
+# === Global ===
+.DS_Store
+*.log
 .env
 .env.production
-
-# uploaded images (local dev)
-public/uploads/
-
-# macOS-specific files
-.DS_Store
-
-# jetbrains setting folder
 .idea/
-.vercel
+.vscode/
+
+# === beefactory (Astro) ===
+beefactory/dist/
+beefactory/.astro/
+beefactory/node_modules/
+beefactory/.vercel
+beefactory/public/uploads/
+
+# === Flutter app ===
+apps/mobile_flutter/build/
+apps/mobile_flutter/.dart_tool/
+apps/mobile_flutter/.flutter-plugins-dependencies
+apps/mobile_flutter/.pub-cache/
+apps/mobile_flutter/.pub/
+apps/mobile_flutter/**/doc/api/
+apps/mobile_flutter/**/ios/Flutter/.last_build_id
+apps/mobile_flutter/android/app/debug
+apps/mobile_flutter/android/app/profile
+apps/mobile_flutter/android/app/release
+apps/mobile_flutter/coverage/
+
+# === beekeeper-app monorepo ===
+beekeeper-app/apps/mobile_flutter/build/
+beekeeper-app/apps/mobile_flutter/.dart_tool/
+beekeeper-app/services/api_backend/node_modules/
+beekeeper-app/services/api_backend/dist/
+
+# === Archives (don't commit zips) ===
+*.zip
