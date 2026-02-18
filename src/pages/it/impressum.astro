@@ -1,0 +1,21 @@
+---
+export const prerender = true;
+import ShopLayout from '../../layouts/ShopLayout.astro';
+import { t } from '../../lib/i18n';
+const lang = 'it';
+---
+
+<ShopLayout lang={lang} title={t('impressum.title', lang)} canonicalPath="/it/impressum">
+  <section class="section-padding">
+    <div class="container-wide max-w-3xl">
+      <h1 class="heading-lg mb-8">{t('impressum.title', lang)}</h1>
+      <div class="space-y-4 text-mid-gray leading-relaxed">
+        <p><strong class="text-near-black">Bee Factory</strong><br/>Via Esempio 1<br/>39100 Bolzano (BZ)<br/>Alto Adige, Italia</p>
+        <p>E-mail: info@beefactory.shop<br/>Tel: +39 0471 000000</p>
+        <p>P.IVA: IT00000000000<br/>Codice fiscale: 00000000000</p>
+        <p>Iscritto al Registro delle Imprese di Bolzano<br/>N. REA: BZ-000000</p>
+        <p class="text-sm">Risoluzione delle controversie online ai sensi dell'art. 14, par. 1, regolamento ODR: <a href="https://ec.europa.eu/consumers/odr" class="text-honey hover:underline" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a></p>
+      </div>
+    </div>
+  </section>
+</ShopLayout>

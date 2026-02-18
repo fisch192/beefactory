@@ -1,0 +1,13 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import AdminNav from '../../components/admin/AdminNav';
+import BackupRestore from '../../components/admin/BackupRestore';
+---
+<AdminLayout title="Backup">
+  <div class="flex min-h-screen">
+    <AdminNav client:load active="backup" />
+    <main class="flex-1 p-8">
+      <BackupRestore client:load />
+    </main>
+  </div>
+</AdminLayout>

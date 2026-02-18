@@ -1,0 +1,63 @@
+---
+export const prerender = true;
+import ShopLayout from '../../../layouts/ShopLayout.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import CartDrawer from '../../../components/cart/CartDrawer';
+import { t } from '../../../lib/i18n';
+import { getCollections, getCollection } from '../../../data/collections';
+
+export async function getStaticPaths() {
+  const cols = await getCollections();
+  return cols.map((c) => ({ params: { handle: c.handle } }));
+}
+
+const lang = 'de';
+const { handle } = Astro.params;
+const result = await getCollection(handle!);
+if (!result) return Astro.redirect('/de/');
+
+const { collection, products } = result;
+---
+
+<ShopLayout
+  lang={lang}
+  title={collection.title[lang]}
+  description={collection.description[lang]}
+  canonicalPath={`/de/kategorien/${handle}`}
+>
+  <section class="section-padding">
+    <div class="container-wide">
+      <!-- Breadcrumb -->
+      <nav class="text-sm text-mid-gray mb-8">
+        <a href="/de/" class="hover:text-near-black transition-colors">Home</a>
+        <span class="mx-2">/</span>
+        <span class="text-near-black">{collection.title[lang]}</span>
+      </nav>
+
+      <div class="mb-12 fade-in">
+        <h1 class="heading-lg mb-3">{collection.title[lang]}</h1>
+        <p class="text-mid-gray text-lg max-w-2xl">{collection.description[lang]}</p>
+      </div>
+
+      {products.length > 0 ? (
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+          {products.map((product) => (
+            <ProductCard product={product} lang={lang} />
+          ))}
+        </div>
+      ) : (
+        <p class="text-mid-gray text-center py-16">Noch keine Produkte in dieser Kategorie.</p>
+      )}
+    </div>
+  </section>
+
+  <CartDrawer
+    client:load
+    title={t('cart.title', lang)}
+    emptyText={t('cart.empty', lang)}
+    totalText={t('cart.total', lang)}
+    checkoutText={t('cart.checkout', lang)}
+    continueText={t('cart.continue', lang)}
+    removeText={t('cart.remove', lang)}
+  />
+</ShopLayout>

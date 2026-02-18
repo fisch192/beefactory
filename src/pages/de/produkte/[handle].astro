@@ -1,0 +1,107 @@
+---
+export const prerender = true;
+import ShopLayout from '../../../layouts/ShopLayout.astro';
+import AddToCart from '../../../components/cart/AddToCart';
+import CartDrawer from '../../../components/cart/CartDrawer';
+import { t } from '../../../lib/i18n';
+import { formatPrice } from '../../../lib/utils';
+import { getProducts, getProduct } from '../../../data/products';
+import { getCollectionByHandle } from '../../../data/collections';
+
+export async function getStaticPaths() {
+  const products = await getProducts();
+  return products.map((p) => ({ params: { handle: p.handle } }));
+}
+
+const lang = 'de';
+const { handle } = Astro.params;
+const product = await getProduct(handle!);
+if (!product) return Astro.redirect('/de/');
+
+const collection = getCollectionByHandle(product.collection);
+---
+
+<ShopLayout
+  lang={lang}
+  title={product.title[lang]}
+  description={product.description[lang]}
+  canonicalPath={`/de/produkte/${handle}`}
+>
+  <section class="section-padding">
+    <div class="container-wide">
+      <!-- Breadcrumb -->
+      <nav class="text-sm text-mid-gray mb-8">
+        <a href="/de/" class="hover:text-near-black transition-colors">Home</a>
+        <span class="mx-2">/</span>
+        {collection && (
+          <>
+            <a href={`/de/kategorien/${collection.handle}`} class="hover:text-near-black transition-colors">{collection.title[lang]}</a>
+            <span class="mx-2">/</span>
+          </>
+        )}
+        <span class="text-near-black">{product.title[lang]}</span>
+      </nav>
+
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+        <!-- Product image placeholder -->
+        <div class="aspect-square bg-warm-gray relative overflow-hidden fade-in">
+          <div class="absolute inset-0 honeycomb-bg"></div>
+          <div class="absolute inset-0 bg-gradient-to-br from-warm-gray via-transparent to-honey/5"></div>
+          <div class="absolute inset-0 flex items-center justify-center p-8">
+            <span class="text-4xl sm:text-5xl font-bold text-near-black/8 text-center leading-tight tracking-tight uppercase">
+              {product.title[lang]}
+            </span>
+          </div>
+          {product.tags.includes('bestseller') && (
+            <span class="absolute top-4 left-4 bg-honey text-near-black text-xs font-semibold px-3 py-1.5 uppercase tracking-wider">
+              Bestseller
+            </span>
+          )}
+        </div>
+
+        <!-- Product info -->
+        <div class="fade-in">
+          <h1 class="heading-md mb-4">{product.title[lang]}</h1>
+          <p class="text-2xl font-bold mb-6">{formatPrice(product.price)}</p>
+          <p class="text-mid-gray leading-relaxed mb-8">{product.description[lang]}</p>
+
+          <AddToCart
+            client:load
+            productId={product.id}
+            productTitle={product.title[lang]}
+            variants={product.variants}
+            buttonText={t('product.addToCart', lang)}
+            outOfStockText={t('product.outOfStock', lang)}
+            variantLabel={product.variants.length > 1 ? t('product.variant', lang) : undefined}
+          />
+
+          <!-- USPs -->
+          <div class="mt-10 pt-8 border-t border-black/10 space-y-3">
+            <div class="flex items-center gap-3 text-sm text-mid-gray">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              Versandkostenfrei ab 300 EUR
+            </div>
+            <div class="flex items-center gap-3 text-sm text-mid-gray">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Geprüfte Qualität aus Südtirol
+            </div>
+            <div class="flex items-center gap-3 text-sm text-mid-gray">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              Persönliche Beratung
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CartDrawer
+    client:load
+    title={t('cart.title', lang)}
+    emptyText={t('cart.empty', lang)}
+    totalText={t('cart.total', lang)}
+    checkoutText={t('cart.checkout', lang)}
+    continueText={t('cart.continue', lang)}
+    removeText={t('cart.remove', lang)}
+  />
+</ShopLayout>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 44" fill="none">
+  <!-- Hexagon with bee -->
+  <g transform="translate(0, 0)">
+    <!-- Outer hexagon -->
+    <path d="M22 2L40 12.4V33.6L22 44L4 33.6V12.4L22 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+    <!-- Inner hexagon -->
+    <path d="M22 8L34 14.9V28.1L22 35L10 28.1V14.9L22 8Z" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.3"/>
+    <!-- Bee body -->
+    <ellipse cx="22" cy="21" rx="5" ry="3.5" fill="currentColor" opacity="0.8"/>
+    <!-- Bee stripes -->
+    <line x1="20" y1="19" x2="20" y2="23" stroke="#D4A843" stroke-width="0.8"/>
+    <line x1="22" y1="18.5" x2="22" y2="23.5" stroke="#D4A843" stroke-width="0.8"/>
+    <line x1="24" y1="19" x2="24" y2="23" stroke="#D4A843" stroke-width="0.8"/>
+    <!-- Bee wings -->
+    <ellipse cx="18.5" cy="18" rx="3.5" ry="2" fill="currentColor" opacity="0.25" transform="rotate(-25 18.5 18)"/>
+    <ellipse cx="25.5" cy="18" rx="3.5" ry="2" fill="currentColor" opacity="0.25" transform="rotate(25 25.5 18)"/>
+    <!-- Bee head -->
+    <circle cx="27" cy="21" r="1.5" fill="currentColor" opacity="0.6"/>
+    <!-- Antennae -->
+    <line x1="27.5" y1="19.5" x2="29" y2="17" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+    <line x1="28" y1="20" x2="30" y2="18" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+  </g>
+  <!-- BEE text -->
+  <text x="52" y="19" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="800" fill="currentColor" letter-spacing="0.15em">BEE</text>
+  <!-- FACTORY text -->
+  <text x="52" y="37" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="300" fill="currentColor" letter-spacing="0.25em">FACTORY</text>
+</svg>

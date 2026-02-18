@@ -1,0 +1,13 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import AdminNav from '../../components/admin/AdminNav';
+import TranslationEditor from '../../components/admin/TranslationEditor';
+---
+<AdminLayout title="Uebersetzungen">
+  <div class="flex min-h-screen">
+    <AdminNav client:load active="translations" />
+    <main class="flex-1 p-8">
+      <TranslationEditor client:load />
+    </main>
+  </div>
+</AdminLayout>

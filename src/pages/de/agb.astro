@@ -1,0 +1,30 @@
+---
+export const prerender = true;
+import ShopLayout from '../../layouts/ShopLayout.astro';
+import { t } from '../../lib/i18n';
+const lang = 'de';
+---
+
+<ShopLayout lang={lang} title={t('agb.title', lang)} canonicalPath="/de/agb">
+  <section class="section-padding">
+    <div class="container-wide max-w-3xl">
+      <h1 class="heading-lg mb-8">{t('agb.title', lang)}</h1>
+      <div class="space-y-6 text-mid-gray leading-relaxed text-sm">
+        <h2 class="text-lg font-semibold text-near-black">1. Geltungsbereich</h2>
+        <p>Diese Allgemeinen Geschäftsbedingungen gelten für alle Bestellungen, die über unseren Online-Shop getätigt werden.</p>
+
+        <h2 class="text-lg font-semibold text-near-black">2. Vertragspartner</h2>
+        <p>Der Kaufvertrag kommt zustande mit Bee Factory, Musterstraße 1, 39100 Bozen (BZ), Südtirol, Italien.</p>
+
+        <h2 class="text-lg font-semibold text-near-black">3. Preise und Zahlung</h2>
+        <p>Alle angegebenen Preise sind Endpreise inkl. gesetzlicher MwSt. Die Versandkosten werden vor Abschluss der Bestellung gesondert ausgewiesen. Ab einem Bestellwert von 300 EUR liefern wir versandkostenfrei.</p>
+
+        <h2 class="text-lg font-semibold text-near-black">4. Lieferung</h2>
+        <p>Wir liefern innerhalb Italiens, Österreichs und Deutschlands. Die Lieferzeit beträgt in der Regel 3-5 Werktage.</p>
+
+        <h2 class="text-lg font-semibold text-near-black">5. Widerrufsrecht</h2>
+        <p>Sie haben das Recht, binnen 14 Tagen ohne Angabe von Gründen den Vertrag zu widerrufen. Weitere Informationen finden Sie in unserer Widerrufsbelehrung.</p>
+      </div>
+    </div>
+  </section>
+</ShopLayout>

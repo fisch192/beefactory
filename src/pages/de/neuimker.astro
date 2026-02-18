@@ -1,0 +1,50 @@
+---
+export const prerender = true;
+import ShopLayout from '../../layouts/ShopLayout.astro';
+import CartDrawer from '../../components/cart/CartDrawer';
+import { t } from '../../lib/i18n';
+
+const lang = 'de';
+---
+
+<ShopLayout lang={lang} title="Neuimker" canonicalPath="/de/neuimker">
+  <section class="section-padding">
+    <div class="container-wide max-w-3xl">
+      <h1 class="heading-lg mb-8">Starten Sie in die Imkerei</h1>
+
+      <div class="prose prose-lg max-w-none space-y-6 text-mid-gray leading-relaxed">
+        <p>
+          Sie möchten Imker werden? Herzlich willkommen! Die Imkerei ist ein wunderbares Hobby,
+          das Sie in die faszinierende Welt der Bienen eintauchen lässt.
+        </p>
+
+        <h2 class="heading-md text-near-black !mt-12 !mb-4">Was brauche ich zum Start?</h2>
+        <p>
+          Als Neuimker benötigen Sie eine Grundausstattung: eine Bienenbeute, Rähmchen,
+          einen Smoker, einen Stockmeißel und natürlich Schutzkleidung. Unsere Startersets
+          enthalten alles, was Sie für den Anfang brauchen.
+        </p>
+
+        <h2 class="heading-md text-near-black !mt-12 !mb-4">Förderung in Südtirol</h2>
+        <p>
+          Als Neuimker in Südtirol können Sie von lokalen Förderprogrammen profitieren.
+          Die Provinz gewährt Zuschüsse von bis zu 50% für die Erstausstattung.
+          Wir beraten Sie gerne zu den Möglichkeiten und helfen bei der Antragstellung.
+        </p>
+
+        <h2 class="heading-md text-near-black !mt-12 !mb-4">Unsere Empfehlung</h2>
+        <p>
+          Beginnen Sie mit einem unserer Startersets – entweder im Dadant- oder Zander-System.
+          Beide Systeme haben ihre Vorzüge, und wir helfen Ihnen gerne bei der Wahl.
+        </p>
+
+        <div class="!mt-10 flex flex-col sm:flex-row gap-4">
+          <a href="/de/kategorien/startersets" class="btn-primary text-center">Startersets ansehen</a>
+          <a href="/de/faq" class="btn-outline text-center">Häufige Fragen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CartDrawer client:load title={t('cart.title', lang)} emptyText={t('cart.empty', lang)} totalText={t('cart.total', lang)} checkoutText={t('cart.checkout', lang)} continueText={t('cart.continue', lang)} removeText={t('cart.remove', lang)} />
+</ShopLayout>

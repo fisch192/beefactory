@@ -1,0 +1,57 @@
+---
+import type { Collection } from '../data/collections';
+import type { Lang } from '../lib/i18n';
+import { t } from '../lib/i18n';
+import { getProductsByCollection } from '../data/products';
+
+interface Props {
+  collection: Collection;
+  lang: Lang;
+  size?: 'normal' | 'large';
+}
+
+const { collection, lang, size = 'normal' } = Astro.props;
+const prefix = `/${lang}`;
+const catSlug = lang === 'de' ? 'kategorien' : 'categorie';
+const productCount = getProductsByCollection(collection.handle).length;
+---
+
+<a
+  href={`${prefix}/${catSlug}/${collection.handle}`}
+  class:list={[
+    'group relative block overflow-hidden bg-warm-gray fade-in',
+    size === 'large' ? 'aspect-[4/3] sm:aspect-[16/9] lg:row-span-2 lg:aspect-auto' : 'aspect-[4/3]',
+  ]}
+>
+  <!-- Background image -->
+  {collection.image ? (
+    <img src={collection.image} alt="" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+  ) : (
+    <div class="absolute inset-0 honeycomb-bg opacity-40"></div>
+  )}
+  <div class="absolute inset-0 bg-gradient-to-t from-near-black/80 via-near-black/30 to-near-black/10"></div>
+
+  <!-- Decorative hex accent -->
+  <div class="absolute top-4 right-4 opacity-20 group-hover:opacity-40 transition-opacity duration-500">
+    <svg width="40" height="46" viewBox="0 0 40 46" fill="none">
+      <path d="M20 0L40 11.5V34.5L20 46L0 34.5V11.5L20 0Z" stroke="#D4A843" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+    <p class="text-xs text-white/50 uppercase tracking-wider mb-1">{productCount} {lang === 'de' ? 'Produkte' : 'Prodotti'}</p>
+    <h3 class:list={[
+      'font-bold text-white mb-2 group-hover:text-honey transition-colors duration-300',
+      size === 'large' ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl',
+    ]}>
+      {collection.title[lang]}
+    </h3>
+    <span class="inline-flex items-center gap-1.5 text-sm text-white/70 group-hover:text-white transition-colors">
+      {t('categories.view', lang)}
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transform group-hover:translate-x-1 transition-transform">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </span>
+  </div>
+</a>

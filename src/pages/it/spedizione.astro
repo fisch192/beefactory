@@ -1,0 +1,30 @@
+---
+export const prerender = true;
+import ShopLayout from '../../layouts/ShopLayout.astro';
+import { t } from '../../lib/i18n';
+const lang = 'it';
+---
+
+<ShopLayout lang={lang} title={t('versand.title', lang)} canonicalPath="/it/spedizione">
+  <section class="section-padding">
+    <div class="container-wide max-w-3xl">
+      <h1 class="heading-lg mb-8">{t('versand.title', lang)}</h1>
+      <div class="space-y-6 text-mid-gray leading-relaxed">
+        <h2 class="text-lg font-semibold text-near-black">Costi di spedizione</h2>
+        <p>Per ordini superiori a <strong class="text-near-black">300 EUR</strong> la spedizione è gratuita in Italia, Austria e Germania.</p>
+        <div class="border border-black/10 p-6">
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-black/10"><th class="text-left pb-3 text-near-black">Regione</th><th class="text-right pb-3 text-near-black">Costo</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-black/5"><td class="py-2">Italia</td><td class="text-right py-2">7,90 EUR</td></tr>
+              <tr class="border-b border-black/5"><td class="py-2">Austria</td><td class="text-right py-2">9,90 EUR</td></tr>
+              <tr><td class="py-2">Germania</td><td class="text-right py-2">9,90 EUR</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 class="text-lg font-semibold text-near-black">Tempi di consegna</h2>
+        <p>I tempi di consegna sono generalmente di 3-5 giorni lavorativi. Spediamo con DHL e GLS.</p>
+      </div>
+    </div>
+  </section>
+</ShopLayout>

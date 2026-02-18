@@ -1,0 +1,81 @@
+---
+export const prerender = true;
+import ShopLayout from '../../layouts/ShopLayout.astro';
+import Hero from '../../components/Hero.astro';
+import FeatureGrid from '../../components/FeatureGrid.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import CategoryCard from '../../components/CategoryCard.astro';
+import NeuimkerSpotlight from '../../components/NeuimkerSpotlight.astro';
+import SeasonalGuide from '../../components/SeasonalGuide.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import CartDrawer from '../../components/cart/CartDrawer';
+import { t } from '../../lib/i18n';
+import { getFeaturedProductsAsync } from '../../data/products';
+import { getCollections } from '../../data/collections';
+
+const lang = 'de';
+const featured = await getFeaturedProductsAsync();
+const collections = await getCollections();
+---
+
+<ShopLayout lang={lang} canonicalPath="/de/" showSplash={true}>
+  <!-- 1. Hero -->
+  <Hero lang={lang} />
+
+  <!-- 2. USP Bar -->
+  <FeatureGrid lang={lang} />
+
+  <!-- 3. Featured Products -->
+  <section class="section-padding">
+    <div class="container-wide">
+      <div class="text-center mb-12 sm:mb-16 fade-in">
+        <h2 class="heading-lg mb-3">{t('featured.title', lang)}</h2>
+        <p class="text-mid-gray text-lg">{t('featured.subtitle', lang)}</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        {featured.map((product) => (
+          <ProductCard product={product} lang={lang} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Category Grid (Bento) -->
+  <section id="categories" class="section-padding bg-white">
+    <div class="container-wide">
+      <div class="text-center mb-12 sm:mb-16 fade-in">
+        <h2 class="heading-lg mb-3">{t('categories.title', lang)}</h2>
+        <p class="text-mid-gray text-lg">{t('categories.subtitle', lang)}</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 auto-rows-[200px] lg:auto-rows-[220px]">
+        {collections.map((col, i) => (
+          <CategoryCard collection={col} lang={lang} size={i === 0 ? 'large' : 'normal'} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Neuimker Spotlight -->
+  <NeuimkerSpotlight lang={lang} />
+
+  <!-- 6. Seasonal Guide -->
+  <SeasonalGuide lang={lang} />
+
+  <!-- 7. Testimonials -->
+  <Testimonials lang={lang} />
+
+  <!-- 8. Newsletter -->
+  <Newsletter lang={lang} />
+
+  <!-- Cart Drawer (Preact island) -->
+  <CartDrawer
+    client:load
+    title={t('cart.title', lang)}
+    emptyText={t('cart.empty', lang)}
+    totalText={t('cart.total', lang)}
+    checkoutText={t('cart.checkout', lang)}
+    continueText={t('cart.continue', lang)}
+    removeText={t('cart.remove', lang)}
+  />
+</ShopLayout>

@@ -1,0 +1,13 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import AdminNav from '../../components/admin/AdminNav';
+import AdminDashboard from '../../components/admin/AdminDashboard';
+---
+<AdminLayout title="Dashboard">
+  <div class="flex min-h-screen">
+    <AdminNav client:load active="dashboard" />
+    <main class="flex-1 p-8">
+      <AdminDashboard client:load />
+    </main>
+  </div>
+</AdminLayout>

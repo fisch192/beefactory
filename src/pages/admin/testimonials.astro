@@ -1,0 +1,13 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import AdminNav from '../../components/admin/AdminNav';
+import TestimonialManager from '../../components/admin/TestimonialManager';
+---
+<AdminLayout title="Bewertungen">
+  <div class="flex min-h-screen">
+    <AdminNav client:load active="testimonials" />
+    <main class="flex-1 p-8">
+      <TestimonialManager client:load />
+    </main>
+  </div>
+</AdminLayout>

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "startersets",
+    "handle": "startersets",
+    "title": { "de": "Startersets", "it": "Set Iniziali" },
+    "description": {
+      "de": "Komplette Startersets für den Einstieg in die Imkerei. Alles in einem Paket.",
+      "it": "Set iniziali completi per iniziare l'apicoltura. Tutto in un unico pacchetto."
+    },
+    "image": "/images/cat-startersets.jpg"
+  },
+  {
+    "id": "bienenbeuten-zubehoer",
+    "handle": "bienenbeuten-zubehoer",
+    "title": { "de": "Bienenbeuten & Zubehör", "it": "Arnie & Accessori" },
+    "description": {
+      "de": "Hochwertige Bienenbeuten und passendes Zubehör für alle gängigen Systeme.",
+      "it": "Arnie di alta qualità e accessori adatti per tutti i sistemi comuni."
+    },
+    "image": "/images/cat-bienenbeuten.jpg"
+  },
+  {
+    "id": "werkzeuge-smoker",
+    "handle": "werkzeuge-smoker",
+    "title": { "de": "Werkzeuge & Smoker", "it": "Attrezzi & Affumicatori" },
+    "description": {
+      "de": "Professionelle Imkerwerkzeuge und Smoker für die tägliche Arbeit am Bienenstock.",
+      "it": "Attrezzi professionali per l'apicoltura e affumicatori per il lavoro quotidiano all'alveare."
+    },
+    "image": "/images/cat-werkzeuge.jpg"
+  },
+  {
+    "id": "schutz-kleidung",
+    "handle": "schutz-kleidung",
+    "title": { "de": "Schutz & Kleidung", "it": "Protezione & Abbigliamento" },
+    "description": {
+      "de": "Imkeranzüge, Handschuhe und Schutzkleidung für sicheres Arbeiten.",
+      "it": "Tute, guanti e abbigliamento protettivo per lavorare in sicurezza."
+    },
+    "image": "/images/cat-schutz.jpg"
+  },
+  {
+    "id": "honigernte-verarbeitung",
+    "handle": "honigernte-verarbeitung",
+    "title": { "de": "Honigernte & Verarbeitung", "it": "Raccolta & Lavorazione Miele" },
+    "description": {
+      "de": "Honigschleudern, Entdeckelungswerkzeuge und alles für die Honigernte.",
+      "it": "Smielatori, attrezzi per disopercolare e tutto per la raccolta del miele."
+    },
+    "image": "/images/cat-honigernte.jpg"
+  },
+  {
+    "id": "fuetterung-gesundheit",
+    "handle": "fuetterung-gesundheit",
+    "title": { "de": "Fütterung & Gesundheit", "it": "Alimentazione & Salute" },
+    "description": {
+      "de": "Futtertröge, Varroa-Behandlung und Gesundheitsprodukte für Ihre Bienenvölker.",
+      "it": "Nutritori, trattamento varroa e prodotti per la salute delle tue colonie."
+    },
+    "image": "/images/cat-fuetterung.jpg"
+  }
+]

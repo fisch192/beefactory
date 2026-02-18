@@ -1,0 +1,30 @@
+---
+export const prerender = true;
+import ShopLayout from '../../layouts/ShopLayout.astro';
+import { t } from '../../lib/i18n';
+const lang = 'de';
+---
+
+<ShopLayout lang={lang} title={t('datenschutz.title', lang)} canonicalPath="/de/datenschutz">
+  <section class="section-padding">
+    <div class="container-wide max-w-3xl">
+      <h1 class="heading-lg mb-8">{t('datenschutz.title', lang)}</h1>
+      <div class="space-y-6 text-mid-gray leading-relaxed text-sm">
+        <h2 class="text-lg font-semibold text-near-black">1. Datenschutz auf einen Blick</h2>
+        <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.</p>
+
+        <h2 class="text-lg font-semibold text-near-black">2. Verantwortliche Stelle</h2>
+        <p>Bee Factory, Musterstraße 1, 39100 Bozen (BZ), Südtirol, Italien.<br/>E-Mail: info@beefactory.shop</p>
+
+        <h2 class="text-lg font-semibold text-near-black">3. Datenerfassung auf dieser Website</h2>
+        <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Wir erheben Daten, die Ihr Browser automatisch an uns übermittelt (Server-Logfiles).</p>
+
+        <h2 class="text-lg font-semibold text-near-black">4. Ihre Rechte</h2>
+        <p>Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung sowie ein Recht auf Berichtigung oder Löschung dieser Daten.</p>
+
+        <h2 class="text-lg font-semibold text-near-black">5. Cookies</h2>
+        <p>Diese Website verwendet Cookies. Dabei handelt es sich um kleine Textdateien, die auf Ihrem Endgerät gespeichert werden. Wir verwenden nur technisch notwendige Cookies.</p>
+      </div>
+    </div>
+  </section>
+</ShopLayout>

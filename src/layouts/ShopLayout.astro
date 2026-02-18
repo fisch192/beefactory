@@ -1,0 +1,28 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import WelcomeSplash from '../components/WelcomeSplash.astro';
+import type { Lang } from '../lib/i18n';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang: Lang;
+  canonicalPath?: string;
+  showSplash?: boolean;
+}
+
+const { title, description, lang, canonicalPath, showSplash = false } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} lang={lang} canonicalPath={canonicalPath}>
+  {showSplash && <WelcomeSplash />}
+  <Header lang={lang} />
+  <main>
+    <slot />
+  </main>
+  <Footer lang={lang} />
+  <CookieConsent lang={lang} />
+</BaseLayout>

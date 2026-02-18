@@ -1,0 +1,13 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import AdminNav from '../../components/admin/AdminNav';
+import ProductManager from '../../components/admin/ProductManager';
+---
+<AdminLayout title="Produkte">
+  <div class="flex min-h-screen">
+    <AdminNav client:load active="products" />
+    <main class="flex-1 p-8">
+      <ProductManager client:load />
+    </main>
+  </div>
+</AdminLayout>

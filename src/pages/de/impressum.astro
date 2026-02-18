@@ -1,0 +1,22 @@
+---
+export const prerender = true;
+import ShopLayout from '../../layouts/ShopLayout.astro';
+import { t } from '../../lib/i18n';
+const lang = 'de';
+---
+
+<ShopLayout lang={lang} title={t('impressum.title', lang)} canonicalPath="/de/impressum">
+  <section class="section-padding">
+    <div class="container-wide max-w-3xl">
+      <h1 class="heading-lg mb-8">{t('impressum.title', lang)}</h1>
+      <div class="space-y-4 text-mid-gray leading-relaxed">
+        <p><strong class="text-near-black">Bee Factory</strong><br/>Musterstraße 1<br/>39100 Bozen (BZ)<br/>Südtirol, Italien</p>
+        <p>E-Mail: info@beefactory.shop<br/>Tel: +39 0471 000000</p>
+        <p>USt-IdNr.: IT00000000000<br/>Steuernummer: 00000000000</p>
+        <p>Eingetragen im Handelsregister Bozen<br/>REA-Nr.: BZ-000000</p>
+        <p class="text-sm">Verantwortlich für den Inhalt gemäß § 55 Abs. 2 RStV: [Name des Verantwortlichen]</p>
+        <p class="text-sm">Online-Streitbeilegung gemäß Art. 14 Abs. 1 ODR-VO: Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr" class="text-honey hover:underline" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a></p>
+      </div>
+    </div>
+  </section>
+</ShopLayout>

@@ -1,0 +1,51 @@
+---
+import type { Product } from '../data/products';
+import type { Lang } from '../lib/i18n';
+import { formatPrice } from '../lib/utils';
+import { t } from '../lib/i18n';
+
+interface Props {
+  product: Product;
+  lang: Lang;
+}
+
+const { product, lang } = Astro.props;
+const prefix = `/${lang}`;
+const productSlug = lang === 'de' ? 'produkte' : 'prodotti';
+---
+
+<a href={`${prefix}/${productSlug}/${product.handle}`} class="group block fade-in">
+  <!-- Image / Placeholder -->
+  <div class="relative aspect-square overflow-hidden bg-warm-gray mb-4">
+    <div class="absolute inset-0 honeycomb-bg"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-warm-gray via-transparent to-honey/5"></div>
+    <!-- Product name as typographic element -->
+    <div class="absolute inset-0 flex items-center justify-center p-6">
+      <span class="text-2xl sm:text-3xl font-bold text-near-black/8 text-center leading-tight tracking-tight uppercase">
+        {product.title[lang]}
+      </span>
+    </div>
+    <!-- Hover overlay -->
+    <div class="absolute inset-0 bg-near-black/0 group-hover:bg-near-black/5 transition-all duration-300"></div>
+    <!-- Tag -->
+    {product.tags.includes('bestseller') && (
+      <span class="absolute top-3 left-3 bg-honey text-near-black text-xs font-semibold px-2.5 py-1 uppercase tracking-wider">
+        Bestseller
+      </span>
+    )}
+  </div>
+
+  <!-- Info -->
+  <div class="space-y-1">
+    <h3 class="font-semibold text-near-black group-hover:text-honey transition-colors duration-200">
+      {product.title[lang]}
+    </h3>
+    <p class="text-mid-gray text-sm line-clamp-2">
+      {product.description[lang]}
+    </p>
+    <p class="font-semibold text-near-black pt-1">
+      {product.variants.length > 1 && <span class="text-sm text-mid-gray font-normal">{t('product.price.from', lang)} </span>}
+      {formatPrice(product.price)}
+    </p>
+  </div>
+</a>

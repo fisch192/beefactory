@@ -1,0 +1,99 @@
+---
+import type { Lang } from '../lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<section class="relative min-h-[100vh] flex items-center justify-center overflow-hidden">
+  <!-- Background photo -->
+  <div class="absolute inset-0 bg-near-black">
+    <img
+      src="/images/hero-bg.jpg"
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover hero-img"
+      style="opacity: 0.65;"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <!-- Top gradient for header legibility -->
+    <div class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-near-black/50 to-transparent"></div>
+    <!-- Bottom gradient -->
+    <div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-near-black/70 to-transparent"></div>
+  </div>
+
+  <!-- Centered logo — like the original beefactory.shop -->
+  <div class="relative z-10 text-center hero-content">
+    <img
+      src="/images/beefactory-logo.png"
+      alt="BEE FACTORY — beekeeping equipment"
+      class="hero-logo-img mx-auto"
+    />
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 animate-bounce hero-scroll">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+         stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </div>
+</section>
+
+<style>
+  /* Slow zoom on hero background */
+  .hero-img {
+    animation: heroZoom 24s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom {
+    0%   { transform: scale(1); }
+    100% { transform: scale(1.06); }
+  }
+
+  /* Logo image — white on the dark hero background */
+  .hero-logo-img {
+    width: clamp(260px, 45vw, 480px);
+    height: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0;
+    animation: logoReveal 1.2s ease-out 0.3s forwards;
+  }
+
+  @keyframes logoReveal {
+    0% {
+      opacity: 0;
+      transform: scale(0.9) translateY(15px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  /* Scroll indicator fade-in */
+  .hero-scroll {
+    opacity: 0;
+    animation: scrollIn 0.8s ease-out 1.2s forwards;
+  }
+  @keyframes scrollIn {
+    to { opacity: 1; }
+  }
+
+  /* If first visit with splash, delay hero animations */
+  :global(html.first-visit) .hero-logo-img {
+    animation-delay: 0s;
+  }
+  :global(html.first-visit) .hero-scroll {
+    animation-delay: 0.8s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-img { animation: none; }
+    .hero-logo-img { animation: none; opacity: 1; }
+    .hero-scroll { animation: none; opacity: 1; }
+  }
+</style>

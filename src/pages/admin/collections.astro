@@ -1,0 +1,13 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import AdminNav from '../../components/admin/AdminNav';
+import CollectionManager from '../../components/admin/CollectionManager';
+---
+<AdminLayout title="Kategorien">
+  <div class="flex min-h-screen">
+    <AdminNav client:load active="collections" />
+    <main class="flex-1 p-8">
+      <CollectionManager client:load />
+    </main>
+  </div>
+</AdminLayout>

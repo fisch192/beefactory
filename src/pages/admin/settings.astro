@@ -1,0 +1,13 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import AdminNav from '../../components/admin/AdminNav';
+import SettingsEditor from '../../components/admin/SettingsEditor';
+---
+<AdminLayout title="Einstellungen">
+  <div class="flex min-h-screen">
+    <AdminNav client:load active="settings" />
+    <main class="flex-1 p-8">
+      <SettingsEditor client:load />
+    </main>
+  </div>
+</AdminLayout>

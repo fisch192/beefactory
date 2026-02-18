@@ -1,0 +1,74 @@
+---
+import '../styles/global.css';
+import type { Lang } from '../lib/i18n';
+import { t, getAlternateLang } from '../lib/i18n';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang: Lang;
+  canonicalPath?: string;
+}
+
+const { title, description, lang, canonicalPath } = Astro.props;
+const altLang = getAlternateLang(lang);
+const siteTitle = title ? `${title} | Bee Factory` : t('site.title', lang);
+const siteDescription = description || t('site.description', lang);
+const altPath = canonicalPath?.replace(`/${lang}/`, `/${altLang}/`) ?? `/${altLang}/`;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={siteDescription} />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{siteTitle}</title>
+
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+    <link rel="canonical" href={`https://beefactory.shop${canonicalPath ?? Astro.url.pathname}`} />
+    <link rel="alternate" hreflang={lang} href={`https://beefactory.shop${canonicalPath ?? Astro.url.pathname}`} />
+    <link rel="alternate" hreflang={altLang} href={`https://beefactory.shop${altPath}`} />
+
+    <!-- Inter Variable font -->
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
+    <!-- Poppins for logo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
+
+    <!-- OG -->
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={siteDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'it_IT'} />
+
+    <!-- Must run before body renders so CSS animation delays apply correctly -->
+    <script is:inline>
+      if (!sessionStorage.getItem('beefactory-welcomed')) {
+        document.documentElement.classList.add('first-visit');
+      }
+    </script>
+  </head>
+  <body class="bg-off-white text-near-black antialiased">
+    <slot />
+    <script>
+      // Intersection observer for fade-in animations
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

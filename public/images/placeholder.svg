@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <rect width="400" height="400" fill="#f5f0eb"/>
+  <!-- Honeycomb pattern -->
+  <pattern id="hc" x="0" y="0" width="56" height="100" patternUnits="userSpaceOnUse">
+    <path d="M28 66L0 50V16L28 0L56 16V50L28 66ZM28 100L0 84V50L28 34L56 50V84L28 100Z" fill="none" stroke="#D4A843" stroke-width="0.8" opacity="0.2"/>
+  </pattern>
+  <rect width="400" height="400" fill="url(#hc)"/>
+  <!-- Center hex -->
+  <path d="M200 150L230 167.3V201.7L200 219L170 201.7V167.3L200 150Z" fill="#D4A843" opacity="0.15"/>
+  <path d="M200 165L215 173.7V191.3L200 200L185 191.3V173.7L200 165Z" fill="#D4A843" opacity="0.25"/>
+  <!-- Bee silhouette -->
+  <ellipse cx="200" cy="182" rx="8" ry="6" fill="#D4A843" opacity="0.4"/>
+  <ellipse cx="194" cy="178" rx="4" ry="3" fill="#D4A843" opacity="0.2" transform="rotate(-20 194 178)"/>
+  <ellipse cx="206" cy="178" rx="4" ry="3" fill="#D4A843" opacity="0.2" transform="rotate(20 206 178)"/>
+</svg>

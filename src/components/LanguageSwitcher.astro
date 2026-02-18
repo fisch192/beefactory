@@ -1,0 +1,58 @@
+---
+import type { Lang } from '../lib/i18n';
+import { getAlternateLang } from '../lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const altLang = getAlternateLang(lang);
+
+// Build alternate URL by replacing language prefix
+const currentPath = Astro.url.pathname;
+let altPath = currentPath.replace(`/${lang}/`, `/${altLang}/`);
+if (currentPath === `/${lang}` || currentPath === `/${lang}/`) {
+  altPath = `/${altLang}/`;
+}
+
+// Map DE page slugs to IT equivalents
+const slugMap: Record<string, string> = {
+  'kategorien': 'categorie',
+  'categorie': 'kategorien',
+  'produkte': 'prodotti',
+  'prodotti': 'produkte',
+  'neuimker': 'nuovi-apicoltori',
+  'nuovi-apicoltori': 'neuimker',
+  'ueber-uns': 'chi-siamo',
+  'chi-siamo': 'ueber-uns',
+  'datenschutz': 'privacy',
+  'privacy': 'datenschutz',
+  'wiederruf': 'recesso',
+  'recesso': 'wiederruf',
+  'versand': 'spedizione',
+  'spedizione': 'versand',
+};
+
+// Replace known slugs
+for (const [from, to] of Object.entries(slugMap)) {
+  altPath = altPath.replace(`/${from}`, `/${to}`);
+}
+---
+
+<a
+  href={altPath}
+  class="text-sm font-medium transition-colors uppercase tracking-wider header-lang"
+  aria-label={altLang === 'de' ? 'Deutsch' : 'Italiano'}
+>
+  {altLang.toUpperCase()}
+</a>
+
+<style>
+  .header-lang {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .header-lang:hover {
+    color: white;
+  }
+</style>

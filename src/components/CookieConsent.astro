@@ -1,0 +1,43 @@
+---
+import type { Lang } from '../lib/i18n';
+import { t } from '../lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[100] bg-near-black text-white p-4 sm:p-6 hidden" role="dialog" aria-label="Cookie consent">
+  <div class="container-wide flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-sm text-white/80">{t('cookie.text', lang)}</p>
+    <div class="flex items-center gap-3 shrink-0">
+      <button id="cookie-decline" class="text-sm text-white/60 hover:text-white transition-colors px-4 py-2">
+        {t('cookie.decline', lang)}
+      </button>
+      <button id="cookie-accept" class="text-sm bg-honey text-near-black font-semibold px-5 py-2 hover:bg-honey-light transition-colors">
+        {t('cookie.accept', lang)}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const banner = document.getElementById('cookie-banner');
+  const accepted = localStorage.getItem('cookies-accepted');
+
+  if (!accepted && banner) {
+    banner.classList.remove('hidden');
+  }
+
+  document.getElementById('cookie-accept')?.addEventListener('click', () => {
+    localStorage.setItem('cookies-accepted', 'true');
+    banner?.classList.add('hidden');
+  });
+
+  document.getElementById('cookie-decline')?.addEventListener('click', () => {
+    localStorage.setItem('cookies-accepted', 'false');
+    banner?.classList.add('hidden');
+  });
+</script>

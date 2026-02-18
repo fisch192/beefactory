@@ -1,0 +1,60 @@
+---
+import type { Lang } from '../lib/i18n';
+import { t } from '../lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const prefix = `/${lang}`;
+const neuimkerPath = lang === 'de' ? 'neuimker' : 'nuovi-apicoltori';
+---
+
+<section class="relative overflow-hidden bg-near-black text-white section-padding">
+  <!-- Background pattern -->
+  <div class="absolute inset-0 honeycomb-bg opacity-20"></div>
+  <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-honey/10 to-transparent"></div>
+
+  <div class="container-wide relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div class="fade-in">
+        <span class="inline-block text-xs uppercase tracking-[0.2em] text-honey mb-4 font-semibold">
+          {t('neuimker.subsidies', lang)}
+        </span>
+        <h2 class="heading-lg text-white mb-6">
+          {t('neuimker.title', lang)}
+        </h2>
+        <p class="text-lg text-white/70 mb-4 leading-relaxed">
+          {t('neuimker.text', lang)}
+        </p>
+        <p class="text-honey font-semibold mb-8">
+          {t('neuimker.subsidies.text', lang)}
+        </p>
+        <a href={`${prefix}/${neuimkerPath}`} class="btn-primary bg-honey text-near-black hover:bg-honey-light">
+          {t('neuimker.cta', lang)}
+        </a>
+      </div>
+
+      <!-- Decorative element -->
+      <div class="hidden lg:flex items-center justify-center fade-in">
+        <div class="relative">
+          <!-- Large decorative hexagon -->
+          <svg width="300" height="346" viewBox="0 0 300 346" fill="none" class="opacity-20">
+            <path d="M150 0L300 86.6V259.8L150 346L0 259.8V86.6L150 0Z" stroke="#D4A843" stroke-width="1"/>
+            <path d="M150 30L270 99.3V237.7L150 307L30 237.7V99.3L150 30Z" stroke="#D4A843" stroke-width="0.5"/>
+            <path d="M150 60L240 112V234L150 286L60 234V112L150 60Z" stroke="#D4A843" stroke-width="0.5"/>
+          </svg>
+          <!-- Center icon -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="1" class="opacity-60">
+              <path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/>
+              <path d="M12 22V12"/>
+              <path d="M2 7l10 5 10-5"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
