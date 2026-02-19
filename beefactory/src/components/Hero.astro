@@ -6,94 +6,308 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const prefix = `/${lang}`;
+const neuimkerPath = lang === 'de' ? 'neuimker' : 'nuovi-apicoltori';
+const catSlug      = lang === 'de' ? 'kategorien' : 'categorie';
+
+const headline = lang === 'de'
+  ? { line1: 'Die Kunst der', em: 'Imkerei.', line3: 'Meisterhaft.' }
+  : { line1: "L'Arte dell'", em: 'Apicoltura.', line3: 'Perfezionata.' };
+
+const ctaPrimary   = lang === 'de' ? 'Sortiment entdecken' : 'Scopri il catalogo';
+const ctaSecondary = lang === 'de' ? 'Einsteiger-Guide'    : 'Guida principianti';
+const subtitle     = lang === 'de'
+  ? 'Professionelle Imkerei-Ausrüstung für Einsteiger und erfahrene Imker in der Alpenregion.'
+  : 'Attrezzatura apistica professionale per principianti ed esperti in tutta la regione alpina.';
+
+const stats = lang === 'de'
+  ? [{ val: '500+', label: 'Kunden' }, { val: '50+', label: 'Produkte' }, { val: '5 ★', label: 'Bewertung' }]
+  : [{ val: '500+', label: 'Clienti' }, { val: '50+', label: 'Prodotti' }, { val: '5 ★', label: 'Valutazione' }];
 ---
 
-<section class="relative min-h-[100vh] flex items-center justify-center overflow-hidden">
-  <!-- Background photo -->
-  <div class="absolute inset-0 bg-near-black">
-    <img
-      src="/images/hero-bg.jpg"
-      alt=""
-      class="absolute inset-0 w-full h-full object-cover hero-img"
-      style="opacity: 0.65;"
-      loading="eager"
-      fetchpriority="high"
-    />
-    <!-- Top gradient for header legibility -->
-    <div class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-near-black/50 to-transparent"></div>
-    <!-- Bottom gradient -->
-    <div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-near-black/70 to-transparent"></div>
-  </div>
+<section class="hero-section">
 
-  <!-- Centered logo — like the original beefactory.shop -->
-  <div class="relative z-10 text-center hero-content">
-    <img
-      src="/images/beefactory-logo.png"
-      alt="BEE FACTORY — beekeeping equipment"
-      class="hero-logo-img mx-auto"
-    />
-  </div>
-
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 animate-bounce hero-scroll">
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
-         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-         stroke-linejoin="round">
-      <polyline points="6 9 12 15 18 9"/>
+  <!-- ── Hexagonal mesh ───────────────────────────── -->
+  <div class="hero-hex" aria-hidden="true">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="hexgrid" width="112" height="194" patternUnits="userSpaceOnUse">
+          <path d="M56 0L112 32.4V97.2L56 129.6L0 97.2V32.4L56 0Z
+                   M56 129.6L112 162V226.8L56 259.2L0 226.8V162L56 129.6Z"
+                fill="none" stroke="#C49A3C" stroke-width="0.6"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#hexgrid)"/>
     </svg>
   </div>
+
+  <!-- ── Radial glow ──────────────────────────────── -->
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <!-- ── Content ──────────────────────────────────── -->
+  <div class="hero-body">
+
+    <!-- Eyebrow -->
+    <div class="hero-eyebrow hi-1">
+      <span class="hero-rule"></span>
+      <span class="hero-eyebrow-text">
+        {lang === 'de' ? 'Seit 2019 · Südtirol' : 'Dal 2019 · Alto Adige'}
+      </span>
+      <span class="hero-rule"></span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="hero-headline hi-2">
+      {headline.line1}<br/>
+      <em class="hero-em">{headline.em}</em><br/>
+      <span class="hero-line3">{headline.line3}</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="hero-subtitle hi-3">{subtitle}</p>
+
+    <!-- CTAs -->
+    <div class="hero-ctas hi-4">
+      <a href={`${prefix}/${catSlug}/startersets`} class="btn-gold">
+        {ctaPrimary}
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </a>
+      <a href={`${prefix}/${neuimkerPath}`} class="btn-secondary">
+        {ctaSecondary}
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="hero-stats hi-5">
+      {stats.map((s, i) => (
+        <>
+          {i > 0 && <div class="hero-stat-divider" aria-hidden="true"></div>}
+          <div class="hero-stat">
+            <div class="hero-stat-val">{s.val}</div>
+            <div class="hero-stat-label">{s.label}</div>
+          </div>
+        </>
+      ))}
+    </div>
+
+  </div>
+
+  <!-- ── Scroll indicator ─────────────────────────── -->
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="hero-scroll-line"></div>
+  </div>
+
+  <!-- ── Bottom fade to cream ─────────────────────── -->
+  <div class="hero-fade-out" aria-hidden="true"></div>
+
 </section>
 
 <style>
-  /* Slow zoom on hero background */
-  .hero-img {
-    animation: heroZoom 24s ease-in-out infinite alternate;
-  }
-  @keyframes heroZoom {
-    0%   { transform: scale(1); }
-    100% { transform: scale(1.06); }
-  }
-
-  /* Logo image — white on the dark hero background */
-  .hero-logo-img {
-    width: clamp(260px, 45vw, 480px);
-    height: auto;
-    filter: brightness(0) invert(1);
-    opacity: 0;
-    animation: logoReveal 1.2s ease-out 0.3s forwards;
+  /* ── Section shell ─────────────────────────── */
+  .hero-section {
+    position:   relative;
+    min-height: 100svh;
+    background: var(--color-obsidian);
+    overflow:   hidden;
+    display:    flex;
+    flex-direction: column;
   }
 
-  @keyframes logoReveal {
-    0% {
-      opacity: 0;
-      transform: scale(0.9) translateY(15px);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
+  /* ── Hex grid ──────────────────────────────── */
+  .hero-hex {
+    position: absolute;
+    inset:    0;
+    opacity:  0.038;
   }
 
-  /* Scroll indicator fade-in */
+  /* ── Radial warm glow ──────────────────────── */
+  .hero-glow {
+    position:   absolute;
+    inset:      0;
+    background: radial-gradient(
+      ellipse 75% 55% at 50% 0%,
+      rgba(196, 154, 60, 0.15) 0%,
+      transparent 65%
+    );
+    pointer-events: none;
+  }
+
+  /* ── Content wrapper ───────────────────────── */
+  .hero-body {
+    position:        relative;
+    z-index:         10;
+    flex:            1;
+    display:         flex;
+    flex-direction:  column;
+    align-items:     center;
+    justify-content: center;
+    text-align:      center;
+    padding:         clamp(5rem, 12vw, 9rem) clamp(1.25rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+    gap:             0;
+  }
+
+  /* ── Eyebrow ───────────────────────────────── */
+  .hero-eyebrow {
+    display:     flex;
+    align-items: center;
+    gap:         1.25rem;
+    margin-bottom: 2.5rem;
+  }
+  .hero-rule {
+    display:    block;
+    width:      2.5rem;
+    height:     1px;
+    background: rgba(196, 154, 60, 0.55);
+    flex-shrink: 0;
+  }
+  .hero-eyebrow-text {
+    font-size:      0.6875rem;
+    font-weight:    500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color:          rgba(196, 154, 60, 0.7);
+  }
+
+  /* ── Headline ──────────────────────────────── */
+  .hero-headline {
+    font-family:    var(--font-display);
+    font-size:      clamp(3.25rem, 10vw, 8.5rem);
+    font-weight:    300;
+    letter-spacing: -0.03em;
+    line-height:    0.9;
+    color:          white;
+    margin-bottom:  2rem;
+    font-style:     normal;
+  }
+  .hero-em {
+    color:      var(--color-gold);
+    font-style: italic;
+  }
+  .hero-line3 {
+    color:      rgba(255, 255, 255, 0.55);
+    font-style: normal;
+  }
+
+  /* ── Subtitle ──────────────────────────────── */
+  .hero-subtitle {
+    font-size:      clamp(0.9rem, 1.8vw, 1.125rem);
+    font-weight:    300;
+    color:          rgba(255, 255, 255, 0.45);
+    max-width:      38rem;
+    line-height:    1.75;
+    letter-spacing: 0;
+    margin-bottom:  3rem;
+  }
+
+  /* ── CTAs ──────────────────────────────────── */
+  .hero-ctas {
+    display:     flex;
+    flex-wrap:   wrap;
+    gap:         1rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4.5rem;
+  }
+
+  /* ── Stats ─────────────────────────────────── */
+  .hero-stats {
+    display:     flex;
+    align-items: center;
+    gap:         3rem;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat-val {
+    font-family:    var(--font-display);
+    font-weight:    300;
+    color:          var(--color-gold);
+    font-size:      clamp(1.6rem, 4vw, 2.25rem);
+    line-height:    1;
+    margin-bottom:  0.35rem;
+  }
+  .hero-stat-label {
+    font-size:      0.6rem;
+    font-weight:    500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color:          rgba(255, 255, 255, 0.3);
+  }
+  .hero-stat-divider {
+    width:      1px;
+    height:     2rem;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* ── Scroll line ───────────────────────────── */
   .hero-scroll {
-    opacity: 0;
-    animation: scrollIn 0.8s ease-out 1.2s forwards;
+    position:   absolute;
+    bottom:     2.5rem;
+    left:       50%;
+    transform:  translateX(-50%);
+    z-index:    10;
+    animation:  heroScrollFade 1s ease 1.4s both;
   }
-  @keyframes scrollIn {
-    to { opacity: 1; }
+  .hero-scroll-line {
+    width:       1px;
+    height:      3rem;
+    background:  linear-gradient(to bottom, rgba(196,154,60,0.6), transparent);
+    animation:   scrollPulse 2.4s ease-in-out infinite;
   }
 
-  /* If first visit with splash, delay hero animations */
-  :global(html.first-visit) .hero-logo-img {
-    animation-delay: 0s;
-  }
-  :global(html.first-visit) .hero-scroll {
-    animation-delay: 0.8s;
+  /* ── Bottom fade to cream ──────────────────── */
+  .hero-fade-out {
+    position:       absolute;
+    bottom:         0;
+    left:           0;
+    right:          0;
+    height:         8rem;
+    background:     linear-gradient(to bottom, transparent, var(--color-cream));
+    pointer-events: none;
+    z-index:        5;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .hero-img { animation: none; }
-    .hero-logo-img { animation: none; opacity: 1; }
-    .hero-scroll { animation: none; opacity: 1; }
+  /* ── Hero item entrance animation ─────────── */
+  .hi-1, .hi-2, .hi-3, .hi-4, .hi-5 {
+    animation:  heroItem 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: transform, opacity;
+  }
+  .hi-1 { animation-delay: 0.05s; }
+  .hi-2 { animation-delay: 0.18s; }
+  .hi-3 { animation-delay: 0.34s; }
+  .hi-4 { animation-delay: 0.48s; }
+  .hi-5 { animation-delay: 0.62s; }
+
+  @keyframes heroItem {
+    from {
+      opacity:   0;
+      transform: translateY(18px);
+      filter:    blur(6px);
+    }
+    to {
+      opacity:   1;
+      transform: translateY(0);
+      filter:    blur(0);
+    }
+  }
+
+  @keyframes heroScrollFade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.35; transform: scaleY(0.7); transform-origin: top; }
+    55%       { opacity: 0.85; transform: scaleY(1);   transform-origin: top; }
+  }
+
+  /* ── Mobile adjustments ────────────────────── */
+  @media (max-width: 480px) {
+    .hero-stats { gap: 1.75rem; }
+    .hero-ctas  { flex-direction: column; width: 100%; max-width: 22rem; }
+    .hero-ctas a { width: 100%; justify-content: center; }
   }
 </style>

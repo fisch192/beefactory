@@ -1,6 +1,19 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../services/ai_service.dart';
+
+import '../../../data/local/database.dart';
+import '../../../data/local/daos/sites_dao.dart';
+import '../../../data/local/daos/hives_dao.dart';
+import '../../../data/local/daos/events_dao.dart';
+import '../../../data/local/daos/tasks_dao.dart';
 import '../../../l10n/app_localizations.dart';
 import '../community/community_feed_screen.dart';
 
@@ -25,6 +38,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _notificationsEnabled = true;
   String? _lastSyncTime;
   final String _appVersion = '1.0.0';
+  bool _aiPremium = false;
 
   bool _loading = true;
 
@@ -35,11 +49,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _loadSettings() async {
+    final aiPremium = await AiService.isPremium();
     setState(() {
       _region = 'suedtirol';
       _elevationBand = 'mid';
       _notificationsEnabled = true;
       _lastSyncTime = null;
+      _aiPremium = aiPremium;
       _loading = false;
     });
   }
@@ -87,14 +103,115 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  void _exportData() {
+  Future<void> _exportData() async {
     final l = AppLocalizations.of(context);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(l.tr('export_not_implemented')),
-        backgroundColor: Colors.orange,
-      ),
-    );
+
+    try {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => const Center(
+            child: CircularProgressIndicator(color: kHoneyAmber)),
+      );
+
+      final db = context.read<AppDatabase>();
+      final sites = await SitesDao(db).getAll();
+      final hives = await HivesDao(db).getAll();
+      final events = await EventsDao(db).getAll();
+      final tasks = await TasksDao(db).getAll();
+
+      final export = {
+        'exported_at': DateTime.now().toIso8601String(),
+        'app_version': _appVersion,
+        'sites': sites
+            .map((s) => {
+                  'id': s.id,
+                  'name': s.name,
+                  'location': s.location,
+                  'latitude': s.latitude,
+                  'longitude': s.longitude,
+                  'elevation': s.elevation,
+                  'notes': s.notes,
+                  'created_at': s.createdAt.toIso8601String(),
+                })
+            .toList(),
+        'hives': hives
+            .map((h) => {
+                  'id': h.id,
+                  'site_id': h.siteId,
+                  'number': h.number,
+                  'name': h.name,
+                  'queen_year': h.queenYear,
+                  'queen_color': h.queenColor,
+                  'queen_marked': h.queenMarked,
+                  'notes': h.notes,
+                  'created_at': h.createdAt.toIso8601String(),
+                })
+            .toList(),
+        'events': events
+            .map((e) => {
+                  'id': e.id,
+                  'type': e.type,
+                  'hive_id': e.hiveId,
+                  'site_id': e.siteId,
+                  'occurred_at': e.occurredAtLocal.toIso8601String(),
+                  'payload': e.payload,
+                  'source': e.source,
+                  'created_at': e.createdAt.toIso8601String(),
+                })
+            .toList(),
+        'tasks': tasks
+            .map((t) => {
+                  'id': t.id,
+                  'title': t.title,
+                  'description': t.description,
+                  'status': t.status,
+                  'due_at': t.dueAt?.toIso8601String(),
+                  'hive_id': t.hiveId,
+                  'site_id': t.siteId,
+                  'created_at': t.createdAt.toIso8601String(),
+                })
+            .toList(),
+      };
+
+      final dir = await getApplicationDocumentsDirectory();
+      final timestamp = DateTime.now()
+          .toIso8601String()
+          .replaceAll(':', '-')
+          .split('.')
+          .first;
+      final file = File('${dir.path}/bee_export_$timestamp.json');
+      await file
+          .writeAsString(const JsonEncoder.withIndent('  ').convert(export));
+
+      if (!mounted) return;
+      Navigator.of(context).pop(); // dismiss loading
+
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          icon:
+              const Icon(Icons.check_circle, color: Colors.green, size: 48),
+          title: Text(l.tr('export_complete')),
+          content: Text('${l.tr('export_saved_to')}\n${file.path}'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      if (mounted) {
+        Navigator.of(context).pop(); // dismiss loading
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text('${l.tr('error')}: $e'),
+              backgroundColor: Colors.red),
+        );
+      }
+    }
   }
 
   @override
@@ -270,6 +387,51 @@ class _SettingsScreenState extends State<SettingsScreen> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12)),
               onTap: () => _openStore(),
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          // --------------- KI / Premium ---------------
+          _SectionHeader(title: 'KI-Assistent'),
+          Card(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12)),
+            child: Column(
+              children: [
+                SwitchListTile(
+                  secondary: Icon(
+                    _aiPremium ? Icons.star : Icons.star_border,
+                    color: _aiPremium ? Colors.amber : Colors.grey,
+                  ),
+                  title: const Text('Premium-Modus'),
+                  subtitle: Text(
+                    _aiPremium
+                        ? 'Unlimitierte KI-Anfragen aktiv'
+                        : '3 kostenlose Anfragen / Tag',
+                    style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                  ),
+                  value: _aiPremium,
+                  activeColor: kHoneyAmber,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(12))),
+                  onChanged: (value) async {
+                    await AiService.setPremium(value);
+                    setState(() => _aiPremium = value);
+                  },
+                ),
+                const Divider(height: 1, indent: 56),
+                ListTile(
+                  leading: const Icon(Icons.smart_toy_outlined,
+                      color: kHoneyAmber),
+                  title: const Text('Imker-KI öffnen'),
+                  trailing: const Icon(Icons.chevron_right),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.vertical(bottom: Radius.circular(12))),
+                  onTap: () => context.push('/ai'),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 16),

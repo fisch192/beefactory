@@ -8,66 +8,239 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const prefix = `/${lang}`;
+const prefix  = `/${lang}`;
 const catSlug = lang === 'de' ? 'kategorien' : 'categorie';
-const year = new Date().getFullYear();
+const year    = new Date().getFullYear();
 ---
 
-<footer class="bg-near-black text-white/80">
-  <div class="container-wide section-padding">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-      <!-- About -->
-      <div>
-        <img src="/images/beefactory-logo.png" alt="Bee Factory" class="h-12 mb-4 brightness-0 invert" />
-        <p class="text-sm leading-relaxed text-white/60">{t('footer.about.text', lang)}</p>
-      </div>
+<footer class="site-footer">
 
-      <!-- Categories -->
-      <div>
-        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">{t('footer.categories.title', lang)}</h3>
-        <ul class="space-y-2.5">
-          {collections.map((col) => (
-            <li>
-              <a href={`${prefix}/${catSlug}/${col.handle}`} class="text-sm text-white/60 hover:text-honey transition-colors">
-                {col.title[lang]}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+  <!-- Top: brand + columns -->
+  <div class="footer-main container-wide">
 
-      <!-- For beekeepers -->
-      <div>
-        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">{t('footer.imker.title', lang)}</h3>
-        <ul class="space-y-2.5">
-          <li><a href={`${prefix}/${lang === 'de' ? 'neuimker' : 'nuovi-apicoltori'}`} class="text-sm text-white/60 hover:text-honey transition-colors">{t('footer.imker.neuimker', lang)}</a></li>
-          <li><a href={`${prefix}/faq`} class="text-sm text-white/60 hover:text-honey transition-colors">{t('footer.imker.faq', lang)}</a></li>
-        </ul>
-      </div>
+    <!-- Brand -->
+    <div class="footer-brand">
+      <img src="/images/logo-white-stacked.svg" alt="Bee Factory"
+           class="footer-logo" loading="lazy" />
+      <p class="footer-tagline">{t('footer.about.text', lang)}</p>
 
-      <!-- Customer service -->
-      <div>
-        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">{t('footer.service.title', lang)}</h3>
-        <ul class="space-y-2.5">
-          <li><a href={`${prefix}/${lang === 'de' ? 'versand' : 'spedizione'}`} class="text-sm text-white/60 hover:text-honey transition-colors">{t('footer.service.shipping', lang)}</a></li>
-          <li><a href={`${prefix}/impressum`} class="text-sm text-white/60 hover:text-honey transition-colors">{t('footer.service.impressum', lang)}</a></li>
-          <li><a href={`${prefix}/${lang === 'de' ? 'datenschutz' : 'privacy'}`} class="text-sm text-white/60 hover:text-honey transition-colors">{t('footer.service.privacy', lang)}</a></li>
-          <li><a href={`${prefix}/agb`} class="text-sm text-white/60 hover:text-honey transition-colors">{t('footer.service.agb', lang)}</a></li>
-          <li><a href={`${prefix}/${lang === 'de' ? 'wiederruf' : 'recesso'}`} class="text-sm text-white/60 hover:text-honey transition-colors">{t('footer.service.widerruf', lang)}</a></li>
-        </ul>
+      <!-- Social links placeholder -->
+      <div class="footer-social">
+        <a href="#" class="social-link" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="#" class="social-link" aria-label="Facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+          </svg>
+        </a>
       </div>
     </div>
 
-    <!-- Bottom bar -->
-    <div class="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-xs text-white/40">&copy; {year} {t('footer.copyright', lang)}</p>
-      <!-- Payment icons placeholder -->
-      <div class="flex items-center gap-3 text-white/30">
-        <span class="text-xs uppercase tracking-wider">Visa</span>
-        <span class="text-xs uppercase tracking-wider">Mastercard</span>
-        <span class="text-xs uppercase tracking-wider">PayPal</span>
-        <span class="text-xs uppercase tracking-wider">Klarna</span>
-      </div>
+    <!-- Categories -->
+    <div class="footer-col">
+      <h3 class="footer-col-title">{t('footer.categories.title', lang)}</h3>
+      <ul class="footer-links">
+        {collections.map((col) => (
+          <li>
+            <a href={`${prefix}/${catSlug}/${col.handle}`} class="footer-link">
+              {col.title[lang]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- For beekeepers -->
+    <div class="footer-col">
+      <h3 class="footer-col-title">{t('footer.imker.title', lang)}</h3>
+      <ul class="footer-links">
+        <li>
+          <a href={`${prefix}/${lang === 'de' ? 'neuimker' : 'nuovi-apicoltori'}`}
+             class="footer-link">{t('footer.imker.neuimker', lang)}</a>
+        </li>
+        <li>
+          <a href={`${prefix}/faq`} class="footer-link">{t('footer.imker.faq', lang)}</a>
+        </li>
+        <li>
+          <a href={`${prefix}/${lang === 'de' ? 'ueber-uns' : 'chi-siamo'}`}
+             class="footer-link">{t('nav.about', lang)}</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Service -->
+    <div class="footer-col">
+      <h3 class="footer-col-title">{t('footer.service.title', lang)}</h3>
+      <ul class="footer-links">
+        <li><a href={`${prefix}/${lang === 'de' ? 'versand' : 'spedizione'}`} class="footer-link">{t('footer.service.shipping', lang)}</a></li>
+        <li><a href={`${prefix}/impressum`}   class="footer-link">{t('footer.service.impressum', lang)}</a></li>
+        <li><a href={`${prefix}/${lang === 'de' ? 'datenschutz' : 'privacy'}`} class="footer-link">{t('footer.service.privacy', lang)}</a></li>
+        <li><a href={`${prefix}/agb`}          class="footer-link">{t('footer.service.agb', lang)}</a></li>
+        <li><a href={`${prefix}/${lang === 'de' ? 'wiederruf' : 'recesso'}`} class="footer-link">{t('footer.service.widerruf', lang)}</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Divider -->
+  <div class="footer-divider container-wide">
+    <div class="rule"></div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom container-wide">
+    <p class="footer-copy">&copy; {year} {t('footer.copyright', lang)}</p>
+
+    <!-- Payment methods -->
+    <div class="footer-payments">
+      {['Visa', 'Mastercard', 'PayPal', 'Klarna'].map((pm) => (
+        <span class="payment-chip">{pm}</span>
+      ))}
     </div>
   </div>
+
 </footer>
+
+<style>
+  .site-footer {
+    background: var(--color-obsidian);
+    color:      rgba(255, 255, 255, 0.55);
+  }
+
+  /* ── Main grid ─────────────────────────────── */
+  .footer-main {
+    display:               grid;
+    grid-template-columns: 1fr;
+    gap:                   3rem;
+    padding-top:    clamp(4rem, 8vw, 7rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  @media (min-width: 640px) {
+    .footer-main { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .footer-main { grid-template-columns: 1.6fr repeat(3, 1fr); gap: 2.5rem; }
+  }
+
+  /* ── Brand column ──────────────────────────── */
+  .footer-brand {
+    display:        flex;
+    flex-direction: column;
+    gap:            1.25rem;
+  }
+
+  .footer-logo {
+    height:     5rem;
+    width:      auto;
+    opacity:    0.65;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .footer-logo:hover { opacity: 1; }
+
+  .footer-tagline {
+    font-size:   0.875rem;
+    line-height: 1.65;
+    max-width:   22rem;
+  }
+
+  .footer-social {
+    display: flex;
+    gap:     0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .social-link {
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    width:           2.25rem;
+    height:          2.25rem;
+    border:          1px solid rgba(255, 255, 255, 0.12);
+    color:           rgba(255, 255, 255, 0.45);
+    transition:
+      border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      color        0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      transform    0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .social-link:hover {
+    border-color: var(--color-gold);
+    color:        var(--color-gold);
+    transform:    translateY(-2px);
+  }
+
+  /* ── Nav columns ───────────────────────────── */
+  .footer-col { display: flex; flex-direction: column; gap: 0; }
+
+  .footer-col-title {
+    font-size:      0.6875rem;
+    font-weight:    600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color:          rgba(255, 255, 255, 0.7);
+    margin-bottom:  1.5rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding:    0;
+    margin:     0;
+    display:    flex;
+    flex-direction: column;
+    gap:        0.9rem;
+  }
+
+  .footer-link {
+    font-size:       0.875rem;
+    color:           rgba(255, 255, 255, 0.42);
+    text-decoration: none;
+    transition:      color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .footer-link:hover { color: rgba(255, 255, 255, 0.9); }
+
+  /* ── Divider ───────────────────────────────── */
+  .footer-divider {
+    padding-top:    0;
+    padding-bottom: 0;
+  }
+
+  /* ── Bottom bar ────────────────────────────── */
+  .footer-bottom {
+    display:         flex;
+    align-items:     center;
+    justify-content: space-between;
+    flex-wrap:       wrap;
+    gap:             1rem;
+    padding-top:     1.5rem;
+    padding-bottom:  2.5rem;
+  }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color:     rgba(255, 255, 255, 0.25);
+  }
+
+  .footer-payments {
+    display: flex;
+    gap:     0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .payment-chip {
+    font-size:      0.625rem;
+    font-weight:    600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color:          rgba(255, 255, 255, 0.22);
+    padding:        0.3rem 0.65rem;
+    border:         1px solid rgba(255, 255, 255, 0.1);
+  }
+</style>

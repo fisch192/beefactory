@@ -16,11 +16,17 @@ import 'screens/inspection/quick_inspection_screen.dart';
 import 'screens/community/community_feed_screen.dart';
 import 'screens/community/create_post_screen.dart';
 import 'screens/community/post_detail_screen.dart';
+import 'screens/community/channels_screen.dart';
+import 'screens/community/groups_screen.dart';
 import 'screens/settings/settings_screen.dart';
 import 'screens/varroa/varroa_measurement_screen.dart';
 import 'screens/varroa/treatment_screen.dart';
 import 'screens/varroa/varroa_history_screen.dart';
 import 'screens/voice/voice_entry_screen.dart';
+import 'screens/hives/hive_tasks_screen.dart';
+import 'screens/tools/calculator_screen.dart';
+import 'screens/tools/calendar_screen.dart';
+import 'screens/ai/ai_assistant_screen.dart';
 
 class AppRouter {
   final AuthProvider authProvider;
@@ -111,7 +117,7 @@ class AppRouter {
           GoRoute(
             path: '/community',
             name: 'community',
-            builder: (context, state) => const CommunityFeedScreen(),
+            builder: (context, state) => const CommunityTabScreen(),
           ),
           GoRoute(
             path: '/settings',
@@ -173,11 +179,38 @@ class AppRouter {
           return VarroaHistoryScreen(hiveId: hiveId);
         },
       ),
+      // Per-hive tasks
+      GoRoute(
+        path: '/hives/:hiveId/tasks',
+        name: 'hive-tasks',
+        builder: (context, state) {
+          final hiveId =
+              int.tryParse(state.pathParameters['hiveId'] ?? '') ?? 0;
+          return HiveTasksScreen(hiveId: hiveId);
+        },
+      ),
+      // Tools
+      GoRoute(
+        path: '/tools/calculator',
+        name: 'calculator',
+        builder: (context, state) => const CalculatorScreen(),
+      ),
+      GoRoute(
+        path: '/tools/calendar',
+        name: 'calendar',
+        builder: (context, state) => const CalendarScreen(),
+      ),
       // Voice entry
       GoRoute(
         path: '/voice',
         name: 'voice-entry',
         builder: (context, state) => const VoiceEntryScreen(),
+      ),
+      // AI assistant
+      GoRoute(
+        path: '/ai',
+        name: 'ai-assistant',
+        builder: (context, state) => const AiAssistantScreen(),
       ),
       // Community detail routes
       GoRoute(

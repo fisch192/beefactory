@@ -19,7 +19,7 @@ const featured = await getFeaturedProductsAsync();
 const collections = await getCollections();
 ---
 
-<ShopLayout lang={lang} canonicalPath="/de/" showSplash={true}>
+<ShopLayout lang={lang} canonicalPath="/de/" hasHero={true}>
   <!-- 1. Hero -->
   <Hero lang={lang} />
 
@@ -27,13 +27,14 @@ const collections = await getCollections();
   <FeatureGrid lang={lang} />
 
   <!-- 3. Featured Products -->
-  <section class="section-padding">
+  <section class="section-products">
     <div class="container-wide">
-      <div class="text-center mb-12 sm:mb-16 fade-in">
-        <h2 class="heading-lg mb-3">{t('featured.title', lang)}</h2>
-        <p class="text-mid-gray text-lg">{t('featured.subtitle', lang)}</p>
+      <div class="section-header fade-in">
+        <span class="eyebrow">Unsere Auswahl</span>
+        <h2 class="display-md mt-4">{t('featured.title', lang)}</h2>
+        <p class="section-sub">{t('featured.subtitle', lang)}</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      <div class="products-grid">
         {featured.map((product) => (
           <ProductCard product={product} lang={lang} />
         ))}
@@ -42,13 +43,14 @@ const collections = await getCollections();
   </section>
 
   <!-- 4. Category Grid (Bento) -->
-  <section id="categories" class="section-padding bg-white">
+  <section id="categories" class="section-categories">
     <div class="container-wide">
-      <div class="text-center mb-12 sm:mb-16 fade-in">
-        <h2 class="heading-lg mb-3">{t('categories.title', lang)}</h2>
-        <p class="text-mid-gray text-lg">{t('categories.subtitle', lang)}</p>
+      <div class="section-header fade-in">
+        <span class="eyebrow">Sortiment</span>
+        <h2 class="display-md mt-4">{t('categories.title', lang)}</h2>
+        <p class="section-sub">{t('categories.subtitle', lang)}</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 auto-rows-[200px] lg:auto-rows-[220px]">
+      <div class="categories-grid">
         {collections.map((col, i) => (
           <CategoryCard collection={col} lang={lang} size={i === 0 ? 'large' : 'normal'} />
         ))}
@@ -79,3 +81,61 @@ const collections = await getCollections();
     removeText={t('cart.remove', lang)}
   />
 </ShopLayout>
+
+<style>
+  /* ── Products section ───────────────────────────── */
+  .section-products {
+    background:     var(--color-cream);
+    padding-top:    clamp(5rem, 10vw, 12rem);
+    padding-bottom: clamp(5rem, 10vw, 12rem);
+  }
+
+  /* ── Categories section ─────────────────────────── */
+  .section-categories {
+    background:     var(--color-warm);
+    padding-top:    clamp(5rem, 10vw, 12rem);
+    padding-bottom: clamp(5rem, 10vw, 12rem);
+  }
+
+  /* ── Shared section header ──────────────────────── */
+  .section-header {
+    text-align:    center;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .section-sub {
+    font-size:   1rem;
+    color:       var(--color-ash);
+    line-height: 1.65;
+    margin-top:  1rem;
+  }
+
+  /* ── Products grid ──────────────────────────────── */
+  .products-grid {
+    display:               grid;
+    grid-template-columns: 1fr;
+    gap:                   1.5rem;
+  }
+  @media (min-width: 640px)  { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .products-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; } }
+
+  /* ── Categories bento grid ──────────────────────── */
+  .categories-grid {
+    display:               grid;
+    grid-template-columns: 1fr;
+    gap:                   1rem;
+    auto-rows:             220px;
+  }
+  @media (min-width: 640px)  {
+    .categories-grid {
+      grid-template-columns: repeat(2, 1fr);
+      auto-rows: 200px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .categories-grid {
+      grid-template-columns: repeat(3, 1fr);
+      auto-rows: 240px;
+    }
+  }
+</style>

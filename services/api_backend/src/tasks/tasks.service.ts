@@ -101,4 +101,12 @@ export class TasksService {
       },
     });
   }
+
+  async remove(userId: string, id: string) {
+    await this.findOne(userId, id);
+    return this.prisma.task.update({
+      where: { id },
+      data: { status: 'CANCELLED' },
+    });
+  }
 }

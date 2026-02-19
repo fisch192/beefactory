@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 340" width="440" height="340">
+  <!-- Hive icon (same geometry as logo.svg, all white) -->
+  <g transform="translate(220, 130)">
+    <rect x="-52" y="-105" width="104" height="28" rx="14" fill="white"/>
+    <rect x="-84" y="-70"  width="168" height="30" rx="15" fill="white"/>
+    <path d="M-100,-34 Q-100,-43 -90,-43 L90,-43 Q100,-43 100,-34 L100,-14 Q100,-5 90,-5 L18,-5 C13,-5 10,0 8,8 C5,15 0,22 0,22 C0,22 -5,15 -8,8 C-10,0 -13,-5 -18,-5 L-90,-5 Q-100,-5 -100,-14 Z" fill="white"/>
+    <rect x="-84" y="30"   width="168" height="30" rx="15" fill="white"/>
+    <rect x="-66" y="67"   width="132" height="28" rx="14" fill="white"/>
+  </g>
+
+  <!-- BEE FACTORY wordmark -->
+  <text
+    x="220" y="248"
+    text-anchor="middle"
+    font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+    font-size="52"
+    font-weight="300"
+    letter-spacing="12"
+    fill="white">BEE FACTORY</text>
+
+  <!-- tagline -->
+  <text
+    x="220" y="286"
+    text-anchor="middle"
+    font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+    font-size="18"
+    font-weight="300"
+    letter-spacing="6"
+    fill="rgba(255,255,255,0.5)">beekeeping equipment</text>
+</svg>

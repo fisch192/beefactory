@@ -59,6 +59,9 @@ model User {
   communityPosts CommunityPost[]
   comments       CommunityComment[]
   reports        Report[]
+  channels       Channel[]
+  topics         Topic[]
+  messages       Message[]
 
   @@map("users")
 }
@@ -213,6 +216,70 @@ model Report {
   comment CommunityComment? @relation(fields: [commentId], references: [id])
 
   @@map("reports")
+}
+
+// ---------------------------------------------------------------------------
+// Discord-like channels
+// ---------------------------------------------------------------------------
+
+model Channel {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String   @db.VarChar(100)
+  description String?  @db.VarChar(500)
+  icon        String?  @db.VarChar(50)
+  position    Int      @default(0)
+  createdById String   @map("created_by_id") @db.Uuid
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  createdBy User    @relation(fields: [createdById], references: [id])
+  topics    Topic[]
+
+  @@index([position])
+  @@map("channels")
+}
+
+model Topic {
+  id          String   @id @default(uuid()) @db.Uuid
+  channelId   String   @map("channel_id") @db.Uuid
+  title       String   @db.VarChar(200)
+  pinned      Boolean  @default(false)
+  locked      Boolean  @default(false)
+  createdById String   @map("created_by_id") @db.Uuid
+  lastMessageAt DateTime? @map("last_message_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  channel   Channel   @relation(fields: [channelId], references: [id])
+  createdBy User      @relation(fields: [createdById], references: [id])
+  messages  Message[]
+
+  @@index([channelId, lastMessageAt])
+  @@index([channelId, pinned])
+  @@map("topics")
+}
+
+model Message {
+  id        String   @id @default(uuid()) @db.Uuid
+  topicId   String   @map("topic_id") @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  body      String
+  photoUrl  String?  @map("photo_url")
+  replyToId String?  @map("reply_to_id") @db.Uuid
+  editedAt  DateTime? @map("edited_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  topic   Topic    @relation(fields: [topicId], references: [id])
+  user    User     @relation(fields: [userId], references: [id])
+  replyTo Message? @relation("MessageReplies", fields: [replyToId], references: [id])
+  replies Message[] @relation("MessageReplies")
+
+  @@index([topicId, createdAt])
+  @@index([userId])
+  @@map("messages")
 }
 
 model ZoneProfile {

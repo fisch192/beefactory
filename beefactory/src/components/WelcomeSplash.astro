@@ -1,177 +1,103 @@
 ---
-// Welcome splash — shows the real BEE FACTORY logo with animated bee
+// Welcome splash — immersive Three.js intro that recreates the BEE FACTORY logo
+// Golden particles → honeycomb bars assemble → honey drop → bee flies in → text appears → dissolve
 ---
 
-<div id="welcome-splash" class="fixed inset-0 z-[200] flex items-center justify-center bg-near-black overflow-hidden">
-  <!-- Honeycomb pattern background -->
-  <div class="absolute inset-0 honeycomb-bg opacity-[0.06]"></div>
+<div id="welcome-splash" class="fixed inset-0 z-[200] bg-[#0a0a0a]">
+  <!-- Three.js canvas -->
+  <canvas id="splash-canvas" class="absolute inset-0 w-full h-full"></canvas>
 
-  <!-- Floating golden particles -->
-  <div class="splash-particles">
-    <div class="particle" style="--x: 15%; --y: 20%; --delay: 0s; --dur: 3s;"></div>
-    <div class="particle" style="--x: 80%; --y: 30%; --delay: 0.5s; --dur: 4s;"></div>
-    <div class="particle" style="--x: 40%; --y: 70%; --delay: 1s; --dur: 3.5s;"></div>
-    <div class="particle" style="--x: 70%; --y: 60%; --delay: 0.3s; --dur: 2.8s;"></div>
-    <div class="particle" style="--x: 25%; --y: 50%; --delay: 0.8s; --dur: 3.2s;"></div>
-    <div class="particle" style="--x: 55%; --y: 15%; --delay: 1.2s; --dur: 4.2s;"></div>
-    <div class="particle" style="--x: 90%; --y: 75%; --delay: 0.2s; --dur: 3.8s;"></div>
-  </div>
-
-  <!-- Animated bee that flies in, circles, then lands near the logo -->
-  <div class="splash-bee">
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Wings -->
-      <ellipse class="bee-wing-l" cx="12" cy="12" rx="7" ry="4" fill="white" opacity="0.25" transform="rotate(-20 12 12)"/>
-      <ellipse class="bee-wing-r" cx="24" cy="12" rx="7" ry="4" fill="white" opacity="0.25" transform="rotate(20 24 12)"/>
-      <!-- Body -->
-      <ellipse cx="18" cy="19" rx="8" ry="5.5" fill="#D4A843" opacity="0.9"/>
-      <!-- Stripes -->
-      <line x1="14" y1="16" x2="14" y2="22" stroke="#0f0f0f" stroke-width="1.2" opacity="0.25"/>
-      <line x1="18" y1="15" x2="18" y2="23" stroke="#0f0f0f" stroke-width="1.2" opacity="0.25"/>
-      <line x1="22" y1="16" x2="22" y2="22" stroke="#0f0f0f" stroke-width="1.2" opacity="0.25"/>
-      <!-- Head -->
-      <circle cx="26" cy="19" r="3" fill="#D4A843" opacity="0.8"/>
-      <!-- Eye -->
-      <circle cx="27.5" cy="18" r="0.8" fill="#0f0f0f" opacity="0.4"/>
-      <!-- Antennae -->
-      <line x1="27" y1="16" x2="30" y2="11" stroke="#D4A843" stroke-width="0.6" opacity="0.5"/>
-      <line x1="28" y1="17" x2="32" y2="13" stroke="#D4A843" stroke-width="0.6" opacity="0.5"/>
-      <circle cx="30" cy="11" r="1" fill="#D4A843" opacity="0.3"/>
-      <circle cx="32" cy="13" r="1" fill="#D4A843" opacity="0.3"/>
-    </svg>
-  </div>
-
-  <!-- Logo -->
-  <div class="relative flex flex-col items-center splash-logo-wrapper">
+  <!-- Reduced-motion fallback: static logo -->
+  <div id="splash-static" class="hidden absolute inset-0 flex items-center justify-center">
     <img
-      src="/images/beefactory-logo.png"
+      src="/images/logo.svg"
       alt="BEE FACTORY"
-      class="splash-logo"
+      class="w-[clamp(220px,40vw,380px)] h-auto"
     />
   </div>
 </div>
 
+<!-- Mini-replay canvas (hidden, reused on scroll-to-top) -->
+<canvas id="replay-canvas" class="fixed inset-0 z-[199] w-full h-full pointer-events-none hidden"></canvas>
+
 <style>
-  /* Splash fade-out */
   #welcome-splash {
     pointer-events: all;
-    transition: opacity 0.8s ease-in-out;
-  }
-
-  /* Floating particles */
-  .particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: #D4A843;
-    left: var(--x);
-    top: var(--y);
-    opacity: 0;
-    animation: particleFloat var(--dur) ease-in-out var(--delay) infinite;
-  }
-
-  @keyframes particleFloat {
-    0%, 100% { opacity: 0; transform: translateY(0); }
-    50% { opacity: 0.4; transform: translateY(-30px); }
-  }
-
-  /* Bee flight path — flies in from left, does a small loop, settles above logo */
-  .splash-bee {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    animation: beeFlightPath 2.2s ease-in-out 0.2s both;
-  }
-
-  @keyframes beeFlightPath {
-    0% {
-      transform: translate(-300px, -100px) scale(0.4) rotate(-15deg);
-      opacity: 0;
-    }
-    20% {
-      opacity: 1;
-      transform: translate(-120px, -60px) scale(0.7) rotate(-5deg);
-    }
-    40% {
-      transform: translate(40px, -80px) scale(0.9) rotate(8deg);
-    }
-    60% {
-      transform: translate(20px, -40px) scale(1) rotate(-3deg);
-    }
-    80% {
-      transform: translate(-30px, -100px) scale(0.95) rotate(5deg);
-    }
-    100% {
-      transform: translate(-50%, -180px) scale(0.85) rotate(0deg);
-      opacity: 0.8;
-    }
-  }
-
-  /* Bee wing flap */
-  .bee-wing-l, .bee-wing-r {
-    animation: wingFlap 0.08s ease-in-out infinite alternate;
-    transform-origin: center;
-  }
-
-  @keyframes wingFlap {
-    0% { opacity: 0.25; }
-    100% { opacity: 0.12; }
-  }
-
-  /* Logo reveal */
-  .splash-logo-wrapper {
-    z-index: 5;
-  }
-
-  .splash-logo {
-    width: clamp(220px, 40vw, 380px);
-    height: auto;
-    filter: brightness(0) invert(1);
-    opacity: 0;
-    animation: splashLogoIn 1s ease-out 1.4s forwards;
-  }
-
-  @keyframes splashLogoIn {
-    0% {
-      opacity: 0;
-      transform: scale(0.85);
-      filter: brightness(0) invert(1) blur(4px);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1);
-      filter: brightness(0) invert(1) blur(0px);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #welcome-splash { animation-duration: 0.01s; }
-    .splash-bee, .splash-logo, .particle, .bee-wing-l, .bee-wing-r {
-      animation: none !important;
-      opacity: 1 !important;
-    }
+    transition: opacity 0.6s ease-out;
   }
 </style>
 
 <script>
-  const splash = document.getElementById('welcome-splash');
+  import { initSplashScene, playMiniReplay } from '../lib/three-splash';
 
+  const splash = document.getElementById('welcome-splash');
+  const canvas = document.getElementById('splash-canvas') as HTMLCanvasElement | null;
+  const staticFallback = document.getElementById('splash-static');
+  const replayCanvas = document.getElementById('replay-canvas') as HTMLCanvasElement | null;
+
+  // Skip on return visit
   if (sessionStorage.getItem('beefactory-welcomed')) {
     splash?.remove();
   } else {
     sessionStorage.setItem('beefactory-welcomed', '1');
-    // Auto-dismiss after animation completes
-    setTimeout(() => {
-      if (!splash) return;
-      splash.style.opacity = '0';
-      splash.style.pointerEvents = 'none';
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReduced || !canvas) {
+      // Static fallback: show logo briefly then fade
+      if (canvas) canvas.style.display = 'none';
+      if (staticFallback) staticFallback.classList.remove('hidden');
       setTimeout(() => {
-        window.dispatchEvent(new CustomEvent('beefactory:splash-fade'));
-        splash.remove();
-      }, 800);
-    }, 3500);
+        if (!splash) return;
+        splash.style.opacity = '0';
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('beefactory:splash-fade'));
+          splash.remove();
+        }, 600);
+      }, 1500);
+    } else {
+      // Three.js intro
+      initSplashScene(
+        canvas,
+        () => {
+          if (!splash) return;
+          splash.style.opacity = '0';
+          setTimeout(() => {
+            window.dispatchEvent(new CustomEvent('beefactory:splash-fade'));
+            splash.remove();
+          }, 600);
+        },
+        '/images/logo.svg',
+      );
+    }
+  }
+
+  // Scroll-to-top mini replay
+  let hasScrolledAway = false;
+  let replayPlaying = false;
+
+  const heroSection = document.querySelector('section'); // first section = hero
+
+  if (heroSection && replayCanvas) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            hasScrolledAway = true;
+          } else if (hasScrolledAway && entry.isIntersecting && entry.intersectionRatio > 0.95 && !replayPlaying) {
+            // Scrolled back to top
+            hasScrolledAway = false;
+            replayPlaying = true;
+            replayCanvas.classList.remove('hidden');
+            playMiniReplay(replayCanvas, () => {
+              replayCanvas.classList.add('hidden');
+              replayPlaying = false;
+            });
+          }
+        });
+      },
+      { threshold: [0, 0.95] },
+    );
+    observer.observe(heroSection);
   }
 </script>

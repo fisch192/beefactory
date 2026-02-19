@@ -4,6 +4,7 @@ enum EventType {
   inspection,
   feeding,
   treatment,
+  varroaMeasurement,
   harvest,
   swarm,
   queenEvent,
@@ -21,6 +22,8 @@ enum EventType {
         return 'Feeding';
       case EventType.treatment:
         return 'Treatment';
+      case EventType.varroaMeasurement:
+        return 'Varroa Measurement';
       case EventType.harvest:
         return 'Harvest';
       case EventType.swarm:
@@ -41,10 +44,25 @@ enum EventType {
   }
 
   static EventType fromString(String value) {
-    return EventType.values.firstWhere(
-      (e) => e.name == value,
-      orElse: () => EventType.other,
-    );
+    switch (value) {
+      case 'VARROA_MEASUREMENT':
+      case 'varroa_measurement':
+        return EventType.varroaMeasurement;
+      default:
+        return EventType.values.firstWhere(
+          (e) => e.name == value,
+          orElse: () => EventType.other,
+        );
+    }
+  }
+
+  String toJsonString() {
+    switch (this) {
+      case EventType.varroaMeasurement:
+        return 'VARROA_MEASUREMENT';
+      default:
+        return name;
+    }
   }
 }
 
@@ -142,7 +160,7 @@ class EventModel {
       'client_event_id': clientEventId,
       'hive_id': hiveId,
       'site_id': siteId,
-      'type': type.name,
+      'type': type.toJsonString(),
       'occurred_at_local': occurredAtLocal.toIso8601String(),
       'occurred_at_utc': occurredAtUtc.toUtc().toIso8601String(),
       'payload': jsonEncode(payload),

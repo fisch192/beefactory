@@ -11,39 +11,164 @@ const { lang } = Astro.props;
 const testimonials = await getTestimonials();
 ---
 
-<section class="section-padding bg-warm-gray">
+<section class="testimonials-section">
   <div class="container-wide">
-    <div class="text-center mb-12 sm:mb-16 fade-in">
-      <h2 class="heading-lg">{t('testimonials.title', lang)}</h2>
+
+    <!-- Header -->
+    <div class="testimonials-header fade-in">
+      <span class="eyebrow">{lang === 'de' ? 'Kundenstimmen' : 'Testimonianze'}</span>
+      <h2 class="display-md mt-4">
+        {t('testimonials.title', lang)}
+      </h2>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
-      {testimonials.map((review) => (
-        <div class="bg-white p-6 sm:p-8 fade-in">
+    <!-- Grid -->
+    <div class="testimonials-grid">
+      {testimonials.map((review, i) => (
+        <div class:list={['testimonial-card fade-in', i === 0 ? 'testimonial-card--featured' : '']}>
+
           <!-- Stars -->
-          <div class="flex gap-1 mb-4">
+          <div class="testimonial-stars">
             {Array.from({ length: review.rating }).map(() => (
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#D4A843" stroke="#D4A843" stroke-width="1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                   fill="#C49A3C" stroke="#C49A3C" stroke-width="1">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
               </svg>
             ))}
           </div>
 
-          <blockquote class="text-near-black leading-relaxed mb-4">
-            "{review.text[lang]}"
+          <!-- Quote mark -->
+          <div class="testimonial-quote-mark" aria-hidden="true">"</div>
+
+          <!-- Text -->
+          <blockquote class="testimonial-text">
+            {review.text[lang]}
           </blockquote>
 
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-honey/20 flex items-center justify-center text-honey font-semibold text-sm">
-              {review.name.charAt(0)}
+          <!-- Author -->
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              {review.name.charAt(0).toUpperCase()}
             </div>
             <div>
-              <p class="font-semibold text-sm">{review.name}</p>
-              <p class="text-xs text-mid-gray">{review.location}</p>
+              <div class="testimonial-name">{review.name}</div>
+              <div class="testimonial-location">{review.location}</div>
             </div>
           </div>
+
         </div>
       ))}
     </div>
+
   </div>
 </section>
+
+<style>
+  /* ── Section ───────────────────────────────── */
+  .testimonials-section {
+    padding-top:    clamp(5rem, 10vw, 12rem);
+    padding-bottom: clamp(5rem, 10vw, 12rem);
+    background:     var(--color-obsidian);
+  }
+
+  /* ── Header ────────────────────────────────── */
+  .testimonials-header {
+    text-align:    center;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+    color:         white;
+  }
+  .testimonials-header .display-md {
+    color: white;
+  }
+
+  /* ── Grid ──────────────────────────────────── */
+  .testimonials-grid {
+    display:               grid;
+    grid-template-columns: 1fr;
+    gap:                   1.5px;
+  }
+  @media (min-width: 640px) {
+    .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .testimonials-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  /* ── Card ──────────────────────────────────── */
+  .testimonial-card {
+    background:  rgba(255, 255, 255, 0.03);
+    border:      1px solid rgba(255, 255, 255, 0.06);
+    padding:     2rem 1.75rem;
+    display:     flex;
+    flex-direction: column;
+    gap:         1rem;
+    transition:  background 0.3s, border-color 0.3s;
+  }
+  .testimonial-card:hover {
+    background:   rgba(255, 255, 255, 0.055);
+    border-color: rgba(196, 154, 60, 0.2);
+  }
+
+  /* ── Stars ─────────────────────────────────── */
+  .testimonial-stars {
+    display: flex;
+    gap:     0.2rem;
+  }
+
+  /* ── Quote mark ────────────────────────────── */
+  .testimonial-quote-mark {
+    font-family:    var(--font-display);
+    font-size:      4rem;
+    line-height:    0.7;
+    color:          var(--color-gold);
+    opacity:        0.35;
+    font-weight:    300;
+    margin-top:     0.25rem;
+  }
+
+  /* ── Text ──────────────────────────────────── */
+  .testimonial-text {
+    font-size:   0.9375rem;
+    color:       rgba(255, 255, 255, 0.65);
+    line-height: 1.7;
+    font-style:  italic;
+    flex:        1;
+    margin:      0;
+  }
+
+  /* ── Author ────────────────────────────────── */
+  .testimonial-author {
+    display:     flex;
+    align-items: center;
+    gap:         0.75rem;
+    padding-top: 0.5rem;
+    border-top:  1px solid rgba(255, 255, 255, 0.07);
+    margin-top:  auto;
+  }
+
+  .testimonial-avatar {
+    width:           2.25rem;
+    height:          2.25rem;
+    border-radius:   50%;
+    background:      rgba(196, 154, 60, 0.15);
+    border:          1px solid rgba(196, 154, 60, 0.3);
+    color:           var(--color-gold);
+    font-size:       0.875rem;
+    font-weight:     600;
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    flex-shrink:     0;
+  }
+
+  .testimonial-name {
+    font-size:   0.8125rem;
+    font-weight: 600;
+    color:       rgba(255, 255, 255, 0.85);
+  }
+
+  .testimonial-location {
+    font-size: 0.75rem;
+    color:     rgba(255, 255, 255, 0.35);
+  }
+</style>

@@ -10,38 +10,109 @@ const { lang } = Astro.props;
 
 const features = [
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>`,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>`,
     title: t('usp.quality.title', lang),
-    text: t('usp.quality.text', lang),
+    text:  t('usp.quality.text', lang),
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
     title: t('usp.experience.title', lang),
-    text: t('usp.experience.text', lang),
+    text:  t('usp.experience.text', lang),
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
     title: t('usp.shipping.title', lang),
-    text: t('usp.shipping.text', lang),
+    text:  t('usp.shipping.text', lang),
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>`,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>`,
     title: t('usp.support.title', lang),
-    text: t('usp.support.text', lang),
+    text:  t('usp.support.text', lang),
   },
 ];
 ---
 
-<section class="py-12 sm:py-16 bg-white border-y border-black/5">
-  <div class="container-wide">
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-      {features.map((feature) => (
-        <div class="text-center">
-          <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-honey/10 text-honey mb-4" set:html={feature.icon} />
-          <h3 class="font-semibold text-sm sm:text-base mb-1">{feature.title}</h3>
-          <p class="text-xs sm:text-sm text-mid-gray">{feature.text}</p>
+<div class="feature-bar">
+  <div class="feature-inner">
+    {features.map((f) => (
+      <div class="feature-item">
+        <div class="feature-icon" set:html={f.icon} />
+        <div class="feature-text">
+          <span class="feature-title">{f.title}</span>
+          <span class="feature-body">{f.text}</span>
         </div>
-      ))}
-    </div>
+      </div>
+    ))}
   </div>
-</section>
+</div>
+
+<style>
+  .feature-bar {
+    background:   var(--color-obsidian);
+    border-top:   1px solid rgba(196, 154, 60, 0.12);
+    border-bottom: 1px solid rgba(196, 154, 60, 0.12);
+    padding:      1.5rem 0;
+  }
+
+  .feature-inner {
+    max-width:  1440px;
+    margin:     0 auto;
+    padding:    0 clamp(1.25rem, 5vw, 4rem);
+    display:    grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:        1.25rem 2rem;
+  }
+  @media (min-width: 768px) {
+    .feature-inner {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+  }
+
+  .feature-item {
+    display:     flex;
+    align-items: flex-start;
+    gap:         0.875rem;
+    padding:     0.75rem 0;
+    transition:  opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .feature-bar:hover .feature-item { opacity: 0.5; }
+  .feature-bar:hover .feature-item:hover { opacity: 1; }
+
+  @media (min-width: 768px) {
+    .feature-item {
+      padding:      0 2rem;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .feature-item:last-child  { border-right: none; }
+    .feature-item:first-child { padding-left: 0; }
+  }
+
+  .feature-icon {
+    flex-shrink: 0;
+    color:       var(--color-gold);
+    margin-top:  0.1rem;
+    opacity:     0.85;
+    transition:  transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .feature-item:hover .feature-icon { transform: scale(1.15); }
+
+  .feature-text {
+    display:        flex;
+    flex-direction: column;
+    gap:            0.2rem;
+  }
+
+  .feature-title {
+    font-size:      0.8125rem;
+    font-weight:    600;
+    letter-spacing: -0.005em;
+    color:          rgba(255, 255, 255, 0.9);
+  }
+
+  .feature-body {
+    font-size:   0.75rem;
+    color:       rgba(255, 255, 255, 0.38);
+    line-height: 1.5;
+  }
+</style>

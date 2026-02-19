@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 400" width="360" height="400">
+  <defs>
+    <!-- Metallic gold gradients with depth -->
+    <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f5e488"/>
+      <stop offset="15%" stop-color="#ecd56c"/>
+      <stop offset="35%" stop-color="#dfc048"/>
+      <stop offset="50%" stop-color="#d0ac30"/>
+      <stop offset="65%" stop-color="#c49c24"/>
+      <stop offset="85%" stop-color="#b89020"/>
+      <stop offset="100%" stop-color="#a8841c"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8e890"/>
+      <stop offset="12%" stop-color="#f0d870"/>
+      <stop offset="30%" stop-color="#e4c450"/>
+      <stop offset="50%" stop-color="#d4b038"/>
+      <stop offset="70%" stop-color="#c8a028"/>
+      <stop offset="90%" stop-color="#bc9420"/>
+      <stop offset="100%" stop-color="#b08818"/>
+    </linearGradient>
+    <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f2dc7c"/>
+      <stop offset="20%" stop-color="#e4c858"/>
+      <stop offset="45%" stop-color="#d4b038"/>
+      <stop offset="60%" stop-color="#c49c28"/>
+      <stop offset="80%" stop-color="#b48c1c"/>
+      <stop offset="100%" stop-color="#a47c14"/>
+    </linearGradient>
+    <!-- Edge stroke gradient -->
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c8a830"/>
+      <stop offset="100%" stop-color="#8c6c0c"/>
+    </linearGradient>
+    <!-- Shine highlight -->
+    <linearGradient id="sh" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="white" stop-opacity="0.45"/>
+      <stop offset="35%" stop-color="white" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Honey drop -->
+    <radialGradient id="hd" cx="35%" cy="25%" r="65%">
+      <stop offset="0%" stop-color="#f4d048"/>
+      <stop offset="40%" stop-color="#e4b028"/>
+      <stop offset="80%" stop-color="#cc9418"/>
+      <stop offset="100%" stop-color="#b88010"/>
+    </radialGradient>
+    <!-- Drop shadow -->
+    <filter id="ds" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0.5" dy="1.5" stdDeviation="1.5" flood-color="#705800" flood-opacity="0.18"/>
+    </filter>
+    <!-- Wing -->
+    <radialGradient id="wg" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.75"/>
+      <stop offset="50%" stop-color="#f8f4ec" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#e8e0d0" stop-opacity="0.3"/>
+    </radialGradient>
+    <!-- Bee body sheen -->
+    <linearGradient id="bb" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8b830"/>
+      <stop offset="40%" stop-color="#c89820"/>
+      <stop offset="100%" stop-color="#a07818"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Honeycomb -->
+  <g transform="translate(170, 140)">
+    <!-- Bar 1 - top -->
+    <rect x="-42" y="-88" width="84" height="26" rx="10" ry="10" fill="url(#g1)" stroke="url(#edge)" stroke-width="0.7" filter="url(#ds)"/>
+    <rect x="-42" y="-88" width="84" height="13" rx="10" ry="10" fill="url(#sh)"/>
+
+    <!-- Bar 2 -->
+    <rect x="-66" y="-56" width="132" height="30" rx="11" ry="11" fill="url(#g2)" stroke="url(#edge)" stroke-width="0.7" filter="url(#ds)"/>
+    <rect x="-66" y="-56" width="132" height="15" rx="11" ry="11" fill="url(#sh)"/>
+
+    <!-- Bar 3 - center (widest, split for drop) -->
+    <path d="M-80,-20 Q-80,-28 -70,-28 L70,-28 Q80,-28 80,-20 L80,-4 Q80,4 70,4 L16,4 C12,4 10,8 8,14 C6,20 3,26 0,32 C-3,26 -6,20 -8,14 C-10,8 -12,4 -16,4 L-70,4 Q-80,4 -80,-4 Z" fill="url(#g3)" stroke="url(#edge)" stroke-width="0.7" filter="url(#ds)"/>
+    <path d="M-80,-20 Q-80,-28 -70,-28 L70,-28 Q80,-28 80,-20 L80,-12 Q0,-12 -80,-12 Z" fill="url(#sh)"/>
+
+    <!-- Honey drop -->
+    <path d="M0,6 C5,6 8,14 8,20 C8,26 4,32 0,34 C-4,32 -8,26 -8,20 C-8,14 -5,6 0,6 Z" fill="url(#hd)" stroke="#b07808" stroke-width="0.5"/>
+    <ellipse cx="-2" cy="16" rx="2.5" ry="4" fill="white" opacity="0.3" transform="rotate(-10 -2 16)"/>
+
+    <!-- Bar 4 -->
+    <rect x="-66" y="40" width="132" height="30" rx="11" ry="11" fill="url(#g2)" stroke="url(#edge)" stroke-width="0.7" filter="url(#ds)"/>
+    <rect x="-66" y="40" width="132" height="15" rx="11" ry="11" fill="url(#sh)"/>
+
+    <!-- Bar 5 - bottom -->
+    <rect x="-42" y="76" width="84" height="26" rx="10" ry="10" fill="url(#g1)" stroke="url(#edge)" stroke-width="0.7" filter="url(#ds)"/>
+    <rect x="-42" y="76" width="84" height="13" rx="10" ry="10" fill="url(#sh)"/>
+
+    <!-- BEE -->
+    <g transform="translate(82, -55) rotate(-22) scale(1.15)">
+      <!-- Wings (behind body) -->
+      <ellipse cx="-6" cy="-13" rx="18" ry="10" fill="url(#wg)" stroke="#c0b898" stroke-width="0.4" transform="rotate(-12)"/>
+      <ellipse cx="8" cy="-15" rx="15" ry="8.5" fill="url(#wg)" stroke="#c0b898" stroke-width="0.4" transform="rotate(12)"/>
+      <!-- Wing veins -->
+      <path d="M-12,-18 C-6,-14 0,-12 6,-13" fill="none" stroke="#d0c8b0" stroke-width="0.3" opacity="0.6"/>
+      <path d="M2,-20 C6,-16 10,-14 14,-14" fill="none" stroke="#d0c8b0" stroke-width="0.3" opacity="0.6"/>
+
+      <!-- Thorax -->
+      <ellipse cx="-2" cy="0" rx="8" ry="6.5" fill="#9c7418"/>
+      <ellipse cx="-2" cy="-2" rx="6" ry="3" fill="#b88c20" opacity="0.5"/>
+
+      <!-- Abdomen -->
+      <ellipse cx="14" cy="2" rx="15" ry="8.5" fill="url(#bb)"/>
+      <!-- Dark stripes -->
+      <path d="M5,-5.5 C5.5,-6 6,-6.2 6.5,-6.2 L9,-6 C9.5,-5.8 10,-5 10,-4 L10,7 C10,8 9.5,8.5 9,8.5 L6.5,8.5 C6,8.5 5.5,8 5,7.5 Z" fill="#1e1408" opacity="0.7"/>
+      <path d="M14,-7 C14.5,-7.2 15,-7.2 15.5,-7 L18.5,-6 C19,-5.5 19.5,-4.5 19.5,-3.5 L19.5,6 C19.5,7 19,8 18.5,8 L15.5,8 C15,8 14.5,7.5 14,7 Z" fill="#1e1408" opacity="0.65"/>
+      <path d="M23,-4 C23.5,-4.5 24,-4.5 24.5,-4 L26,-3 C26.5,-2 26.5,0 26.5,1 L26.5,4 C26.5,5 26,5.5 25.5,5.5 L24,5 C23.5,4.5 23,3.5 23,2.5 Z" fill="#1e1408" opacity="0.6"/>
+      <!-- Highlight -->
+      <ellipse cx="14" cy="-1" rx="11" ry="3.5" fill="white" opacity="0.1"/>
+
+      <!-- Head -->
+      <ellipse cx="-12" cy="-1" rx="6.5" ry="5.5" fill="#3c2c10"/>
+      <!-- Eye -->
+      <ellipse cx="-14" cy="-2.5" rx="2.5" ry="2" fill="#1a1208"/>
+      <ellipse cx="-14.5" cy="-3" rx="0.8" ry="0.6" fill="white" opacity="0.3"/>
+
+      <!-- Antennae -->
+      <path d="M-16,-6 C-20,-10 -25,-14 -30,-16" fill="none" stroke="#2c1e08" stroke-width="0.9" stroke-linecap="round"/>
+      <path d="M-14,-6 C-16,-10 -16,-15 -16,-19" fill="none" stroke="#2c1e08" stroke-width="0.9" stroke-linecap="round"/>
+      <circle cx="-30" cy="-16" r="1.5" fill="#2c1e08"/>
+      <circle cx="-16" cy="-19" r="1.5" fill="#2c1e08"/>
+
+      <!-- Stinger -->
+      <path d="M28,2 L33,2.5" stroke="#2c1e08" stroke-width="1" stroke-linecap="round"/>
+
+      <!-- Legs -->
+      <g stroke="#2c1e08" stroke-width="0.7" fill="none" stroke-linecap="round">
+        <path d="M-2,6 L-5,12 L-8,15"/>
+        <path d="M5,8 L5,14 L4,18"/>
+        <path d="M14,8 L17,14 L20,16"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- BEE FACTORY text -->
+  <text x="170" y="292" text-anchor="middle" font-family="Georgia, 'Times New Roman', 'Palatino', serif" font-size="34" font-weight="400" letter-spacing="5" fill="#2c2c2c">BEE FACTORY</text>
+
+  <!-- Subtitle -->
+  <text x="170" y="318" text-anchor="middle" font-family="Georgia, 'Times New Roman', 'Palatino', serif" font-size="14" font-weight="300" letter-spacing="2" fill="#707070">beekeeping equipment</text>
+</svg>

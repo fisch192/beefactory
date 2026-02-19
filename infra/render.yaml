@@ -1,0 +1,33 @@
+# Render.com Blueprint — deploy with "New > Blueprint" pointing to this repo
+# Free tier: 750 hours/month, auto-sleep after 15 min inactivity
+# Free PostgreSQL: 256MB storage, 90-day expiry (recreate after)
+
+services:
+  - type: web
+    name: beefactory-api
+    runtime: docker
+    dockerfilePath: ./services/api_backend/Dockerfile
+    dockerContext: ./services/api_backend
+    region: frankfurt
+    plan: free
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: beefactory-db
+          property: connectionString
+    healthCheckPath: /v1/zones
+
+databases:
+  - name: beefactory-db
+    plan: free
+    region: frankfurt
+    databaseName: bee
+    user: bee

@@ -155,6 +155,8 @@ const Map<String, String> de = {
   'export_data': 'Daten exportieren',
   'export_subtitle': 'JSON/CSV Export aller Einträge',
   'export_not_implemented': 'Datenexport noch nicht implementiert',
+  'export_complete': 'Export abgeschlossen',
+  'export_saved_to': 'Gespeichert unter:',
   'delete_account': 'Konto löschen',
   'delete_account_subtitle': 'Alle Daten unwiderruflich entfernen',
   'delete_confirm_title': 'Konto löschen?',
@@ -305,4 +307,18 @@ const Map<String, String> de = {
   'get_started': 'Los geht\'s',
   'next': 'Weiter',
   'continue_without_account': 'Ohne Konto fortfahren',
+
+  // Channels (Discord-like)
+  'channels_title': 'Kanäle',
+  'channel_name': 'Kanalname',
+  'create_channel': 'Kanal erstellen',
+  'no_channels': 'Noch keine Kanäle',
+  'new_topic': 'Neues Thema',
+  'topic_title': 'Thema-Titel',
+  'no_topics': 'Noch keine Themen',
+  'create_first_topic': 'Erstelle das erste Thema in diesem Kanal',
+  'start_conversation': 'Starte die Unterhaltung!',
+  'type_message': 'Nachricht schreiben...',
+  'is_typing': 'tippt...',
+  'messages': 'Nachrichten',
 };

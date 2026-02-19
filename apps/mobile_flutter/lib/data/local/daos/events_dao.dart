@@ -34,6 +34,19 @@ class EventsDao extends DatabaseAccessor<AppDatabase> with _$EventsDaoMixin {
         .watch();
   }
 
+  Future<List<Event>> getByHiveIdAndTypes(int hiveId, List<String> types,
+      {int limit = 100, int offset = 0}) {
+    return (select(events)
+          ..where(
+              (e) => e.hiveId.equals(hiveId) & e.type.isIn(types))
+          ..orderBy([
+            (e) => OrderingTerm(
+                expression: e.occurredAtLocal, mode: OrderingMode.desc)
+          ])
+          ..limit(limit, offset: offset))
+        .get();
+  }
+
   Future<List<Event>> getBySiteId(int siteId) =>
       (select(events)
             ..where((e) => e.siteId.equals(siteId))

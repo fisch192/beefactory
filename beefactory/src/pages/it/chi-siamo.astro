@@ -8,16 +8,112 @@ const lang = 'it';
 ---
 
 <ShopLayout lang={lang} title={t('about.title', lang)} canonicalPath="/it/chi-siamo">
-  <section class="section-padding">
-    <div class="container-wide max-w-3xl">
-      <h1 class="heading-lg mb-8">{t('about.title', lang)}</h1>
-      <div class="space-y-6 text-mid-gray leading-relaxed">
-        <p>Bee Factory è il tuo specialista per attrezzatura apicola di alta qualità dall'Alto Adige. Come apicoltori appassionati sappiamo esattamente cosa conta.</p>
-        <p>Offriamo solo prodotti che abbiamo testato e approvato personalmente. Qualità, durabilità e praticità sono le nostre priorità.</p>
-        <p>La nostra sede in Alto Adige unisce la tradizione dell'apicoltura alpina con l'artigianato moderno. Ti consigliamo personalmente e ti aiutiamo nella scelta dell'attrezzatura giusta.</p>
+
+  <section class="about-hero">
+    <img src="/images/hero-bg.jpg" alt="Ape sul favo di miele" class="about-hero-img" />
+    <div class="about-hero-overlay"></div>
+    <div class="about-hero-body">
+      <span class="eyebrow" style="color:rgba(196,154,60,0.7);margin-bottom:1rem;display:block">Chi siamo</span>
+      <h1 class="about-hero-title">Passione<br/><em>per le api.</em></h1>
+    </div>
+  </section>
+
+  <div class="about-stats">
+    <div class="about-stat"><span class="about-stat-val">Alto Adige</span><span class="about-stat-lbl">La nostra sede</span></div>
+    <div class="about-stat-div"></div>
+    <div class="about-stat"><span class="about-stat-val">100%</span><span class="about-stat-lbl">Prodotti testati</span></div>
+    <div class="about-stat-div"></div>
+    <div class="about-stat"><span class="about-stat-val">50%</span><span class="about-stat-lbl">Contributo nuovi apic.</span></div>
+    <div class="about-stat-div"></div>
+    <div class="about-stat"><span class="about-stat-val">Gratis</span><span class="about-stat-lbl">Consulenza personale</span></div>
+  </div>
+
+  <section class="about-content">
+    <div class="container-wide about-grid">
+      <div class="about-text fade-in">
+        <span class="eyebrow">La nostra storia</span>
+        <h2 class="display-md mt-4">Apicoltori. Rivenditori.<br/>Consulenti.</h2>
+        <div class="about-body">
+          <p>Bee Factory è il tuo specialista per attrezzatura apicola di alta qualità dall'Alto Adige. Come apicoltori appassionati sappiamo esattamente cosa conta.</p>
+          <p>Offriamo solo prodotti che abbiamo testato e approvato personalmente. Qualità, durabilità e praticità sono le nostre priorità.</p>
+          <p>La nostra sede in Alto Adige unisce la tradizione dell'apicoltura alpina con l'artigianato moderno. Ti consigliamo personalmente e ti aiutiamo nella scelta dell'attrezzatura giusta.</p>
+        </div>
+        <a href="mailto:info@beefactory.shop" class="btn-gold" style="margin-top:2rem;display:inline-flex">
+          Contattaci
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="about-image-col fade-in">
+        <div class="about-img-main">
+          <img src="/images/cat-fuetterung.jpg" alt="Arnie" />
+        </div>
+        <div class="about-img-secondary">
+          <img src="/images/cat-startersets.jpg" alt="Set iniziali" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-values">
+    <div class="container-wide">
+      <div class="about-values-header fade-in">
+        <span class="eyebrow">I nostri valori</span>
+        <h2 class="display-md mt-4">Cosa ci muove.</h2>
+      </div>
+      <div class="about-values-grid">
+        {[
+          { title: 'Qualità', text: 'Ogni prodotto viene testato personalmente da noi. Solo ciò che useremmo noi stessi entra nel nostro assortimento.' },
+          { title: 'Consulenza', text: 'Come apicoltori capiamo le tue esigenze. Ti aiutiamo a fare la scelta giusta – gratuitamente e senza pressioni.' },
+          { title: 'Contributi', text: 'Conosciamo bene i programmi di sostegno altoatesini e ti supportiamo attivamente nella presentazione della domanda.' },
+          { title: 'Sostenibilità', text: 'Le api sono essenziali per il nostro ecosistema. Con attrezzatura di qualità promuoviamo colonie sane e apicoltura sostenibile.' },
+        ].map((v) => (
+          <div class="about-value fade-in">
+            <h3 class="about-value-title">{v.title}</h3>
+            <p class="about-value-text">{v.text}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <CartDrawer client:load title={t('cart.title', lang)} emptyText={t('cart.empty', lang)} totalText={t('cart.total', lang)} checkoutText={t('cart.checkout', lang)} continueText={t('cart.continue', lang)} removeText={t('cart.remove', lang)} />
 </ShopLayout>
+
+<style>
+  .about-hero { position: relative; height: clamp(22rem,45vw,36rem); overflow: hidden; display: flex; align-items: flex-end; }
+  .about-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% center; filter: brightness(0.45) saturate(0.85); }
+  .about-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,12,10,0.9) 0%, rgba(13,12,10,0.2) 70%); }
+  .about-hero-body { position: relative; z-index: 2; width: 100%; padding: 0 clamp(1.25rem,5vw,4rem) clamp(3rem,6vw,5rem); max-width: 1440px; margin: 0 auto; }
+  .about-hero-title { font-family: var(--font-display); font-size: clamp(3rem,8vw,7rem); font-weight: 300; letter-spacing: -0.03em; line-height: 0.92; color: white; animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+  .about-hero-title em { color: var(--color-gold); font-style: italic; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .about-stats { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; background: var(--color-obsidian); border-bottom: 1px solid rgba(196,154,60,0.1); padding: 2rem clamp(1.25rem,5vw,4rem); }
+  .about-stat { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; padding: 0 2.5rem; }
+  .about-stat-val { font-family: var(--font-display); font-size: clamp(1.25rem,2.5vw,1.75rem); font-weight: 300; color: var(--color-gold); line-height: 1; }
+  .about-stat-lbl { font-size: 0.625rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.3); text-align: center; }
+  .about-stat-div { width: 1px; height: 2.5rem; background: rgba(255,255,255,0.08); }
+  @media (max-width: 640px) { .about-stat { padding: 0.75rem 1.25rem; } .about-stat-div { display: none; } }
+  .about-content { background: var(--color-cream); padding-top: clamp(5rem,10vw,10rem); padding-bottom: clamp(5rem,10vw,10rem); }
+  .about-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center; }
+  @media (min-width: 1024px) { .about-grid { grid-template-columns: 1fr 1fr; } }
+  .about-body { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .about-body p { font-size: 1rem; color: var(--color-ash); line-height: 1.75; margin: 0; }
+  .about-image-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .about-img-main { grid-column: 1 / -1; aspect-ratio: 16/9; overflow: hidden; }
+  .about-img-secondary { overflow: hidden; aspect-ratio: 1; }
+  .about-img-main img, .about-img-secondary img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .about-img-main:hover img, .about-img-secondary:hover img { transform: scale(1.04); }
+  .about-values { background: var(--color-warm); padding-top: clamp(5rem,10vw,10rem); padding-bottom: clamp(5rem,10vw,10rem); }
+  .about-values-header { text-align: center; margin-bottom: clamp(3rem,6vw,5rem); }
+  .about-values-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--color-warm-dark); border: 1px solid var(--color-warm-dark); }
+  @media (min-width: 640px) { .about-values-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .about-values-grid { grid-template-columns: repeat(4, 1fr); } }
+  .about-value { background: var(--color-warm); padding: 2.5rem 2rem; transition: background 0.3s cubic-bezier(0.16,1,0.3,1); }
+  .about-value:hover { background: var(--color-cream); }
+  .about-value-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; letter-spacing: -0.01em; color: var(--color-ink); margin-bottom: 0.75rem; }
+  .about-value-text { font-size: 0.875rem; color: var(--color-ash); line-height: 1.65; }
+</style>

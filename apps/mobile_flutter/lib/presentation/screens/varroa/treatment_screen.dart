@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:drift/drift.dart' show Value;
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
-import '../../../data/remote/events_api.dart';
-import '../../../data/remote/tasks_api.dart';
+import '../../../data/local/daos/events_dao.dart';
+import '../../../data/local/daos/tasks_dao.dart';
+import '../../../data/local/database.dart' as db;
 import '../../../l10n/app_localizations.dart';
 import '../community/community_feed_screen.dart';
 
@@ -104,39 +109,53 @@ class _TreatmentScreenState extends State<TreatmentScreen> {
     setState(() => _saving = true);
 
     try {
-      final eventsApi = context.read<EventsApi>();
+      final eventsDao = context.read<EventsDao>();
+      final now = DateTime.now();
+      final payload = {
+        'method': _method.apiValue,
+        'dosage': _dosageController.text.trim(),
+        'start_date': _startDate.toUtc().toIso8601String(),
+        'end_date': _endDate.toUtc().toIso8601String(),
+        'notes': _notesController.text.trim(),
+        'source': 'manual',
+      };
 
-      // Create TREATMENT event.
-      await eventsApi.createEvent({
-        'type': 'TREATMENT',
-        'hive_id': widget.hiveId,
-        'payload': {
-          'method': _method.apiValue,
-          'dosage': _dosageController.text.trim(),
-          'start_date': _startDate.toUtc().toIso8601String(),
-          'end_date': _endDate.toUtc().toIso8601String(),
-          'notes': _notesController.text.trim(),
-          'source': 'manual',
-        },
-      });
+      // Create TREATMENT event in local DB.
+      await eventsDao.insertEvent(db.EventsCompanion(
+        clientEventId: Value(const Uuid().v4()),
+        hiveId: Value(int.tryParse(widget.hiveId)),
+        type: const Value('treatment'),
+        occurredAtLocal: Value(now),
+        occurredAtUtc: Value(now.toUtc()),
+        payload: Value(jsonEncode(payload)),
+        source: const Value('manual'),
+        syncStatus: const Value('pending'),
+        createdAt: Value(now),
+        updatedAt: Value(now),
+      ));
 
-      // Create follow-up measurement reminder task if requested.
+      // Create follow-up measurement reminder task in local DB.
       if (_createFollowUp) {
         final followUpDays =
             int.tryParse(_followUpDaysController.text) ?? 14;
         final dueAt = _endDate.add(Duration(days: followUpDays));
 
-        final tasksApi = context.read<TasksApi>();
-        await tasksApi.createTask({
-          'hive_id': widget.hiveId,
-          'title':
-              'Varroa-Kontrolle nach ${_method.label}-Behandlung',
-          'description':
+        final tasksDao = context.read<TasksDao>();
+        await tasksDao.insertTask(db.TasksCompanion(
+          clientTaskId: Value(const Uuid().v4()),
+          hiveId: Value(int.tryParse(widget.hiveId)),
+          title: Value(
+              'Varroa-Kontrolle nach ${_method.label}-Behandlung'),
+          description: Value(
               'Follow-up Varroa-Messung nach Behandlung vom '
-              '${_formatDate(_startDate)} bis ${_formatDate(_endDate)}.',
-          'status': 'PENDING',
-          'due_at': dueAt.toUtc().toIso8601String(),
-        });
+              '${_formatDate(_startDate)} bis ${_formatDate(_endDate)}.'),
+          status: const Value('open'),
+          dueAt: Value(dueAt),
+          source: const Value('manual'),
+          syncStatus: const Value('pending'),
+          createdAt: Value(now),
+          updatedAt: Value(now),
+        ));
       }
 
       if (!mounted) return;

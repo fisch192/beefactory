@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../../data/local/daos/events_dao.dart';
+import '../../../data/local/daos/tasks_dao.dart';
+import '../../../data/local/database.dart' as db;
 import '../../../l10n/app_localizations.dart';
+import '../../../services/gamification_service.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/sync_provider.dart';
 import '../../providers/sites_provider.dart';
@@ -116,8 +121,75 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 /// Content for the Home tab.
-class HomeTabContent extends StatelessWidget {
+class HomeTabContent extends StatefulWidget {
   const HomeTabContent({super.key});
+
+  @override
+  State<HomeTabContent> createState() => _HomeTabContentState();
+}
+
+class _HomeTabContentState extends State<HomeTabContent> {
+  List<Achievement> _achievements = [];
+  int _streak = 0;
+  bool _gamLoaded = false;
+  List<db.Task> _todayTasks = [];
+  List<db.Task> _weekTasks = [];
+  int _inspectionCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _loadAll());
+  }
+
+  Future<void> _loadAll() async {
+    try {
+      final eventsDao = context.read<EventsDao>();
+      final tasksDao = context.read<TasksDao>();
+      final events = await eventsDao.getAll();
+      final tasks = await tasksDao.getAll();
+
+      final now = DateTime.now();
+      final todayStart = DateTime(now.year, now.month, now.day);
+      final todayEnd = todayStart.add(const Duration(days: 1));
+      final weekEnd = todayStart.add(const Duration(days: 7));
+
+      final todayTasks = tasks
+          .where((t) =>
+              t.status == 'open' &&
+              t.dueAt != null &&
+              !t.dueAt!.isBefore(todayStart) &&
+              t.dueAt!.isBefore(todayEnd))
+          .toList();
+
+      final weekTasks = tasks
+          .where((t) =>
+              t.status == 'open' &&
+              t.dueAt != null &&
+              !t.dueAt!.isBefore(todayEnd) &&
+              t.dueAt!.isBefore(weekEnd))
+          .toList()
+        ..sort((a, b) => a.dueAt!.compareTo(b.dueAt!));
+
+      final inspectionCount = events
+          .where((e) => e.type == 'inspection' || e.type == 'INSPECTION')
+          .length;
+
+      if (mounted) {
+        setState(() {
+          _achievements =
+              GamificationService.evaluate(events: events, tasks: tasks);
+          _streak = GamificationService.computeStreak(events);
+          _todayTasks = todayTasks;
+          _weekTasks = weekTasks;
+          _inspectionCount = inspectionCount;
+          _gamLoaded = true;
+        });
+      }
+    } catch (_) {
+      if (mounted) setState(() => _gamLoaded = true);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,20 +199,85 @@ class HomeTabContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Greeting
-          Consumer<AuthProvider>(
-            builder: (context, auth, _) {
-              final name = auth.user?.name ?? 'Imker';
-              final greeting = _greeting(l);
-              return Text(
-                '$greeting, $name!',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              );
-            },
+          // Greeting + streak
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Consumer<AuthProvider>(
+                  builder: (context, auth, _) {
+                    final name = auth.user?.name ?? 'Imker';
+                    final greeting = _greeting(l);
+                    return Text(
+                      '$greeting, $name!',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    );
+                  },
+                ),
+              ),
+              if (_streak > 0)
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFA000).withAlpha(30),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                        color: const Color(0xFFFFA000).withAlpha(80)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text('🔥', style: TextStyle(fontSize: 16)),
+                      const SizedBox(width: 4),
+                      Text(
+                        '$_streak',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Color(0xFFFFA000),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 20),
+
+          // Achievements row
+          if (_gamLoaded && _achievements.isNotEmpty) ...[
+            Row(
+              children: [
+                const Text('🏅',
+                    style: TextStyle(fontSize: 13)),
+                const SizedBox(width: 4),
+                Text(
+                  'Errungenschaften',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.grey[600],
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            SizedBox(
+              height: 72,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: _achievements
+                    .map((a) => _AchievementBadge(achievement: a))
+                    .toList(),
+              ),
+            ),
+            const SizedBox(height: 20),
+          ],
 
           // Quick Actions
           Text(
@@ -157,7 +294,7 @@ class HomeTabContent extends StatelessWidget {
                   icon: Icons.mic,
                   label: l.tr('voice_note'),
                   color: Colors.orange.shade700,
-                  onTap: () {},
+                  onTap: () => context.push('/voice'),
                 ),
               ),
               const SizedBox(width: 12),
@@ -173,9 +310,42 @@ class HomeTabContent extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 16),
+
+          // Tools row
+          Row(
+            children: [
+              Expanded(
+                child: _ToolButton(
+                  icon: Icons.calculate,
+                  label: 'Imkerrechner',
+                  color: Colors.brown,
+                  onTap: () => context.push('/tools/calculator'),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _ToolButton(
+                  icon: Icons.calendar_month,
+                  label: 'Bienenkalender',
+                  color: Colors.teal,
+                  onTap: () => context.push('/tools/calendar'),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _ToolButton(
+                  icon: Icons.smart_toy_outlined,
+                  label: 'Imker-KI',
+                  color: Colors.deepPurple,
+                  onTap: () => context.push('/ai'),
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 24),
 
-          // Today's Tasks placeholder
+          // Today's Tasks
           Text(
             l.tr('todays_tasks'),
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -183,27 +353,30 @@ class HomeTabContent extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: 12),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Center(
-                child: Column(
+          if (_todayTasks.isEmpty)
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 20, horizontal: 16),
+                child: Row(
                   children: [
                     Icon(Icons.check_circle_outline,
-                        size: 48, color: Colors.grey[400]),
-                    const SizedBox(height: 12),
+                        size: 32, color: Colors.green[300]),
+                    const SizedBox(width: 12),
                     Text(
                       l.tr('no_tasks_today'),
-                      style: TextStyle(color: Colors.grey[600], fontSize: 16),
+                      style:
+                          TextStyle(color: Colors.grey[600], fontSize: 15),
                     ),
                   ],
                 ),
               ),
-            ),
-          ),
+            )
+          else
+            ...(_todayTasks.map((t) => _HomeTaskTile(task: t))),
           const SizedBox(height: 24),
 
-          // Weekly Focus placeholder
+          // Weekly Focus (next 7 days)
           Text(
             l.tr('weekly_focus'),
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -211,24 +384,26 @@ class HomeTabContent extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: 12),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Center(
-                child: Column(
+          if (_weekTasks.isEmpty)
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 20, horizontal: 16),
+                child: Row(
                   children: [
-                    Icon(Icons.calendar_today,
-                        size: 48, color: Colors.grey[400]),
-                    const SizedBox(height: 12),
-                    Text(
-                      l.tr('weekly_focus'),
-                      style: TextStyle(color: Colors.grey[600], fontSize: 16),
+                    Icon(Icons.wb_sunny_outlined,
+                        size: 32, color: Colors.amber[400]),
+                    const SizedBox(width: 12),
+                    const Text(
+                      'Freie Woche – keine weiteren Aufgaben.',
+                      style: TextStyle(color: Colors.grey, fontSize: 15),
                     ),
                   ],
                 ),
               ),
-            ),
-          ),
+            )
+          else
+            ...(_weekTasks.map((t) => _HomeTaskTile(task: t))),
           const SizedBox(height: 24),
 
           // Summary card
@@ -262,7 +437,7 @@ class HomeTabContent extends StatelessWidget {
                         icon: Icons.hexagon_outlined,
                       ),
                       _StatItem(
-                        value: '--',
+                        value: _inspectionCount.toString(),
                         label: l.tr('inspections_count'),
                         icon: Icons.assignment,
                       ),
@@ -322,6 +497,165 @@ class _QuickActionCard extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ToolButton extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color color;
+  final VoidCallback onTap;
+
+  const _ToolButton({
+    required this.icon,
+    required this.label,
+    required this.color,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: color.withAlpha(20),
+      borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+          child: Row(
+            children: [
+              Icon(icon, color: color, size: 22),
+              const SizedBox(width: 10),
+              Text(
+                label,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: color,
+                  fontSize: 13,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AchievementBadge extends StatelessWidget {
+  final Achievement achievement;
+
+  const _AchievementBadge({required this.achievement});
+
+  @override
+  Widget build(BuildContext context) {
+    final unlocked = achievement.unlocked;
+    return Container(
+      width: 64,
+      margin: const EdgeInsets.only(right: 10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            width: 44,
+            height: 44,
+            decoration: BoxDecoration(
+              color: unlocked
+                  ? const Color(0xFFFFA000).withAlpha(35)
+                  : Colors.grey.withAlpha(20),
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: unlocked
+                    ? const Color(0xFFFFA000).withAlpha(120)
+                    : Colors.grey.withAlpha(60),
+                width: 2,
+              ),
+            ),
+            child: Center(
+              child: Text(
+                achievement.emoji,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: unlocked ? null : Colors.transparent,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            achievement.title,
+            style: TextStyle(
+              fontSize: 9,
+              fontWeight: FontWeight.w600,
+              color: unlocked ? const Color(0xFF1A1A2E) : Colors.grey,
+            ),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Home Task Tile ────────────────────────────────────────────────────────────
+
+class _HomeTaskTile extends StatelessWidget {
+  final db.Task task;
+
+  const _HomeTaskTile({required this.task});
+
+  bool get _isOverdue =>
+      task.dueAt != null && task.dueAt!.isBefore(DateTime.now());
+
+  @override
+  Widget build(BuildContext context) {
+    final color = _isOverdue ? Colors.red : const Color(0xFFFFA000);
+    return Card(
+      margin: const EdgeInsets.only(bottom: 8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        child: Row(
+          children: [
+            Container(
+              width: 4,
+              height: 36,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    task.title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w600, fontSize: 14),
+                  ),
+                  if (task.dueAt != null) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      _isOverdue
+                          ? '⚠ Überfällig · ${DateFormat('dd.MM').format(task.dueAt!)}'
+                          : 'Heute · ${DateFormat('HH:mm').format(task.dueAt!)}',
+                      style: TextStyle(
+                          fontSize: 11,
+                          color: _isOverdue ? Colors.red : Colors.grey[500]),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

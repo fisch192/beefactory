@@ -8,6 +8,7 @@ import { HivesModule } from './hives/hives.module.js';
 import { EventsModule } from './events/events.module.js';
 import { TasksModule } from './tasks/tasks.module.js';
 import { CommunityModule } from './community/community.module.js';
+import { ChannelsModule } from './channels/channels.module.js';
 import { ZonesModule } from './zones/zones.module.js';
 import { AttachmentsModule } from './attachments/attachments.module.js';
 import { GlobalExceptionFilter } from './common/filters/http-exception.filter.js';
@@ -27,6 +28,7 @@ import { GlobalExceptionFilter } from './common/filters/http-exception.filter.js
     EventsModule,
     TasksModule,
     CommunityModule,
+    ChannelsModule,
     ZonesModule,
     AttachmentsModule,
   ],

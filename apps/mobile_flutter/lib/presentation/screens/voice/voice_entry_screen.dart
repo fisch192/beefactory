@@ -1,11 +1,15 @@
 import 'dart:async';
+import 'dart:convert' show jsonEncode;
 
+import 'package:drift/drift.dart' show Value;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../domain/voice/intent.dart';
 import '../../../domain/voice/voice_service.dart';
-import '../../../data/remote/events_api.dart';
+import '../../../data/local/database.dart';
+import '../../../data/local/daos/events_dao.dart';
 import '../../../l10n/app_localizations.dart';
 import '../community/community_feed_screen.dart';
 import 'voice_confirmation_widget.dart';
@@ -174,24 +178,33 @@ class _VoiceEntryScreenState extends State<VoiceEntryScreen>
     final intent = _intent;
     if (intent == null) return;
 
-    final eventsApi = context.read<EventsApi>();
+    final db = context.read<AppDatabase>();
+    final eventsDao = EventsDao(db);
     final eventType = intent.backendEventType ?? 'NOTE';
+    final now = DateTime.now();
+
+    final payload = {
+      ..._editableFields,
+      'original_text': intent.originalText,
+      'confidence': intent.confidence,
+      'source': 'voice',
+      if (intent.hiveRef != null) 'hive_ref': intent.hiveRef,
+      if (intent.siteRef != null) 'site_ref': intent.siteRef,
+      if (intent.targetDate != null)
+        'target_date': intent.targetDate!.toIso8601String(),
+    };
 
     try {
-      await eventsApi.createEvent({
-        'type': eventType,
-        if (widget.hiveId != null) 'hive_id': widget.hiveId,
-        'payload': {
-          ..._editableFields,
-          'original_text': intent.originalText,
-          'confidence': intent.confidence,
-          'source': 'voice',
-          if (intent.hiveRef != null) 'hive_ref': intent.hiveRef,
-          if (intent.siteRef != null) 'site_ref': intent.siteRef,
-          if (intent.targetDate != null)
-            'target_date': intent.targetDate!.toIso8601String(),
-        },
-      });
+      await eventsDao.insertEvent(EventsCompanion(
+        clientEventId: Value(const Uuid().v4()),
+        hiveId: Value(int.tryParse(widget.hiveId ?? '')),
+        type: Value(eventType),
+        occurredAtLocal: Value(now),
+        occurredAtUtc: Value(now.toUtc()),
+        payload: Value(jsonEncode(payload)),
+        source: const Value('voice'),
+        syncStatus: const Value('pending'),
+      ));
 
       if (!mounted) return;
       final l = AppLocalizations.of(context);
@@ -216,17 +229,27 @@ class _VoiceEntryScreenState extends State<VoiceEntryScreen>
     final intent = _intent;
     if (intent == null) return;
 
-    final eventsApi = context.read<EventsApi>();
+    final db = context.read<AppDatabase>();
+    final eventsDao = EventsDao(db);
+    final now = DateTime.now();
+
+    final payload = {
+      'text': intent.originalText,
+      'source': 'voice',
+      'low_confidence': true,
+    };
+
     try {
-      await eventsApi.createEvent({
-        'type': 'NOTE',
-        if (widget.hiveId != null) 'hive_id': widget.hiveId,
-        'payload': {
-          'text': intent.originalText,
-          'source': 'voice',
-          'low_confidence': true,
-        },
-      });
+      await eventsDao.insertEvent(EventsCompanion(
+        clientEventId: Value(const Uuid().v4()),
+        hiveId: Value(int.tryParse(widget.hiveId ?? '')),
+        type: const Value('NOTE'),
+        occurredAtLocal: Value(now),
+        occurredAtUtc: Value(now.toUtc()),
+        payload: Value(jsonEncode(payload)),
+        source: const Value('voice'),
+        syncStatus: const Value('pending'),
+      ));
 
       if (!mounted) return;
       final l = AppLocalizations.of(context);

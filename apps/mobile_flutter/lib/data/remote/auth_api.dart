@@ -66,4 +66,22 @@ class AuthApi {
   Future<Map<String, dynamic>> getProfile() async {
     return _client.get('/auth/me');
   }
+
+  Future<Map<String, dynamic>> loginWithGoogle({
+    required String idToken,
+  }) async {
+    final response = await _client.post(
+      '/auth/google',
+      body: {'id_token': idToken},
+      withAuth: false,
+    );
+    final token = response['token'] as String? ??
+        response['access_token'] as String? ??
+        '';
+    final refreshToken = response['refresh_token'] as String? ?? '';
+    if (token.isNotEmpty) {
+      await _client.saveTokens(token, refreshToken);
+    }
+    return response;
+  }
 }

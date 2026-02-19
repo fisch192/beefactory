@@ -50,6 +50,32 @@ services:
       echo 'Bucket bee-attachments created';
       "
 
+  backend:
+    build:
+      context: ../services/api_backend
+      dockerfile: Dockerfile
+    container_name: bee_backend
+    env_file: ../services/api_backend/.env.docker
+    environment:
+      DATABASE_URL: postgresql://bee:bee_dev_pass@postgres:5432/bee?schema=public
+      MINIO_ENDPOINT: minio
+      MINIO_PORT: 9000
+    ports:
+      - '3001:3000'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ['CMD-SHELL', 'curl -f http://localhost:3000/v1/zones || exit 1']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
 volumes:
   pg_data:
   minio_data:

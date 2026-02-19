@@ -17,6 +17,9 @@ const result = await getCollection(handle!);
 if (!result) return Astro.redirect('/it/');
 
 const { collection, products } = result;
+
+const imgSlug = handle!.split('-')[0];
+const catImage = `/images/cat-${imgSlug}.jpg`;
 ---
 
 <ShopLayout
@@ -25,27 +28,36 @@ const { collection, products } = result;
   description={collection.description[lang]}
   canonicalPath={`/it/categorie/${handle}`}
 >
-  <section class="section-padding">
-    <div class="container-wide">
-      <nav class="text-sm text-mid-gray mb-8">
-        <a href="/it/" class="hover:text-near-black transition-colors">Home</a>
-        <span class="mx-2">/</span>
-        <span class="text-near-black">{collection.title[lang]}</span>
+
+  <!-- Category hero banner -->
+  <section class="cat-hero">
+    <img src={catImage} alt={collection.title[lang]} class="cat-hero-img" />
+    <div class="cat-hero-overlay"></div>
+    <div class="cat-hero-body">
+      <nav class="cat-breadcrumb">
+        <a href="/it/">Home</a>
+        <span>/</span>
+        <span>{collection.title[lang]}</span>
       </nav>
+      <h1 class="cat-hero-title">{collection.title[lang]}</h1>
+      <p class="cat-hero-desc">{collection.description[lang]}</p>
+    </div>
+  </section>
 
-      <div class="mb-12 fade-in">
-        <h1 class="heading-lg mb-3">{collection.title[lang]}</h1>
-        <p class="text-mid-gray text-lg max-w-2xl">{collection.description[lang]}</p>
-      </div>
-
+  <!-- Products section -->
+  <section class="cat-products">
+    <div class="container-wide">
       {products.length > 0 ? (
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+        <div class="cat-grid">
           {products.map((product) => (
             <ProductCard product={product} lang={lang} />
           ))}
         </div>
       ) : (
-        <p class="text-mid-gray text-center py-16">Nessun prodotto in questa categoria.</p>
+        <div class="cat-empty">
+          <p>Nessun prodotto in questa categoria.</p>
+          <a href="/it/" class="btn-outline" style="margin-top:1.5rem;display:inline-flex">Torna alla panoramica</a>
+        </div>
       )}
     </div>
   </section>
@@ -60,3 +72,97 @@ const { collection, products } = result;
     removeText={t('cart.remove', lang)}
   />
 </ShopLayout>
+
+<style>
+  .cat-hero {
+    position:    relative;
+    height:      clamp(20rem, 40vw, 32rem);
+    overflow:    hidden;
+    display:     flex;
+    align-items: flex-end;
+  }
+  .cat-hero-img {
+    position:   absolute;
+    inset:      0;
+    width:      100%;
+    height:     100%;
+    object-fit: cover;
+    filter:     brightness(0.5) saturate(0.8);
+    transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+  }
+  .cat-hero-overlay {
+    position:   absolute;
+    inset:      0;
+    background: linear-gradient(
+      to top,
+      rgba(13,12,10,0.85) 0%,
+      rgba(13,12,10,0.3)  60%,
+      rgba(13,12,10,0.1)  100%
+    );
+  }
+  .cat-hero-body {
+    position:  relative;
+    z-index:   2;
+    width:     100%;
+    padding:   0 clamp(1.25rem,5vw,4rem) clamp(2.5rem,5vw,4rem);
+    max-width: 1440px;
+    margin:    0 auto;
+  }
+  .cat-breadcrumb {
+    display:        flex;
+    align-items:    center;
+    gap:            0.5rem;
+    font-size:      0.6875rem;
+    font-weight:    500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color:          rgba(255,255,255,0.4);
+    margin-bottom:  1rem;
+  }
+  .cat-breadcrumb a {
+    color:           rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition:      color 0.2s;
+  }
+  .cat-breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+  .cat-hero-title {
+    font-family:    var(--font-display);
+    font-size:      clamp(2.25rem,6vw,5rem);
+    font-weight:    300;
+    letter-spacing: -0.025em;
+    line-height:    0.95;
+    color:          white;
+    margin-bottom:  0.75rem;
+    animation:      fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.05s both;
+  }
+  .cat-hero-desc {
+    font-size:   clamp(0.875rem,1.5vw,1rem);
+    font-weight: 300;
+    color:       rgba(255,255,255,0.5);
+    line-height: 1.65;
+    max-width:   38rem;
+    animation:   fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.18s both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .cat-products {
+    background:     var(--color-cream);
+    padding-top:    clamp(3.5rem,7vw,6rem);
+    padding-bottom: clamp(4rem,8vw,8rem);
+  }
+  .cat-grid {
+    display:               grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:                   1.5rem;
+  }
+  @media (min-width: 768px)  { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1280px) { .cat-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; } }
+  .cat-empty {
+    text-align: center;
+    padding:    6rem 0;
+    color:      var(--color-ash);
+    font-size:  1rem;
+  }
+</style>

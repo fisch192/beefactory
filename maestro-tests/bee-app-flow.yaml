@@ -1,0 +1,4 @@
+appId: com.bee.bee_app
+---
+- launchApp
+- assertVisible: ".*"

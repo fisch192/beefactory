@@ -3,6 +3,7 @@ import {
   Get,
   Post,
   Put,
+  Delete,
   Body,
   Param,
   Query,
@@ -72,5 +73,11 @@ export class TasksController {
     @Body() dto: UpdateTaskDto,
   ) {
     return this.tasksService.update(req.user.id, id, dto);
+  }
+
+  @Delete(':id')
+  @ApiOperation({ summary: 'Soft-delete a task (sets status to CANCELLED)' })
+  async remove(@Request() req: AuthRequest, @Param('id') id: string) {
+    return this.tasksService.remove(req.user.id, id);
   }
 }

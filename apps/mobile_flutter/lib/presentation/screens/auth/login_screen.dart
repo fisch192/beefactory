@@ -183,6 +183,53 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 16),
 
+                  // Google Sign-In
+                  Consumer<AuthProvider>(
+                    builder: (context, auth, _) {
+                      final isLoading = auth.state == AuthState.loading;
+                      return OutlinedButton.icon(
+                        onPressed: isLoading
+                            ? null
+                            : () async {
+                                final success =
+                                    await auth.loginWithGoogle();
+                                if (success && context.mounted) {
+                                  context.go('/home');
+                                }
+                              },
+                        icon: isLoading
+                            ? const SizedBox(
+                                width: 18,
+                                height: 18,
+                                child: CircularProgressIndicator(
+                                    strokeWidth: 2),
+                              )
+                            : const Icon(Icons.g_mobiledata, size: 24),
+                        label: const Text('Mit Google anmelden'),
+                        style: OutlinedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 48),
+                          side: const BorderSide(color: Color(0xFFDADCE0)),
+                          foregroundColor: const Color(0xFF3C4043),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Expanded(child: Divider(color: Colors.grey[300])),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Text('oder',
+                            style: TextStyle(color: Colors.grey[500])),
+                      ),
+                      Expanded(child: Divider(color: Colors.grey[300])),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+
                   // Continue without account
                   OutlinedButton(
                     onPressed: () => context.go('/home'),

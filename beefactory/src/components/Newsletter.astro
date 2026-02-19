@@ -9,25 +9,133 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<section class="section-padding bg-white">
-  <div class="container-wide">
-    <div class="max-w-2xl mx-auto text-center fade-in">
-      <h2 class="heading-md mb-4">{t('newsletter.title', lang)}</h2>
-      <p class="text-mid-gray mb-8">{t('newsletter.text', lang)}</p>
+<section class="newsletter-section">
 
-      <form class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto" onsubmit="event.preventDefault();">
+  <!-- Hex accent -->
+  <div class="newsletter-hex" aria-hidden="true">
+    <svg width="420" height="420" viewBox="0 0 420 420" fill="none">
+      <path d="M210 10L410 125V295L210 410L10 295V125L210 10Z"
+            stroke="#C49A3C" stroke-width="0.4" opacity="0.18"/>
+      <path d="M210 60L360 147V317L210 404L60 317V147L210 60Z"
+            stroke="#C49A3C" stroke-width="0.3" opacity="0.1"/>
+      <path d="M210 110L310 169V291L210 350L110 291V169L210 110Z"
+            stroke="#C49A3C" stroke-width="0.3" opacity="0.06"/>
+    </svg>
+  </div>
+
+  <div class="container-wide">
+    <div class="newsletter-body fade-in">
+
+      <span class="eyebrow">{lang === 'de' ? 'Newsletter' : 'Newsletter'}</span>
+
+      <h2 class="newsletter-headline">
+        {t('newsletter.title', lang)}
+      </h2>
+
+      <p class="newsletter-sub">
+        {t('newsletter.text', lang)}
+      </p>
+
+      <form class="newsletter-form" onsubmit="event.preventDefault();">
         <input
           type="email"
           placeholder={t('newsletter.placeholder', lang)}
           required
-          class="flex-1 px-4 py-3.5 bg-warm-gray border border-black/10 text-near-black placeholder:text-mid-gray focus:outline-none focus:border-honey transition-colors text-sm"
+          class="newsletter-input"
+          aria-label="E-Mail Adresse"
         />
-        <button type="submit" class="btn-primary whitespace-nowrap">
+        <button type="submit" class="btn-gold">
           {t('newsletter.cta', lang)}
         </button>
       </form>
 
-      <p class="text-xs text-mid-gray mt-4">{t('newsletter.privacy', lang)}</p>
+      <p class="newsletter-privacy">{t('newsletter.privacy', lang)}</p>
+
     </div>
   </div>
 </section>
+
+<style>
+  .newsletter-section {
+    position:   relative;
+    overflow:   hidden;
+    background: var(--color-warm);
+    padding-top:    clamp(5rem, 10vw, 12rem);
+    padding-bottom: clamp(5rem, 10vw, 12rem);
+  }
+
+  /* Background hex decoration */
+  .newsletter-hex {
+    position:       absolute;
+    right:          -8rem;
+    top:            50%;
+    transform:      translateY(-50%);
+    pointer-events: none;
+    opacity:        0.7;
+  }
+
+  /* Body */
+  .newsletter-body {
+    max-width:  42rem;
+    position:   relative;
+    z-index:    2;
+  }
+
+  .newsletter-headline {
+    font-family:    var(--font-display);
+    font-size:      clamp(2rem, 5vw, 3.5rem);
+    font-weight:    400;
+    color:          var(--color-ink);
+    line-height:    1.1;
+    margin:         1rem 0 1.25rem;
+    letter-spacing: -0.01em;
+  }
+
+  .newsletter-sub {
+    font-size:     1rem;
+    color:         var(--color-ash);
+    line-height:   1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  /* Form */
+  .newsletter-form {
+    display: flex;
+    gap:     0;
+    max-width: 36rem;
+  }
+
+  .newsletter-input {
+    flex:        1;
+    min-width:   0;
+    padding:     0.9rem 1.25rem;
+    background:  white;
+    border:      1px solid var(--color-warm-dark);
+    border-right: none;
+    color:       var(--color-ink);
+    font-size:   0.875rem;
+    outline:     none;
+    border-radius: 0;
+    transition:  border-color 0.2s;
+  }
+  .newsletter-input::placeholder { color: var(--color-ash-light); }
+  .newsletter-input:focus { border-color: var(--color-gold); }
+
+  .newsletter-privacy {
+    font-size:  0.75rem;
+    color:      var(--color-ash-light);
+    margin-top: 1rem;
+  }
+
+  /* Stack on mobile */
+  @media (max-width: 560px) {
+    .newsletter-form {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .newsletter-input {
+      border-right: 1px solid var(--color-warm-dark);
+    }
+    .newsletter-form .btn-gold { width: 100%; justify-content: center; }
+  }
+</style>

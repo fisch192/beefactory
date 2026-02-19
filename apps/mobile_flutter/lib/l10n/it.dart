@@ -155,6 +155,8 @@ const Map<String, String> it = {
   'export_data': 'Esporta dati',
   'export_subtitle': 'Esportazione JSON/CSV di tutti i dati',
   'export_not_implemented': 'Esportazione dati non ancora implementata',
+  'export_complete': 'Esportazione completata',
+  'export_saved_to': 'Salvato in:',
   'delete_account': 'Elimina account',
   'delete_account_subtitle': 'Rimuovi tutti i dati in modo irreversibile',
   'delete_confirm_title': 'Eliminare l\'account?',
@@ -305,4 +307,18 @@ const Map<String, String> it = {
   'get_started': 'Iniziamo',
   'next': 'Avanti',
   'continue_without_account': 'Continua senza account',
+
+  // Channels (Discord-like)
+  'channels_title': 'Canali',
+  'channel_name': 'Nome canale',
+  'create_channel': 'Crea canale',
+  'no_channels': 'Nessun canale ancora',
+  'new_topic': 'Nuovo argomento',
+  'topic_title': 'Titolo argomento',
+  'no_topics': 'Nessun argomento ancora',
+  'create_first_topic': 'Crea il primo argomento in questo canale',
+  'start_conversation': 'Inizia la conversazione!',
+  'type_message': 'Scrivi un messaggio...',
+  'is_typing': 'sta scrivendo...',
+  'messages': 'Messaggi',
 };

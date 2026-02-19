@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "maestro": {
+      "command": "maestro",
+      "args": ["mcp", "--working-dir=/media/durst/_mnt_images2/bee/maestro-tests"],
+      "env": {
+        "JAVA_HOME": "/home/durst/.local/opt/jdk-17.0.13+11-jre",
+        "PATH": "/home/durst/.local/opt/jdk-17.0.13+11-jre/bin:/home/durst/.maestro/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      }
+    }
+  }
+}

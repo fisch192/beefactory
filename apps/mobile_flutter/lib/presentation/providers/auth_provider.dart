@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../core/errors/failures.dart';
 import '../../domain/models/user.dart';
@@ -58,6 +59,45 @@ class AuthProvider extends ChangeNotifier {
 
     try {
       _user = await _authRepository.register(email, password, name);
+      _state = AuthState.authenticated;
+      notifyListeners();
+      return true;
+    } on Failure catch (e) {
+      _error = e.message;
+      _state = AuthState.error;
+      notifyListeners();
+      return false;
+    } catch (e) {
+      _error = e.toString();
+      _state = AuthState.error;
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> loginWithGoogle() async {
+    _state = AuthState.loading;
+    _error = null;
+    notifyListeners();
+
+    try {
+      final googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
+      final account = await googleSignIn.signIn();
+      if (account == null) {
+        // User cancelled
+        _state = AuthState.unauthenticated;
+        notifyListeners();
+        return false;
+      }
+      final auth = await account.authentication;
+      final idToken = auth.idToken;
+      if (idToken == null) {
+        _error = 'Google Sign-In fehlgeschlagen: kein ID-Token';
+        _state = AuthState.error;
+        notifyListeners();
+        return false;
+      }
+      _user = await _authRepository.loginWithGoogle(idToken);
       _state = AuthState.authenticated;
       notifyListeners();
       return true;

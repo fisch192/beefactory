@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:drift/drift.dart' show Value;
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
-import '../../../data/remote/events_api.dart';
+import '../../../data/local/daos/events_dao.dart';
+import '../../../data/local/database.dart' as db;
 import '../../../l10n/app_localizations.dart';
 import '../community/community_feed_screen.dart';
 import 'treatment_screen.dart';
@@ -136,19 +141,28 @@ class _VarroaMeasurementScreenState extends State<VarroaMeasurementScreen> {
     setState(() => _saving = true);
 
     try {
-      final eventsApi = context.read<EventsApi>();
-      await eventsApi.createEvent({
-        'type': 'VARROA_MEASUREMENT',
-        'hive_id': widget.hiveId,
-        'payload': {
-          'method': _method.apiValue,
-          'mites_count': mites,
-          if (_durationHours != null) 'duration_hours': _durationHours,
-          if (_normalizedRate != null) 'normalized_rate': _normalizedRate,
-          'threshold': _threshold.name,
-          'source': 'manual',
-        },
-      });
+      final eventsDao = context.read<EventsDao>();
+      final now = DateTime.now();
+      final payload = {
+        'method': _method.apiValue,
+        'mites_count': mites,
+        if (_durationHours != null) 'duration_hours': _durationHours,
+        if (_normalizedRate != null) 'normalized_rate': _normalizedRate,
+        'threshold': _threshold.name,
+        'source': 'manual',
+      };
+      await eventsDao.insertEvent(db.EventsCompanion(
+        clientEventId: Value(const Uuid().v4()),
+        hiveId: Value(int.tryParse(widget.hiveId)),
+        type: const Value('VARROA_MEASUREMENT'),
+        occurredAtLocal: Value(now),
+        occurredAtUtc: Value(now.toUtc()),
+        payload: Value(jsonEncode(payload)),
+        source: const Value('manual'),
+        syncStatus: const Value('pending'),
+        createdAt: Value(now),
+        updatedAt: Value(now),
+      ));
 
       if (!mounted) return;
 

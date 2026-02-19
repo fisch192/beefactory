@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../data/remote/events_api.dart';
+import '../../../data/local/daos/events_dao.dart';
+import '../../../domain/models/event.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../services/recommendation_engine.dart';
 import '../community/community_feed_screen.dart';
 import 'varroa_measurement_screen.dart';
 
@@ -40,6 +44,7 @@ class VarroaHistoryScreen extends StatefulWidget {
 
 class _VarroaHistoryScreenState extends State<VarroaHistoryScreen> {
   List<_TimelineEntry> _entries = [];
+  VarroaTrend? _trend;
   bool _loading = true;
   String? _error;
 
@@ -56,55 +61,60 @@ class _VarroaHistoryScreenState extends State<VarroaHistoryScreen> {
     });
 
     try {
-      final eventsApi = context.read<EventsApi>();
+      final hiveId = int.tryParse(widget.hiveId) ?? 0;
+      final eventsDao = context.read<EventsDao>();
 
-      // Load varroa measurements.
-      final measurements = await eventsApi.listEvents(
-        hiveId: widget.hiveId,
-        type: 'VARROA_MEASUREMENT',
-        limit: 100,
-      );
-
-      // Load treatments.
-      final treatments = await eventsApi.listEvents(
-        hiveId: widget.hiveId,
-        type: 'TREATMENT',
-        limit: 100,
+      // Load varroa measurements and treatments from local DB.
+      final rawEvents = await eventsDao.getByHiveIdAndTypes(
+        hiveId,
+        ['VARROA_MEASUREMENT', 'treatment', 'varroaMeasurement'],
       );
 
       final entries = <_TimelineEntry>[];
 
-      for (final m in measurements) {
-        final data = m as Map<String, dynamic>;
-        entries.add(_TimelineEntry(
-          id: data['id'] as String? ?? '',
-          type: 'VARROA_MEASUREMENT',
-          date: DateTime.tryParse(
-                  data['created_at'] as String? ?? '') ??
-              DateTime.tryParse(data['createdAt'] as String? ?? '') ??
-              DateTime.now(),
-          payload: (data['payload'] as Map<String, dynamic>?) ?? data,
-        ));
-      }
+      for (final e in rawEvents) {
+        Map<String, dynamic> payloadMap = {};
+        try {
+          payloadMap = jsonDecode(e.payload) as Map<String, dynamic>;
+        } catch (_) {}
 
-      for (final t in treatments) {
-        final data = t as Map<String, dynamic>;
+        final type = (e.type == 'VARROA_MEASUREMENT' ||
+                e.type == 'varroaMeasurement')
+            ? 'VARROA_MEASUREMENT'
+            : 'TREATMENT';
+
         entries.add(_TimelineEntry(
-          id: data['id'] as String? ?? '',
-          type: 'TREATMENT',
-          date: DateTime.tryParse(
-                  data['created_at'] as String? ?? '') ??
-              DateTime.tryParse(data['createdAt'] as String? ?? '') ??
-              DateTime.now(),
-          payload: (data['payload'] as Map<String, dynamic>?) ?? data,
+          id: e.id.toString(),
+          type: type,
+          date: e.occurredAtLocal,
+          payload: payloadMap,
         ));
       }
 
       // Sort newest first.
       entries.sort((a, b) => b.date.compareTo(a.date));
 
+      // Compute trend from measurement events
+      final measurementModels = rawEvents
+          .where((e) =>
+              e.type == 'VARROA_MEASUREMENT' ||
+              e.type == 'varroaMeasurement')
+          .map((e) {
+        Map<String, dynamic> p = {};
+        try { p = jsonDecode(e.payload) as Map<String, dynamic>; } catch (_) {}
+        return EventModel(
+          id: e.id, serverId: e.serverId, clientEventId: e.clientEventId,
+          hiveId: e.hiveId, siteId: e.siteId,
+          type: EventType.varroaMeasurement,
+          occurredAtLocal: e.occurredAtLocal, occurredAtUtc: e.occurredAtUtc,
+          payload: p, source: e.source, syncStatus: e.syncStatus,
+          createdAt: e.createdAt, updatedAt: e.updatedAt,
+        );
+      }).toList();
+
       setState(() {
         _entries = entries;
+        _trend = RecommendationEngine.analyzeTrend(measurementModels);
         _loading = false;
       });
     } catch (e) {
@@ -247,6 +257,9 @@ class _VarroaHistoryScreenState extends State<VarroaHistoryScreen> {
                       onRefresh: _loadHistory,
                       child: Column(
                         children: [
+                          // Trend card
+                          if (_trend != null)
+                            _TrendCard(trend: _trend!),
                           // Simple dot chart
                           _DotTimeline(
                             entries: _entries,
@@ -274,6 +287,109 @@ class _VarroaHistoryScreenState extends State<VarroaHistoryScreen> {
                         ],
                       ),
                     ),
+    );
+  }
+}
+
+// ── Trend Card ────────────────────────────────────────────────────────────────
+
+class _TrendCard extends StatelessWidget {
+  final VarroaTrend trend;
+
+  const _TrendCard({required this.trend});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            const Color(0xFF1A0E00),
+            trend.trendColor.withAlpha(40),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Row(
+        children: [
+          // Trend icon
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: trend.trendColor.withAlpha(50),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(
+              trend.isIncreasing
+                  ? Icons.trending_up
+                  : trend.isDecreasing
+                      ? Icons.trending_down
+                      : Icons.trending_flat,
+              color: trend.trendColor,
+              size: 22,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      'Varroa-Trend: ${trend.trendLabel}',
+                      style: TextStyle(
+                        color: trend.trendColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  'Aktuell: ${trend.latestRate.toStringAsFixed(1)} Milben/Tag',
+                  style: const TextStyle(color: Colors.white70, fontSize: 12),
+                ),
+              ],
+            ),
+          ),
+          // Days to threshold badge
+          if (trend.daysToThreshold != null)
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: Colors.red.withAlpha(60),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.red.withAlpha(120)),
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    '${trend.daysToThreshold}',
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Text(
+                    'Tage',
+                    style: TextStyle(color: Colors.red, fontSize: 10),
+                  ),
+                  const Text(
+                    'bis >3',
+                    style: TextStyle(color: Colors.red, fontSize: 9),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

@@ -5,46 +5,849 @@ import CartDrawer from '../../components/cart/CartDrawer';
 import { t } from '../../lib/i18n';
 
 const lang = 'it';
+
+const steps = [
+  {
+    num: '01',
+    title: 'Scegliere l\'attrezzatura',
+    text: 'Scegli tra il sistema Dadant e Zander. I nostri set iniziali contengono tutto il necessario – arnia, telai, affumicatore e abbigliamento protettivo.',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
+  },
+  {
+    num: '02',
+    title: 'Richiedere il contributo',
+    text: 'Come nuovo apicoltore in Alto Adige puoi ottenere fino al 50% di contributo per la prima attrezzatura. Ti accompagniamo in tutto il processo di richiesta.',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>`,
+  },
+  {
+    num: '03',
+    title: 'Prendere le prime api',
+    text: 'La primavera è il momento migliore per iniziare. Acquista uno sciame da un apicoltore locale e sistemalo nella tua nuova arnia.',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  },
+  {
+    num: '04',
+    title: 'Primo raccolto',
+    text: 'Dopo una stagione di successo arriva la ricompensa: il tuo miele. Con i nostri smielatori e attrezzi per il raccolto, la lavorazione è semplice e soddisfacente.',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6 2 2 7 2 12s4 10 10 10 10-4.5 10-10S18 2 12 2z"/><path d="M12 8v4l3 3"/></svg>`,
+  },
+];
+
+const faqs = [
+  {
+    q: 'Quanto tempo mi richiede ogni settimana?',
+    a: 'Durante la stagione attiva (maggio–agosto) circa 2–3 ore a settimana per ogni alveare. In inverno le api riposano e l\'impegno è minimo.',
+  },
+  {
+    q: 'Dove posso sistemare le api?',
+    a: 'L\'apicoltura è possibile anche in giardino o sul balcone. In Alto Adige non è necessaria alcuna autorizzazione speciale per fino a 5 alveari su terreno privato.',
+  },
+  {
+    q: 'Quanto sono pericolose le api?',
+    a: 'Con il giusto abbigliamento protettivo e un approccio calmo, il rischio è molto basso. Le api pungono solo per difendersi – mai senza motivo.',
+  },
+  {
+    q: 'Quali contributi sono disponibili?',
+    a: 'La Provincia Autonoma di Bolzano sostiene i nuovi apicoltori con fino al 50% sull\'attrezzatura iniziale. Esistono anche programmi agricoli UE. Ti aiutiamo con la domanda.',
+  },
+];
 ---
 
-<ShopLayout lang={lang} title="Nuovi Apicoltori" canonicalPath="/it/nuovi-apicoltori">
-  <section class="section-padding">
-    <div class="container-wide max-w-3xl">
-      <h1 class="heading-lg mb-8">Inizia con l'Apicoltura</h1>
+<ShopLayout lang={lang} title="Guida Nuovi Apicoltori – Inizia con l'Apicoltura" canonicalPath="/it/nuovi-apicoltori" hasHero={true}>
 
-      <div class="prose prose-lg max-w-none space-y-6 text-mid-gray leading-relaxed">
-        <p>
-          Vuoi diventare apicoltore? Benvenuto! L'apicoltura è un meraviglioso hobby
-          che ti permette di immergerti nell'affascinante mondo delle api.
+  <!-- ── 1. Hero ──────────────────────────────────────────── -->
+  <section class="ni-hero">
+    <img src="/images/hero-bg.jpg" alt="Ape sul favo di miele" class="ni-hero-img" />
+    <div class="ni-hero-overlay"></div>
+    <div class="ni-hero-body">
+      <span class="ni-hero-eyebrow">
+        <span class="ni-rule"></span>
+        Guida Nuovi Apicoltori · Alto Adige
+        <span class="ni-rule"></span>
+      </span>
+      <h1 class="ni-hero-headline">
+        Il tuo ingresso nel<br/>
+        <em class="ni-hero-em">mondo delle api.</em>
+      </h1>
+      <p class="ni-hero-sub">
+        Dalla prima attrezzatura al primo raccolto –<br class="hide-mobile"/>
+        ti accompagniamo in ogni passo.
+      </p>
+      <div class="ni-hero-ctas">
+        <a href="/it/categorie/startersets" class="btn-gold">
+          Scopri i set iniziali
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </a>
+        <a href="#contributi" class="btn-secondary">Verifica contributi</a>
+      </div>
+    </div>
+    <!-- Scroll line -->
+    <div class="ni-scroll" aria-hidden="true"><div class="ni-scroll-line"></div></div>
+  </section>
+
+  <!-- ── 2. Intro stat bar ────────────────────────────────── -->
+  <div class="ni-stats-bar">
+    <div class="ni-stat">
+      <span class="ni-stat-val">50%</span>
+      <span class="ni-stat-lbl">Contributo possibile</span>
+    </div>
+    <div class="ni-stat-div"></div>
+    <div class="ni-stat">
+      <span class="ni-stat-val">4 Passi</span>
+      <span class="ni-stat-lbl">fino al primo raccolto</span>
+    </div>
+    <div class="ni-stat-div"></div>
+    <div class="ni-stat">
+      <span class="ni-stat-val">5 ★</span>
+      <span class="ni-stat-lbl">Valutazione clienti</span>
+    </div>
+    <div class="ni-stat-div"></div>
+    <div class="ni-stat">
+      <span class="ni-stat-val">Gratuita</span>
+      <span class="ni-stat-lbl">Consulenza & supporto</span>
+    </div>
+  </div>
+
+  <!-- ── 3. Journey steps ─────────────────────────────────── -->
+  <section class="ni-steps">
+    <div class="container-wide">
+      <div class="ni-section-header fade-in">
+        <span class="eyebrow">Il tuo percorso da apicoltore</span>
+        <h2 class="display-md mt-4">In quattro passi<br/>al tuo miele.</h2>
+      </div>
+      <div class="ni-steps-grid">
+        {steps.map((step) => (
+          <div class="ni-step fade-in">
+            <div class="ni-step-top">
+              <span class="ni-step-num">{step.num}</span>
+              <div class="ni-step-icon" set:html={step.icon}></div>
+            </div>
+            <h3 class="ni-step-title">{step.title}</h3>
+            <p class="ni-step-text">{step.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. Contributi (dark) ─────────────────────────────── -->
+  <section class="ni-foerderung" id="contributi">
+    <!-- Honeycomb background -->
+    <img src="/images/cat-fuetterung.jpg" alt="" class="ni-foerderung-bg" aria-hidden="true" />
+    <div class="ni-foerderung-overlay"></div>
+    <div class="container-wide ni-foerderung-body">
+      <div class="ni-foerderung-text fade-in">
+        <span class="eyebrow">Programma contributi Alto Adige</span>
+        <h2 class="display-md mt-4" style="color:white">
+          Fino al 50% della<br/>
+          tua attrezzatura finanziato.
+        </h2>
+        <p class="ni-foerderung-p">
+          La Provincia Autonoma di Bolzano sostiene attivamente i nuovi apicoltori.
+          L'attrezzatura iniziale qualificata viene sovvenzionata fino al 50% –
+          un set completo già a partire da
+          <strong style="color:var(--color-gold)">€ 150</strong>.
         </p>
-
-        <h2 class="heading-md text-near-black !mt-12 !mb-4">Di cosa ho bisogno per iniziare?</h2>
-        <p>
-          Come nuovo apicoltore hai bisogno di un'attrezzatura di base: un'arnia, telai,
-          un affumicatore, una leva e naturalmente l'abbigliamento protettivo. I nostri
-          set iniziali contengono tutto il necessario per iniziare.
+        <p class="ni-foerderung-p">
+          Conosciamo bene i requisiti e ti aiutiamo a presentare tutta la documentazione
+          necessaria in modo corretto. Contattaci senza impegno.
         </p>
-
-        <h2 class="heading-md text-near-black !mt-12 !mb-4">Contributi in Alto Adige</h2>
-        <p>
-          Come nuovo apicoltore in Alto Adige puoi beneficiare dei programmi di sostegno locali.
-          La Provincia concede contributi fino al 50% per l'attrezzatura iniziale.
-          Ti consigliamo volentieri sulle possibilità e ti aiutiamo con la richiesta.
-        </p>
-
-        <h2 class="heading-md text-near-black !mt-12 !mb-4">La nostra raccomandazione</h2>
-        <p>
-          Inizia con uno dei nostri set iniziali – sia nel sistema Dadant che Zander.
-          Entrambi i sistemi hanno i loro vantaggi, e siamo lieti di aiutarti nella scelta.
-        </p>
-
-        <div class="!mt-10 flex flex-col sm:flex-row gap-4">
-          <a href="/it/categorie/startersets" class="btn-primary text-center">Vedi i Set Iniziali</a>
-          <a href="/it/faq" class="btn-outline text-center">Domande Frequenti</a>
+        <a href="mailto:info@beefactory.shop" class="btn-gold" style="margin-top:2rem;display:inline-flex">
+          Richiedi consulenza contributi
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </a>
+      </div>
+      <div class="ni-foerderung-cards fade-in">
+        <div class="ni-fcard">
+          <div class="ni-fcard-val">50%</div>
+          <div class="ni-fcard-lbl">Contributo sulla<br/>prima attrezzatura</div>
+        </div>
+        <div class="ni-fcard">
+          <div class="ni-fcard-val">€ 150</div>
+          <div class="ni-fcard-lbl">Set iniziale da<br/>dopo contributo</div>
+        </div>
+        <div class="ni-fcard">
+          <div class="ni-fcard-val">2025</div>
+          <div class="ni-fcard-lbl">Programma<br/>attivo</div>
         </div>
       </div>
     </div>
   </section>
 
-  <CartDrawer client:load title={t('cart.title', lang)} emptyText={t('cart.empty', lang)} totalText={t('cart.total', lang)} checkoutText={t('cart.checkout', lang)} continueText={t('cart.continue', lang)} removeText={t('cart.remove', lang)} />
+  <!-- ── 5. Equipment image strip ────────────────────────── -->
+  <section class="ni-equipment">
+    <div class="container-wide">
+      <div class="ni-section-header fade-in">
+        <span class="eyebrow">Attrezzatura</span>
+        <h2 class="display-md mt-4">Ciò di cui hai<br/>davvero bisogno.</h2>
+        <p class="ni-section-sub">
+          Nessun accessorio superfluo. I nostri set iniziali contengono
+          esattamente ciò che i nuovi apicoltori necessitano per una prima stagione di successo.
+        </p>
+      </div>
+
+      <!-- Image mosaic using real photos -->
+      <div class="ni-mosaic">
+        <div class="ni-mosaic-main fade-in">
+          <img src="/images/hero-bg.jpg" alt="Apicoltore al lavoro" class="ni-mosaic-img"/>
+          <div class="ni-mosaic-caption">
+            <span class="ni-mosaic-tag">Alveare</span>
+            <p>L'ape Carnica è ideale per i nuovi apicoltori altoatesini –
+               docile e molto produttiva.</p>
+          </div>
+        </div>
+        <div class="ni-mosaic-side">
+          <div class="ni-mosaic-card fade-in">
+            <img src="/images/cat-fuetterung.jpg" alt="Arnie e accessori" class="ni-mosaic-img"/>
+            <div class="ni-mosaic-card-label">Arnie & Accessori</div>
+          </div>
+          <div class="ni-mosaic-card fade-in">
+            <img src="/images/cat-werkzeuge.jpg" alt="Attrezzi da apicoltore" class="ni-mosaic-img"/>
+            <div class="ni-mosaic-card-label">Attrezzi & Affumicatore</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Equipment checklist -->
+      <div class="ni-checklist fade-in">
+        {[
+          { item: 'Arnia (Dadant o Zander)',                  included: true  },
+          { item: 'Tuta protettiva & guanti',                 included: true  },
+          { item: 'Affumicatore & leva',                      included: true  },
+          { item: 'Telai & fogli cerei',                      included: true  },
+          { item: 'Contenitore per l\'alimentazione',         included: true  },
+          { item: 'Attrezzatura base antivarroa',             included: false },
+        ].map(({ item, included }) => (
+          <div class="ni-check-row">
+            <span class={`ni-check-icon ${included ? 'ni-check-yes' : 'ni-check-opt'}`}>
+              {included ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              )}
+            </span>
+            <span class="ni-check-label">{item}</span>
+            {!included && <span class="ni-check-badge">Opzionale</span>}
+          </div>
+        ))}
+      </div>
+
+      <div class="ni-equip-cta fade-in">
+        <a href="/it/categorie/startersets" class="btn-gold">
+          Vedi tutti i set iniziali
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. FAQ ───────────────────────────────────────────── -->
+  <section class="ni-faq">
+    <div class="container-wide">
+      <div class="ni-section-header fade-in">
+        <span class="eyebrow">Domande frequenti</span>
+        <h2 class="display-md mt-4">Tutto quello che i nuovi<br/>apicoltori devono sapere.</h2>
+      </div>
+      <div class="ni-faq-grid">
+        {faqs.map((faq, i) => (
+          <div class="ni-faq-item fade-in">
+            <div class="ni-faq-num">{String(i + 1).padStart(2, '0')}</div>
+            <div>
+              <h3 class="ni-faq-q">{faq.q}</h3>
+              <p class="ni-faq-a">{faq.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="ni-faq-more fade-in">
+        <a href="/it/faq" class="btn-outline">Vedi tutte le domande</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 7. Final CTA ─────────────────────────────────────── -->
+  <section class="ni-final">
+    <img src="/images/cat-startersets.jpg" alt="" class="ni-final-bg" aria-hidden="true"/>
+    <div class="ni-final-overlay"></div>
+    <div class="container-wide ni-final-body fade-in">
+      <span class="eyebrow" style="color:rgba(196,154,60,0.8)">Inizia ora</span>
+      <h2 class="display-lg mt-4" style="color:white;letter-spacing:-0.025em">
+        Pronto per il tuo<br/>primo alveare?
+      </h2>
+      <p class="ni-final-sub">
+        Il nostro team ti consiglia gratuitamente – per telefono, e-mail o direttamente in negozio.
+      </p>
+      <div class="ni-final-ctas">
+        <a href="/it/categorie/startersets" class="btn-gold">
+          Scegli il set iniziale
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </a>
+        <a href="mailto:info@beefactory.shop" class="btn-secondary">
+          Richiedi consulenza
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CartDrawer
+    client:load
+    title={t('cart.title', lang)}
+    emptyText={t('cart.empty', lang)}
+    totalText={t('cart.total', lang)}
+    checkoutText={t('cart.checkout', lang)}
+    continueText={t('cart.continue', lang)}
+    removeText={t('cart.remove', lang)}
+  />
+
 </ShopLayout>
+
+<style>
+  /* ══ HERO ══════════════════════════════════════════════ */
+  .ni-hero {
+    position:   relative;
+    min-height: 100svh;
+    overflow:   hidden;
+    display:    flex;
+    flex-direction: column;
+  }
+  .ni-hero-img {
+    position:   absolute;
+    inset:      0;
+    width:      100%;
+    height:     100%;
+    object-fit: cover;
+    object-position: 70% center;
+    filter:     brightness(0.55) saturate(0.9);
+  }
+  .ni-hero-overlay {
+    position:   absolute;
+    inset:      0;
+    background: linear-gradient(
+      135deg,
+      rgba(13,12,10,0.75) 0%,
+      rgba(13,12,10,0.35) 60%,
+      rgba(13,12,10,0.6)  100%
+    );
+  }
+  .ni-hero-body {
+    position:        relative;
+    z-index:         10;
+    flex:            1;
+    display:         flex;
+    flex-direction:  column;
+    justify-content: center;
+    padding:         clamp(6rem,14vw,11rem) clamp(1.25rem,5vw,4rem) clamp(4rem,8vw,7rem);
+    max-width:       1440px;
+    margin:          0 auto;
+    width:           100%;
+  }
+  .ni-hero-eyebrow {
+    display:        flex;
+    align-items:    center;
+    gap:            1rem;
+    font-size:      0.6875rem;
+    font-weight:    500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color:          rgba(196,154,60,0.75);
+    margin-bottom:  2rem;
+    animation:      niIn 1s cubic-bezier(0.16,1,0.3,1) 0.05s both;
+  }
+  .ni-rule {
+    display:    block;
+    width:      2rem;
+    height:     1px;
+    background: rgba(196,154,60,0.45);
+    flex-shrink: 0;
+  }
+  .ni-hero-headline {
+    font-family:    var(--font-display);
+    font-size:      clamp(3rem,9vw,7.5rem);
+    font-weight:    300;
+    letter-spacing: -0.03em;
+    line-height:    0.92;
+    color:          white;
+    margin-bottom:  1.75rem;
+    animation:      niIn 1s cubic-bezier(0.16,1,0.3,1) 0.18s both;
+  }
+  .ni-hero-em {
+    color:      var(--color-gold);
+    font-style: italic;
+  }
+  .ni-hero-sub {
+    font-size:      clamp(0.9rem,1.8vw,1.1rem);
+    font-weight:    300;
+    color:          rgba(255,255,255,0.55);
+    line-height:    1.75;
+    max-width:      36rem;
+    margin-bottom:  2.75rem;
+    animation:      niIn 1s cubic-bezier(0.16,1,0.3,1) 0.34s both;
+  }
+  .ni-hero-ctas {
+    display:   flex;
+    flex-wrap: wrap;
+    gap:       1rem;
+    animation: niIn 1s cubic-bezier(0.16,1,0.3,1) 0.48s both;
+  }
+  .ni-scroll {
+    position:   absolute;
+    bottom:     2.5rem;
+    left:       50%;
+    transform:  translateX(-50%);
+    z-index:    10;
+    animation:  niIn 1s ease 1.2s both;
+  }
+  .ni-scroll-line {
+    width:     1px;
+    height:    3rem;
+    background: linear-gradient(to bottom, rgba(196,154,60,0.6), transparent);
+    animation:  scrollPulse 2.4s ease-in-out infinite;
+  }
+  .hide-mobile { display: none; }
+  @media (min-width: 640px) { .hide-mobile { display: inline; } }
+
+  /* ══ STATS BAR ═════════════════════════════════════════ */
+  .ni-stats-bar {
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    flex-wrap:       wrap;
+    gap:             0;
+    background:      var(--color-obsidian);
+    border-bottom:   1px solid rgba(196,154,60,0.12);
+    padding:         2rem clamp(1.25rem,5vw,4rem);
+  }
+  .ni-stat {
+    display:        flex;
+    flex-direction: column;
+    align-items:    center;
+    gap:            0.3rem;
+    padding:        0 2.5rem;
+  }
+  .ni-stat-val {
+    font-family:    var(--font-display);
+    font-size:      clamp(1.4rem,3vw,2rem);
+    font-weight:    300;
+    color:          var(--color-gold);
+    line-height:    1;
+  }
+  .ni-stat-lbl {
+    font-size:      0.625rem;
+    font-weight:    500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color:          rgba(255,255,255,0.3);
+    text-align:     center;
+  }
+  .ni-stat-div {
+    width:      1px;
+    height:     2.5rem;
+    background: rgba(255,255,255,0.08);
+  }
+  @media (max-width: 640px) {
+    .ni-stat { padding: 0.75rem 1.5rem; }
+    .ni-stat-div { display: none; }
+    .ni-stats-bar { gap: 0.5rem; }
+  }
+
+  /* ══ SECTION HEADER ════════════════════════════════════ */
+  .ni-section-header {
+    text-align:    center;
+    margin-bottom: clamp(3rem,6vw,5rem);
+  }
+  .ni-section-sub {
+    font-size:   1rem;
+    color:       var(--color-ash);
+    line-height: 1.7;
+    margin-top:  1rem;
+    max-width:   42rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ══ STEPS ═════════════════════════════════════════════ */
+  .ni-steps {
+    background:     var(--color-cream);
+    padding-top:    clamp(5rem,10vw,12rem);
+    padding-bottom: clamp(5rem,10vw,12rem);
+  }
+  .ni-steps-grid {
+    display:               grid;
+    grid-template-columns: 1fr;
+    gap:                   1px;
+    background:            var(--color-warm-dark);
+    border:                1px solid var(--color-warm-dark);
+  }
+  @media (min-width: 640px)  { .ni-steps-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .ni-steps-grid { grid-template-columns: repeat(4, 1fr); } }
+
+  .ni-step {
+    background:     var(--color-cream);
+    padding:        2.5rem 2rem 2.25rem;
+    display:        flex;
+    flex-direction: column;
+    gap:            0.75rem;
+    transition:     background 0.3s cubic-bezier(0.16,1,0.3,1);
+  }
+  .ni-step:hover { background: white; }
+  .ni-step-top {
+    display:         flex;
+    align-items:     center;
+    justify-content: space-between;
+    margin-bottom:   0.5rem;
+  }
+  .ni-step-num {
+    font-family: var(--font-display);
+    font-size:   2.5rem;
+    font-weight: 300;
+    color:       var(--color-warm-dark);
+    line-height: 1;
+  }
+  .ni-step-icon {
+    color:      var(--color-gold);
+    opacity:    0.8;
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .ni-step:hover .ni-step-icon { transform: scale(1.15); }
+  .ni-step-title {
+    font-size:   1.0625rem;
+    font-weight: 600;
+    color:       var(--color-ink);
+    line-height: 1.3;
+  }
+  .ni-step-text {
+    font-size:   0.875rem;
+    color:       var(--color-ash);
+    line-height: 1.65;
+    flex:        1;
+  }
+
+  /* ══ CONTRIBUTI ════════════════════════════════════════ */
+  .ni-foerderung {
+    position:       relative;
+    overflow:       hidden;
+    padding-top:    clamp(5rem,10vw,12rem);
+    padding-bottom: clamp(5rem,10vw,12rem);
+  }
+  .ni-foerderung-bg {
+    position:   absolute;
+    inset:      0;
+    width:      100%;
+    height:     100%;
+    object-fit: cover;
+    filter:     brightness(0.25) saturate(0.6);
+  }
+  .ni-foerderung-overlay {
+    position:   absolute;
+    inset:      0;
+    background: linear-gradient(
+      to right,
+      rgba(13,12,10,0.92) 0%,
+      rgba(13,12,10,0.6)  60%,
+      rgba(13,12,10,0.4)  100%
+    );
+  }
+  .ni-foerderung-body {
+    position:            relative;
+    z-index:             2;
+    display:             grid;
+    grid-template-columns: 1fr;
+    gap:                 4rem;
+    align-items:         center;
+  }
+  @media (min-width: 1024px) {
+    .ni-foerderung-body { grid-template-columns: 1fr 1fr; }
+  }
+  .ni-foerderung-p {
+    font-size:     1rem;
+    color:         rgba(255,255,255,0.55);
+    line-height:   1.75;
+    margin-top:    1.25rem;
+  }
+  .ni-foerderung-cards {
+    display:               grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:                   1px;
+    background:            rgba(196,154,60,0.2);
+  }
+  @media (max-width: 640px) { .ni-foerderung-cards { grid-template-columns: 1fr; } }
+  .ni-fcard {
+    background:     rgba(13,12,10,0.85);
+    border:         1px solid rgba(196,154,60,0.15);
+    padding:        2.5rem 1.5rem;
+    display:        flex;
+    flex-direction: column;
+    align-items:    center;
+    text-align:     center;
+    gap:            0.75rem;
+    transition:     background 0.35s;
+  }
+  .ni-fcard:hover { background: rgba(196,154,60,0.06); }
+  .ni-fcard-val {
+    font-family: var(--font-display);
+    font-size:   2.75rem;
+    font-weight: 300;
+    color:       var(--color-gold);
+    line-height: 1;
+  }
+  .ni-fcard-lbl {
+    font-size:      0.6875rem;
+    font-weight:    500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color:          rgba(255,255,255,0.35);
+    line-height:    1.5;
+  }
+
+  /* ══ EQUIPMENT ═════════════════════════════════════════ */
+  .ni-equipment {
+    background:     var(--color-cream);
+    padding-top:    clamp(5rem,10vw,12rem);
+    padding-bottom: clamp(5rem,10vw,12rem);
+  }
+  .ni-mosaic {
+    display:               grid;
+    grid-template-columns: 1fr;
+    gap:                   1rem;
+    margin-bottom:         4rem;
+  }
+  @media (min-width: 768px) {
+    .ni-mosaic { grid-template-columns: 1.6fr 1fr; }
+  }
+  .ni-mosaic-main {
+    position:    relative;
+    overflow:    hidden;
+    aspect-ratio: 16/10;
+  }
+  @media (min-width: 768px) { .ni-mosaic-main { aspect-ratio: unset; } }
+  .ni-mosaic-img {
+    width:      100%;
+    height:     100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    will-change: transform;
+  }
+  .ni-mosaic-main:hover .ni-mosaic-img,
+  .ni-mosaic-card:hover .ni-mosaic-img { transform: scale(1.04); }
+  .ni-mosaic-caption {
+    position:   absolute;
+    bottom:     0;
+    left:       0;
+    right:      0;
+    padding:    1.5rem;
+    background: linear-gradient(to top, rgba(13,12,10,0.8), transparent);
+    color:      white;
+  }
+  .ni-mosaic-tag {
+    font-size:      0.65rem;
+    font-weight:    600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color:          var(--color-gold);
+    display:        block;
+    margin-bottom:  0.4rem;
+  }
+  .ni-mosaic-caption p {
+    font-size:   0.875rem;
+    color:       rgba(255,255,255,0.65);
+    line-height: 1.5;
+    margin:      0;
+  }
+  .ni-mosaic-side {
+    display:        flex;
+    flex-direction: column;
+    gap:            1rem;
+  }
+  .ni-mosaic-card {
+    position:   relative;
+    overflow:   hidden;
+    flex:       1;
+    min-height: 160px;
+  }
+  .ni-mosaic-card-label {
+    position:       absolute;
+    bottom:         0;
+    left:           0;
+    right:          0;
+    padding:        1rem 1.25rem;
+    background:     linear-gradient(to top, rgba(13,12,10,0.85), transparent);
+    font-size:      0.8125rem;
+    font-weight:    500;
+    color:          rgba(255,255,255,0.9);
+    letter-spacing: 0.01em;
+  }
+
+  /* Checklist */
+  .ni-checklist {
+    display:               grid;
+    grid-template-columns: 1fr;
+    gap:                   0;
+    border:                1px solid var(--color-warm-dark);
+    margin-bottom:         3rem;
+  }
+  @media (min-width: 640px) { .ni-checklist { grid-template-columns: repeat(2, 1fr); } }
+  .ni-check-row {
+    display:     flex;
+    align-items: center;
+    gap:         1rem;
+    padding:     1rem 1.5rem;
+    border-bottom: 1px solid var(--color-warm-dark);
+    transition:  background 0.3s cubic-bezier(0.16,1,0.3,1);
+  }
+  .ni-check-row:hover { background: white; }
+  .ni-check-icon {
+    width:            1.75rem;
+    height:           1.75rem;
+    border-radius:    50%;
+    display:          flex;
+    align-items:      center;
+    justify-content:  center;
+    flex-shrink:      0;
+  }
+  .ni-check-yes {
+    background: rgba(196,154,60,0.12);
+    border:     1px solid rgba(196,154,60,0.3);
+    color:      var(--color-gold);
+  }
+  .ni-check-opt {
+    background: rgba(30,27,20,0.06);
+    border:     1px solid rgba(30,27,20,0.1);
+    color:      var(--color-ash);
+  }
+  .ni-check-label {
+    font-size:   0.9375rem;
+    color:       var(--color-ink);
+    flex:        1;
+  }
+  .ni-check-badge {
+    font-size:      0.625rem;
+    font-weight:    600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color:          var(--color-ash-light);
+    border:         1px solid var(--color-warm-dark);
+    padding:        0.2rem 0.5rem;
+  }
+  .ni-equip-cta { text-align: center; }
+
+  /* ══ FAQ ════════════════════════════════════════════════ */
+  .ni-faq {
+    background:     var(--color-warm);
+    padding-top:    clamp(5rem,10vw,12rem);
+    padding-bottom: clamp(5rem,10vw,12rem);
+  }
+  .ni-faq-grid {
+    display:               grid;
+    grid-template-columns: 1fr;
+    gap:                   1px;
+    background:            var(--color-warm-dark);
+    border:                1px solid var(--color-warm-dark);
+    margin-bottom:         3rem;
+  }
+  @media (min-width: 768px) { .ni-faq-grid { grid-template-columns: repeat(2, 1fr); } }
+  .ni-faq-item {
+    background:  var(--color-warm);
+    padding:     2.5rem 2rem;
+    display:     flex;
+    gap:         1.25rem;
+    transition:  background 0.3s cubic-bezier(0.16,1,0.3,1);
+  }
+  .ni-faq-item:hover { background: var(--color-cream); }
+  .ni-faq-num {
+    font-family:    var(--font-display);
+    font-size:      1.75rem;
+    font-weight:    300;
+    color:          var(--color-warm-dark);
+    line-height:    1;
+    flex-shrink:    0;
+    padding-top:    0.1rem;
+  }
+  .ni-faq-q {
+    font-size:      0.9375rem;
+    font-weight:    600;
+    color:          var(--color-ink);
+    letter-spacing: -0.01em;
+    margin-bottom:  0.75rem;
+    line-height:    1.35;
+  }
+  .ni-faq-a {
+    font-size:   0.875rem;
+    color:       var(--color-ash);
+    line-height: 1.65;
+  }
+  .ni-faq-more { text-align: center; }
+
+  /* ══ FINAL CTA ═════════════════════════════════════════ */
+  .ni-final {
+    position:   relative;
+    overflow:   hidden;
+    padding-top:    clamp(6rem,12vw,14rem);
+    padding-bottom: clamp(6rem,12vw,14rem);
+  }
+  .ni-final-bg {
+    position:   absolute;
+    inset:      0;
+    width:      100%;
+    height:     100%;
+    object-fit: cover;
+    filter:     brightness(0.22) saturate(0.5);
+  }
+  .ni-final-overlay {
+    position:   absolute;
+    inset:      0;
+    background: rgba(13,12,10,0.5);
+  }
+  .ni-final-body {
+    position:   relative;
+    z-index:    2;
+    text-align: center;
+  }
+  .ni-final-sub {
+    font-size:     1rem;
+    color:         rgba(255,255,255,0.5);
+    line-height:   1.7;
+    margin:        1.5rem auto 0;
+    max-width:     38rem;
+  }
+  .ni-final-ctas {
+    display:         flex;
+    flex-wrap:       wrap;
+    gap:             1rem;
+    justify-content: center;
+    margin-top:      3rem;
+  }
+
+  /* ══ ANIMATIONS ════════════════════════════════════════ */
+  @keyframes niIn {
+    from { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+    to   { opacity: 1; transform: translateY(0);    filter: blur(0);   }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.35; transform: scaleY(0.7); transform-origin: top; }
+    55%       { opacity: 0.85; transform: scaleY(1);   transform-origin: top; }
+  }
+
+  @media (max-width: 480px) {
+    .ni-hero-ctas  { flex-direction: column; }
+    .ni-hero-ctas a { width: 100%; justify-content: center; }
+    .ni-final-ctas { flex-direction: column; align-items: center; }
+  }
+</style>

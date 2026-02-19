@@ -1,0 +1,10 @@
+appId: com.android.contacts
+---
+- launchApp
+- tapOn: "Create new contact"
+- tapOn: "First Name"
+- inputText: "Test"
+- tapOn: "Last Name"
+- inputText: "User"
+- tapOn: "Save"
+- assertVisible: "Test User"

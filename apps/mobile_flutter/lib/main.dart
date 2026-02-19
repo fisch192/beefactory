@@ -10,6 +10,8 @@ import 'data/local/daos/events_dao.dart';
 import 'data/local/daos/tasks_dao.dart';
 import 'data/remote/api_client.dart';
 import 'data/remote/auth_api.dart';
+import 'data/remote/channels_api.dart';
+import 'data/remote/chat_socket.dart';
 import 'data/remote/community_api.dart';
 import 'data/remote/sites_api.dart';
 import 'data/remote/hives_api.dart';
@@ -22,12 +24,15 @@ import 'domain/repositories/hive_repository.dart';
 import 'presentation/app.dart';
 import 'l10n/app_localizations.dart';
 import 'presentation/providers/auth_provider.dart';
+import 'presentation/providers/channels_provider.dart';
 import 'presentation/providers/community_provider.dart';
 import 'presentation/providers/sites_provider.dart';
 import 'presentation/providers/sync_provider.dart';
+import 'services/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService.initialize();
 
   // Initialize core services
   final prefs = await SharedPreferences.getInstance();
@@ -49,6 +54,8 @@ void main() async {
   final eventsApi = EventsApi(apiClient);
   final tasksApi = TasksApi(apiClient);
   final communityApi = CommunityApi(apiClient);
+  final channelsApi = ChannelsApi(apiClient);
+  final chatSocket = ChatSocket();
 
   // Repositories
   final authRepository = AuthRepositoryImpl(
@@ -91,6 +98,8 @@ void main() async {
         Provider<EventsApi>.value(value: eventsApi),
         Provider<TasksApi>.value(value: tasksApi),
         Provider<CommunityApi>.value(value: communityApi),
+        Provider<ChannelsApi>.value(value: channelsApi),
+        ChangeNotifierProvider<ChatSocket>.value(value: chatSocket),
 
         // Repositories
         Provider<AuthRepository>.value(value: authRepository),
@@ -123,6 +132,12 @@ void main() async {
             communityApi: communityApi,
             eventsApi: eventsApi,
             tasksApi: tasksApi,
+          ),
+        ),
+        ChangeNotifierProvider<ChannelsProvider>(
+          create: (_) => ChannelsProvider(
+            api: channelsApi,
+            socket: chatSocket,
           ),
         ),
       ],

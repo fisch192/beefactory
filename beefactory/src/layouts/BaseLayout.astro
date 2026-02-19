@@ -36,10 +36,10 @@ const altPath = canonicalPath?.replace(`/${lang}/`, `/${altLang}/`) ?? `/${altLa
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
-    <!-- Poppins for logo -->
+    <!-- Cormorant Garamond (display) + Poppins (legacy) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Poppins:wght@600&display=swap" rel="stylesheet" />
 
     <!-- OG -->
     <meta property="og:title" content={siteTitle} />
@@ -47,14 +47,8 @@ const altPath = canonicalPath?.replace(`/${lang}/`, `/${altLang}/`) ?? `/${altLa
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'it_IT'} />
 
-    <!-- Must run before body renders so CSS animation delays apply correctly -->
-    <script is:inline>
-      if (!sessionStorage.getItem('beefactory-welcomed')) {
-        document.documentElement.classList.add('first-visit');
-      }
-    </script>
   </head>
-  <body class="bg-off-white text-near-black antialiased">
+  <body class="antialiased">
     <slot />
     <script>
       // Intersection observer for fade-in animations

@@ -17,6 +17,17 @@ class TasksDao extends DatabaseAccessor<AppDatabase> with _$TasksDaoMixin {
   Future<List<Task>> getByStatus(String status) =>
       (select(tasks)..where((t) => t.status.equals(status))).get();
 
+  Future<List<Task>> getByHiveId(int hiveId) =>
+      (select(tasks)
+            ..where((t) => t.hiveId.equals(hiveId))
+            ..orderBy([
+              (t) => OrderingTerm(
+                  expression: t.dueAt, mode: OrderingMode.asc),
+              (t) => OrderingTerm(
+                  expression: t.createdAt, mode: OrderingMode.desc),
+            ]))
+          .get();
+
   Stream<List<Task>> watchByStatus(String status) =>
       (select(tasks)..where((t) => t.status.equals(status))).watch();
 

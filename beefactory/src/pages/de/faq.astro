@@ -15,22 +15,170 @@ const faqs = [
 ---
 
 <ShopLayout lang={lang} title={t('faq.title', lang)} canonicalPath="/de/faq">
-  <section class="section-padding">
-    <div class="container-wide max-w-3xl">
-      <h1 class="heading-lg mb-12">{t('faq.title', lang)}</h1>
-      <div class="space-y-6">
-        {faqs.map((faq) => (
-          <details class="group border border-black/10 p-6 cursor-pointer">
-            <summary class="font-semibold text-near-black flex items-center justify-between list-none">
-              {faq.q}
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="shrink-0 ml-4 transform group-open:rotate-180 transition-transform">
+
+  <!-- Page header -->
+  <section class="page-header">
+    <img src="/images/hero-bg.jpg" alt="" class="page-header-img" aria-hidden="true" />
+    <div class="page-header-overlay"></div>
+    <div class="page-header-body">
+      <span class="eyebrow" style="color:rgba(196,154,60,0.7);margin-bottom:1rem;display:block">Support</span>
+      <h1 class="page-header-title">{t('faq.title', lang)}</h1>
+    </div>
+  </section>
+
+  <!-- FAQ content -->
+  <section class="faq-section">
+    <div class="container-wide faq-wrap">
+      <div class="faq-list">
+        {faqs.map((faq, i) => (
+          <details class="faq-item">
+            <summary class="faq-summary">
+              <span class="faq-num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="faq-q">{faq.q}</span>
+              <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <polyline points="6 9 12 15 18 9"/>
               </svg>
             </summary>
-            <p class="mt-4 text-mid-gray leading-relaxed">{faq.a}</p>
+            <div class="faq-answer">
+              <p>{faq.a}</p>
+            </div>
           </details>
         ))}
       </div>
+
+      <div class="faq-cta fade-in">
+        <p class="faq-cta-text">Noch Fragen? Wir helfen gerne persönlich weiter.</p>
+        <a href="mailto:info@beefactory.shop" class="btn-gold">
+          Direkt anfragen
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
+
 </ShopLayout>
+
+<style>
+  .page-header {
+    position:    relative;
+    height:      clamp(16rem,30vw,24rem);
+    overflow:    hidden;
+    display:     flex;
+    align-items: flex-end;
+  }
+  .page-header-img {
+    position:   absolute;
+    inset:      0;
+    width:      100%;
+    height:     100%;
+    object-fit: cover;
+    object-position: 50% 60%;
+    filter:     brightness(0.4) saturate(0.7);
+  }
+  .page-header-overlay {
+    position:   absolute;
+    inset:      0;
+    background: linear-gradient(to top, rgba(13,12,10,0.92) 0%, rgba(13,12,10,0.25) 100%);
+  }
+  .page-header-body {
+    position:  relative;
+    z-index:   2;
+    width:     100%;
+    padding:   0 clamp(1.25rem,5vw,4rem) clamp(2.5rem,5vw,4rem);
+    max-width: 1440px;
+    margin:    0 auto;
+  }
+  .page-header-title {
+    font-family:    var(--font-display);
+    font-size:      clamp(2.5rem,7vw,5.5rem);
+    font-weight:    300;
+    letter-spacing: -0.025em;
+    line-height:    0.95;
+    color:          white;
+    animation:      fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.05s both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .faq-section {
+    background:     var(--color-cream);
+    padding-top:    clamp(4rem,8vw,7rem);
+    padding-bottom: clamp(5rem,10vw,10rem);
+  }
+  .faq-wrap {
+    max-width: 56rem;
+  }
+  .faq-list {
+    border-top:    1px solid var(--color-warm-dark);
+    margin-bottom: 4rem;
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--color-warm-dark);
+  }
+  .faq-summary {
+    display:     flex;
+    align-items: center;
+    gap:         1.25rem;
+    padding:     1.5rem 0;
+    cursor:      pointer;
+    list-style:  none;
+    transition:  background 0.2s;
+  }
+  .faq-summary::-webkit-details-marker { display: none; }
+  .faq-summary:hover .faq-q { color: var(--color-ink); }
+  .faq-num {
+    font-family:    var(--font-display);
+    font-size:      1.25rem;
+    font-weight:    300;
+    color:          var(--color-warm-dark);
+    line-height:    1;
+    flex-shrink:    0;
+    width:          2rem;
+  }
+  .faq-q {
+    font-size:      1rem;
+    font-weight:    500;
+    color:          var(--color-ink);
+    letter-spacing: -0.01em;
+    line-height:    1.4;
+    flex:           1;
+    transition:     color 0.2s;
+  }
+  .faq-icon {
+    color:      var(--color-gold);
+    flex-shrink: 0;
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  }
+  details[open] .faq-icon { transform: rotate(180deg); }
+  details[open] .faq-q    { color: var(--color-gold); }
+  .faq-answer {
+    padding:     0 0 1.75rem calc(2rem + 1.25rem);
+    font-size:   0.9375rem;
+    color:       var(--color-ash);
+    line-height: 1.7;
+  }
+  .faq-answer p { margin: 0; }
+
+  .faq-cta {
+    display:         flex;
+    align-items:     center;
+    gap:             2rem;
+    flex-wrap:       wrap;
+    padding:         2.5rem 3rem;
+    background:      var(--color-obsidian);
+  }
+  .faq-cta-text {
+    font-size:   1rem;
+    color:       rgba(255,255,255,0.55);
+    line-height: 1.5;
+    flex:        1;
+    min-width:   16rem;
+    margin:      0;
+  }
+</style>

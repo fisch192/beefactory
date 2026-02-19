@@ -7,54 +7,226 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const prefix = `/${lang}`;
+const prefix       = `/${lang}`;
 const neuimkerPath = lang === 'de' ? 'neuimker' : 'nuovi-apicoltori';
 ---
 
-<section class="relative overflow-hidden bg-near-black text-white section-padding">
-  <!-- Background pattern -->
-  <div class="absolute inset-0 honeycomb-bg opacity-20"></div>
-  <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-honey/10 to-transparent"></div>
+<section class="spotlight-section">
 
-  <div class="container-wide relative z-10">
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-      <div class="fade-in">
-        <span class="inline-block text-xs uppercase tracking-[0.2em] text-honey mb-4 font-semibold">
-          {t('neuimker.subsidies', lang)}
-        </span>
-        <h2 class="heading-lg text-white mb-6">
+  <!-- Background pattern -->
+  <div class="spotlight-pattern" aria-hidden="true">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="sp-hex" width="84" height="145" patternUnits="userSpaceOnUse">
+          <path d="M42 0L84 24.3V72.8L42 97.1L0 72.8V24.3L42 0Z
+                   M42 97.1L84 121.4V169.9L42 194.2L0 169.9V121.4L42 97.1Z"
+                fill="none" stroke="#C49A3C" stroke-width="0.45"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#sp-hex)"/>
+    </svg>
+  </div>
+
+  <!-- Gold gradient wash -->
+  <div class="spotlight-wash" aria-hidden="true"></div>
+
+  <div class="container-wide">
+    <div class="spotlight-grid">
+
+      <!-- Text column -->
+      <div class="spotlight-text fade-in">
+        <span class="eyebrow">{t('neuimker.subsidies', lang)}</span>
+
+        <h2 class="spotlight-headline">
           {t('neuimker.title', lang)}
         </h2>
-        <p class="text-lg text-white/70 mb-4 leading-relaxed">
+
+        <p class="spotlight-body">
           {t('neuimker.text', lang)}
         </p>
-        <p class="text-honey font-semibold mb-8">
+
+        <p class="spotlight-highlight">
           {t('neuimker.subsidies.text', lang)}
         </p>
-        <a href={`${prefix}/${neuimkerPath}`} class="btn-primary bg-honey text-near-black hover:bg-honey-light">
+
+        <a href={`${prefix}/${neuimkerPath}`} class="btn-gold spotlight-cta">
           {t('neuimker.cta', lang)}
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
         </a>
       </div>
 
-      <!-- Decorative element -->
-      <div class="hidden lg:flex items-center justify-center fade-in">
-        <div class="relative">
-          <!-- Large decorative hexagon -->
-          <svg width="300" height="346" viewBox="0 0 300 346" fill="none" class="opacity-20">
-            <path d="M150 0L300 86.6V259.8L150 346L0 259.8V86.6L150 0Z" stroke="#D4A843" stroke-width="1"/>
-            <path d="M150 30L270 99.3V237.7L150 307L30 237.7V99.3L150 30Z" stroke="#D4A843" stroke-width="0.5"/>
-            <path d="M150 60L240 112V234L150 286L60 234V112L150 60Z" stroke="#D4A843" stroke-width="0.5"/>
-          </svg>
-          <!-- Center icon -->
-          <div class="absolute inset-0 flex items-center justify-center">
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#D4A843" stroke-width="1" class="opacity-60">
-              <path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/>
-              <path d="M12 22V12"/>
-              <path d="M2 7l10 5 10-5"/>
-            </svg>
+      <!-- Visual column -->
+      <div class="spotlight-visual fade-in" aria-hidden="true">
+        <!-- Concentric hexagons -->
+        <svg width="360" height="415" viewBox="0 0 360 415" fill="none"
+             class="spotlight-hex-art">
+          <path d="M180 4L356 105V307L180 408L4 307V105L180 4Z"
+                stroke="#C49A3C" stroke-width="1" opacity="0.5"/>
+          <path d="M180 40L320 121V283L180 364L40 283V121L180 40Z"
+                stroke="#C49A3C" stroke-width="0.6" opacity="0.3"/>
+          <path d="M180 76L284 137V259L180 320L76 259V137L180 76Z"
+                stroke="#C49A3C" stroke-width="0.6" opacity="0.18"/>
+          <path d="M180 112L248 153V235L180 276L112 235V153L180 112Z"
+                stroke="#C49A3C" stroke-width="0.5" opacity="0.1"/>
+
+          <!-- Centre icon -->
+          <g transform="translate(155, 183)" opacity="0.6">
+            <path d="M25 0L50 14.4V43.3L25 57.7L0 43.3V14.4L25 0Z"
+                  fill="rgba(196,154,60,0.08)" stroke="#C49A3C" stroke-width="0.8"/>
+            <path d="M25 10L40 19V37L25 46L10 37V19L25 10Z"
+                  fill="rgba(196,154,60,0.12)" stroke="#C49A3C" stroke-width="0.5"/>
+          </g>
+        </svg>
+
+        <!-- Stats overlaid -->
+        <div class="spotlight-stats">
+          <div class="spotlight-stat">
+            <span class="spotlight-stat-val">30%</span>
+            <span class="spotlight-stat-lbl">
+              {lang === 'de' ? 'Förderung möglich' : 'Sovvenzione possibile'}
+            </span>
+          </div>
+          <div class="spotlight-stat-divider"></div>
+          <div class="spotlight-stat">
+            <span class="spotlight-stat-val">5★</span>
+            <span class="spotlight-stat-lbl">
+              {lang === 'de' ? 'Bewertung' : 'Valutazione'}
+            </span>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
+
+<style>
+  /* ── Section ───────────────────────────────── */
+  .spotlight-section {
+    position:   relative;
+    overflow:   hidden;
+    background: var(--color-obsidian);
+    padding-top:    clamp(5rem, 10vw, 12rem);
+    padding-bottom: clamp(5rem, 10vw, 12rem);
+  }
+
+  /* ── Pattern ───────────────────────────────── */
+  .spotlight-pattern {
+    position:  absolute;
+    inset:     0;
+    opacity:   0.04;
+  }
+
+  /* ── Gold gradient wash (right side) ───────── */
+  .spotlight-wash {
+    position:   absolute;
+    top:        0;
+    right:      0;
+    bottom:     0;
+    width:      55%;
+    background: radial-gradient(
+      ellipse 80% 80% at 100% 50%,
+      rgba(196, 154, 60, 0.09) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  /* ── Grid ──────────────────────────────────── */
+  .spotlight-grid {
+    position:              relative;
+    z-index:               2;
+    display:               grid;
+    grid-template-columns: 1fr;
+    gap:                   4rem;
+    align-items:           center;
+  }
+  @media (min-width: 1024px) {
+    .spotlight-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ── Text ──────────────────────────────────── */
+  .spotlight-text { color: white; }
+
+  .spotlight-headline {
+    font-family:    var(--font-display);
+    font-size:      clamp(2.5rem, 5vw, 4.5rem);
+    font-weight:    300;
+    color:          white;
+    line-height:    1.05;
+    letter-spacing: -0.01em;
+    margin:         1.25rem 0;
+  }
+
+  .spotlight-body {
+    font-size:     1rem;
+    color:         rgba(255, 255, 255, 0.55);
+    line-height:   1.75;
+    margin-bottom: 1rem;
+  }
+
+  .spotlight-highlight {
+    font-size:     0.9375rem;
+    font-weight:   500;
+    color:         var(--color-gold);
+    margin-bottom: 2.5rem;
+  }
+
+  .spotlight-cta { align-self: flex-start; }
+
+  /* ── Visual ────────────────────────────────── */
+  .spotlight-visual {
+    display:         none;
+    align-items:     center;
+    justify-content: center;
+    position:        relative;
+  }
+  @media (min-width: 1024px) {
+    .spotlight-visual { display: flex; }
+  }
+
+  .spotlight-hex-art {
+    max-width: 100%;
+  }
+
+  /* Stats overlay */
+  .spotlight-stats {
+    position:    absolute;
+    bottom:      2.5rem;
+    left:        50%;
+    transform:   translateX(-50%);
+    display:     flex;
+    align-items: center;
+    gap:         2.5rem;
+    white-space: nowrap;
+  }
+  .spotlight-stat {
+    display:        flex;
+    flex-direction: column;
+    align-items:    center;
+    gap:            0.3rem;
+  }
+  .spotlight-stat-val {
+    font-family:    var(--font-display);
+    font-size:      2rem;
+    font-weight:    300;
+    color:          var(--color-gold);
+    line-height:    1;
+  }
+  .spotlight-stat-lbl {
+    font-size:      0.625rem;
+    font-weight:    500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color:          rgba(255, 255, 255, 0.3);
+  }
+  .spotlight-stat-divider {
+    width:      1px;
+    height:     2rem;
+    background: rgba(255, 255, 255, 0.1);
+  }
+</style>

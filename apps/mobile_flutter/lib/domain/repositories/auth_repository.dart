@@ -10,6 +10,7 @@ import '../models/user.dart';
 abstract class AuthRepository {
   Future<UserModel> login(String email, String password);
   Future<UserModel> register(String email, String password, String name);
+  Future<UserModel> loginWithGoogle(String idToken);
   Future<void> logout();
   bool get isLoggedIn;
   Future<UserModel?> getCurrentUser();
@@ -86,6 +87,28 @@ class AuthRepositoryImpl implements AuthRepository {
         await _prefs.setString(AppConstants.userIdKey, user.id!);
       }
 
+      return user;
+    } on AuthException catch (e) {
+      throw AuthFailure(e.message);
+    } on ServerException catch (e) {
+      throw ServerFailure(e.message, statusCode: e.statusCode);
+    } on NetworkException catch (e) {
+      throw NetworkFailure(e.message);
+    } catch (e) {
+      throw ServerFailure(e.toString());
+    }
+  }
+
+  @override
+  Future<UserModel> loginWithGoogle(String idToken) async {
+    try {
+      final response = await _authApi.loginWithGoogle(idToken: idToken);
+      final userData = response['user'] as Map<String, dynamic>? ?? response;
+      final user = UserModel.fromJson(userData);
+      _cachedUser = user;
+      if (user.id != null) {
+        await _prefs.setString(AppConstants.userIdKey, user.id!);
+      }
       return user;
     } on AuthException catch (e) {
       throw AuthFailure(e.message);
