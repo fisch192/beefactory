@@ -26,15 +26,13 @@ const navItems = [
   <div class="header-inner">
 
     <!-- Logo -->
-    <a href={`${prefix}/`} class="header-logo" aria-label="Bee Factory">
-      <!-- White mark: shown on dark/transparent hero -->
-      <img src="/images/logo-white.svg" alt="Bee Factory" class="logo-img logo-white" />
-      <!-- Coloured mark: shown after scroll -->
-      <img src="/images/logo.svg" alt="Bee Factory" class="logo-img logo-color" />
+    <a href={`${prefix}/`} class="header-logo" aria-label="Beefactory">
+      <!-- We use the precise, uploaded hexagon logo -->
+      <img src="/images/beefactory-current-logo.png" alt="Beefactory" class="logo-img" />
     </a>
 
-    <!-- Desktop nav -->
-    <nav class="header-nav" aria-label="Main navigation">
+    <!-- Desktop nav (JetBrains Mono) -->
+    <nav class="header-nav font-sans uppercase tracking-[0.05em] text-sm font-medium" aria-label="Main navigation">
       {navItems.map((item) => (
         <a href={item.href} class="nav-link">{item.label}</a>
       ))}
@@ -44,29 +42,30 @@ const navItems = [
     <div class="header-actions">
       <LanguageSwitcher lang={lang} />
 
-      <button id="cart-toggle" class="header-icon-btn" aria-label={t('nav.cart', lang)}>
+      <button id="cart-toggle" class="header-icon-btn group" aria-label={t('nav.cart', lang)}>
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
              fill="none" stroke="currentColor" stroke-width="1.5"
-             stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+             stroke-linecap="square" stroke-linejoin="miter" class="transition-transform group-hover:scale-110">
+          <path d="M6 2L3 6v14h18V6l-3-4z"/>
           <line x1="3" y1="6" x2="21" y2="6"/>
-          <path d="M16 10a4 4 0 01-8 0"/>
+          <!-- Sharp corners, removed rounded ends -->
+          <path d="M16 10v2a4 4 0 01-8 0v-2" />
         </svg>
-        <span id="cart-count" class="cart-badge hidden">0</span>
+        <span id="cart-count" class="cart-badge hidden font-mono">0</span>
       </button>
 
       <!-- Mobile menu toggle -->
       <button id="mobile-menu-toggle" class="header-icon-btn xl:hidden"
               aria-label="Menu" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+             fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"
              class="menu-open">
           <line x1="3" y1="7"  x2="21" y2="7"/>
           <line x1="3" y1="12" x2="21" y2="12"/>
           <line x1="3" y1="17" x2="21" y2="17"/>
         </svg>
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+             fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"
              class="menu-close hidden">
           <line x1="18" y1="6"  x2="6"  y2="18"/>
           <line x1="6"  y1="6"  x2="18" y2="18"/>
@@ -81,10 +80,10 @@ const navItems = [
 <div id="mobile-menu" class="mobile-menu hidden" aria-hidden="true">
   <nav class="mobile-nav">
     {navItems.map((item) => (
-      <a href={item.href} class="mobile-nav-link">{item.label}</a>
+      <a href={item.href} class="mobile-nav-link font-sans uppercase tracking-widest">{item.label}</a>
     ))}
     <a href={`${prefix}/${lang === 'de' ? 'ueber-uns' : 'chi-siamo'}`}
-       class="mobile-nav-link opacity-60">{t('nav.about', lang)}</a>
+       class="mobile-nav-link opacity-60 font-sans uppercase tracking-widest">{t('nav.about', lang)}</a>
   </nav>
 </div>
 
@@ -96,35 +95,28 @@ const navItems = [
     left:       0;
     right:      0;
     z-index:    100;
+    background: transparent;
+    --hdr-fg:   var(--color-titanium);
+    --hdr-fg-hover: var(--color-amber);
     transition:
-      background   0.45s cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow   0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      background   0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow   0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* ── Header transitions ────────────────────── */
-  /* On dark hero: transparent + white text */
-  .site-header {
-    background:     transparent;
-    --hdr-fg:       rgba(255, 255, 255, 0.85);
-    --hdr-fg-hover: rgba(255, 255, 255, 1);
-  }
-
-  /* Scrolled: cream bg + dark text */
+  /* Scrolled: Machined Charcoal bg */
   .site-header.scrolled {
-    background:            rgba(250, 247, 242, 0.96);
-    backdrop-filter:       blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    box-shadow:            0 1px 0 rgba(0, 0, 0, 0.06);
-    --hdr-fg:              rgba(30, 27, 20, 0.85);
-    --hdr-fg-hover:        var(--color-obsidian);
+    background:            rgba(28, 28, 30, 0.85); /* Machined Charcoal */
+    backdrop-filter:       blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:            0 1px 0 rgba(255, 255, 255, 0.05); /* Harsh highlight */
   }
 
   /* ── Inner container ───────────────────────── */
   .header-inner {
     max-width: 1440px;
     margin:    0 auto;
-    padding:   0 clamp(1.25rem, 5vw, 4rem);
-    height:    5rem;
+    padding:   0 clamp(1.5rem, 5vw, 5rem);
+    height:    5.5rem;
     display:   flex;
     align-items: center;
     justify-content: space-between;
@@ -136,29 +128,23 @@ const navItems = [
     position:    relative;
     flex-shrink: 0;
     line-height: 0;
-    transition:  opacity 0.25s;
+    transition:  transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .header-logo:hover { opacity: 0.8; }
+  .header-logo:hover {
+    transform: scale(0.95);
+  }
 
   .logo-img {
-    height:     2.75rem;
+    height:     3rem;
     width:      auto;
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    object-fit: contain;
   }
-
-  /* Transparent header: white logo on, golden off */
-  .logo-white { opacity: 1; }
-  .logo-color { opacity: 0; position: absolute; top: 0; left: 0; pointer-events: none; }
-
-  /* Scrolled header: golden logo on, white off */
-  .site-header.scrolled .logo-white { opacity: 0; pointer-events: none; }
-  .site-header.scrolled .logo-color { opacity: 1; pointer-events: auto; }
 
   /* ── Desktop nav ───────────────────────────── */
   .header-nav {
     display:  none;
     align-items: center;
-    gap:      2rem;
+    gap:      2.5rem;
   }
   @media (min-width: 1280px) {
     .header-nav { display: flex; }
@@ -166,40 +152,35 @@ const navItems = [
 
   .nav-link {
     position:        relative;
-    font-size:       0.8125rem;
-    font-weight:     450;
-    letter-spacing:  0.02em;
     color:           var(--hdr-fg);
     text-decoration: none;
-    padding-bottom:  2px;
+    padding-bottom:  4px;
     white-space:     nowrap;
-    transition:      color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:      color 0.2s;
   }
   .nav-link::after {
     content:    '';
     position:   absolute;
     bottom:     0;
-    left:       0;
+    left:       50%;
     width:      100%;
     height:     1px;
-    background: var(--color-gold);
-    transform:  scaleX(0);
-    transform-origin: right;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    background: var(--color-amber);
+    transform:  translateX(-50%) scaleX(0);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .nav-link:hover {
     color: var(--hdr-fg-hover);
   }
   .nav-link:hover::after {
-    transform:        scaleX(1);
-    transform-origin: left;
+    transform: translateX(-50%) scaleX(1);
   }
 
   /* ── Actions ───────────────────────────────── */
   .header-actions {
     display:     flex;
     align-items: center;
-    gap:         0.5rem;
+    gap:         1rem;
     flex-shrink: 0;
   }
 
@@ -222,15 +203,15 @@ const navItems = [
   /* ── Cart badge ────────────────────────────── */
   .cart-badge {
     position:    absolute;
-    top:         0.2rem;
-    right:       0.2rem;
-    background:  var(--color-gold);
-    color:       var(--color-obsidian);
-    font-size:   0.6rem;
+    top:         0;
+    right:       0;
+    background:  var(--color-amber);
+    color:       var(--color-void);
+    font-size:   0.65rem;
     font-weight: 700;
-    width:       1.1rem;
-    height:      1.1rem;
-    border-radius: 50%;
+    width:       1.25rem;
+    height:      1.25rem;
+    border-radius: 0; /* Boxy */
     display:     flex;
     align-items: center;
     justify-content: center;
@@ -241,11 +222,11 @@ const navItems = [
   /* ── Mobile drawer ─────────────────────────── */
   .mobile-menu {
     position:   fixed;
-    top:        5rem;
+    top:        5.5rem;
     left:       0;
     right:      0;
     bottom:     0;
-    background: var(--color-obsidian);
+    background: var(--color-void);
     z-index:    99;
     overflow-y: auto;
   }
@@ -254,24 +235,20 @@ const navItems = [
   .mobile-nav {
     display:        flex;
     flex-direction: column;
-    padding:        2rem clamp(1.25rem, 5vw, 4rem);
+    padding:        2rem clamp(1.5rem, 5vw, 5rem);
     gap:            0;
   }
   .mobile-nav-link {
-    font-size:       1.5rem;
-    font-family:     var(--font-display);
-    font-weight:     300;
-    letter-spacing:  -0.02em;
-    color:           rgba(255, 255, 255, 0.85);
+    font-size:       1.125rem;
+    color:           var(--color-titanium);
     text-decoration: none;
-    padding:         1.1rem 0;
-    border-bottom:   1px solid rgba(255, 255, 255, 0.06);
-    transition:      color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                     letter-spacing 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    padding:         1.25rem 0;
+    border-bottom:   1px solid var(--color-machined);
+    transition:      color 0.2s, padding-left 0.2s;
   }
   .mobile-nav-link:hover {
-    color:           var(--color-gold);
-    letter-spacing:  -0.01em;
+    color:           var(--color-amber);
+    padding-left:    0.5rem;
   }
 </style>
 

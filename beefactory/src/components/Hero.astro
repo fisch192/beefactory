@@ -11,67 +11,50 @@ const neuimkerPath = lang === 'de' ? 'neuimker' : 'nuovi-apicoltori';
 const catSlug      = lang === 'de' ? 'kategorien' : 'categorie';
 
 const headline = lang === 'de'
-  ? { line1: 'Die Kunst der', em: 'Imkerei.', line3: 'Meisterhaft.' }
-  : { line1: "L'Arte dell'", em: 'Apicoltura.', line3: 'Perfezionata.' };
+  ? { line1: 'Nature.', em: 'Engineered.', line3: 'The Apex Hive.' }
+  : { line1: 'Natura.', em: 'Ingegnerizzata.', line3: 'L’Alveare Apex.' };
 
-const ctaPrimary   = lang === 'de' ? 'Sortiment entdecken' : 'Scopri il catalogo';
-const ctaSecondary = lang === 'de' ? 'Einsteiger-Guide'    : 'Guida principianti';
+const ctaPrimary   = lang === 'de' ? 'Enter the Factory' : 'Entra nella Fabbrica';
+const ctaSecondary = lang === 'de' ? 'Specifications'    : 'Specifiche';
 const subtitle     = lang === 'de'
-  ? 'Professionelle Imkerei-Ausrüstung für Einsteiger und erfahrene Imker in der Alpenregion.'
-  : 'Attrezzatura apistica professionale per principianti ed esperti in tutta la regione alpina.';
+  ? 'The first modular apiary system designed with the tolerances of an aerospace lab.'
+  : 'Il primo sistema d’apiario modulare progettato con le tolleranze di un laboratorio aerospaziale.';
 
 const stats = lang === 'de'
-  ? [{ val: '500+', label: 'Kunden' }, { val: '50+', label: 'Produkte' }, { val: '5 ★', label: 'Bewertung' }]
-  : [{ val: '500+', label: 'Clienti' }, { val: '50+', label: 'Prodotti' }, { val: '5 ★', label: 'Valutazione' }];
+  ? [{ val: '±0.1mm', label: 'Toleranz' }, { val: '2.5mm', label: 'Material' }, { val: '∞', label: 'Lebensdauer' }]
+  : [{ val: '±0.1mm', label: 'Tolleranza' }, { val: '2.5mm', label: 'Materiale' }, { val: '∞', label: 'Durata' }];
 ---
 
 <section class="hero-section">
 
-  <!-- ── Hexagonal mesh ───────────────────────────── -->
-  <div class="hero-hex" aria-hidden="true">
-    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="hexgrid" width="112" height="194" patternUnits="userSpaceOnUse">
-          <path d="M56 0L112 32.4V97.2L56 129.6L0 97.2V32.4L56 0Z
-                   M56 129.6L112 162V226.8L56 259.2L0 226.8V162L56 129.6Z"
-                fill="none" stroke="#C49A3C" stroke-width="0.6"/>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#hexgrid)"/>
-    </svg>
+  <!-- ── Macro Photography Background ───────────────────────────── -->
+  <div class="hero-bg" aria-hidden="true">
+    <div class="absolute inset-0 bg-void/60 z-10 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-void via-void/40 to-transparent z-20"></div>
+    <img src="/images/sharedimage.jpg" alt="Macro honeycomb" class="w-full h-full object-cover opacity-80" />
   </div>
 
-  <!-- ── Radial glow ──────────────────────────────── -->
-  <div class="hero-glow" aria-hidden="true"></div>
-
   <!-- ── Content ──────────────────────────────────── -->
-  <div class="hero-body">
-
-    <!-- Eyebrow -->
-    <div class="hero-eyebrow hi-1">
-      <span class="hero-rule"></span>
-      <span class="hero-eyebrow-text">
-        {lang === 'de' ? 'Seit 2019 · Südtirol' : 'Dal 2019 · Alto Adige'}
-      </span>
-      <span class="hero-rule"></span>
-    </div>
+  <div class="hero-body relative z-30">
 
     <!-- Headline -->
-    <h1 class="hero-headline hi-2">
+    <h1 class="hero-headline hi-1">
       {headline.line1}<br/>
       <em class="hero-em">{headline.em}</em><br/>
       <span class="hero-line3">{headline.line3}</span>
     </h1>
 
-    <!-- Subtitle -->
-    <p class="hero-subtitle hi-3">{subtitle}</p>
+    <!-- Subtitle (JetBrains Mono) -->
+    <p class="hero-subtitle hi-2 font-mono">
+      {subtitle}
+    </p>
 
     <!-- CTAs -->
-    <div class="hero-ctas hi-4">
-      <a href={`${prefix}/${catSlug}/startersets`} class="btn-gold">
+    <div class="hero-ctas hi-3">
+      <a href={`${prefix}/${catSlug}/startersets`} class="btn-primary">
         {ctaPrimary}
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter">
           <polyline points="9 18 15 12 9 6"/>
         </svg>
       </a>
@@ -80,14 +63,14 @@ const stats = lang === 'de'
       </a>
     </div>
 
-    <!-- Stats -->
-    <div class="hero-stats hi-5">
+    <!-- Stats (Technical Data) -->
+    <div class="hero-stats hi-4">
       {stats.map((s, i) => (
         <>
           {i > 0 && <div class="hero-stat-divider" aria-hidden="true"></div>}
           <div class="hero-stat">
-            <div class="hero-stat-val">{s.val}</div>
-            <div class="hero-stat-label">{s.label}</div>
+            <div class="hero-stat-val font-mono tracking-widest">{s.val}</div>
+            <div class="hero-stat-label font-mono">{s.label}</div>
           </div>
         </>
       ))}
@@ -96,12 +79,10 @@ const stats = lang === 'de'
   </div>
 
   <!-- ── Scroll indicator ─────────────────────────── -->
-  <div class="hero-scroll" aria-hidden="true">
+  <div class="hero-scroll hi-5" aria-hidden="true">
     <div class="hero-scroll-line"></div>
+    <span class="font-mono text-[10px] text-amber mt-2 tracking-[0.2em] uppercase">Scroll</span>
   </div>
-
-  <!-- ── Bottom fade to cream ─────────────────────── -->
-  <div class="hero-fade-out" aria-hidden="true"></div>
 
 </section>
 
@@ -110,106 +91,69 @@ const stats = lang === 'de'
   .hero-section {
     position:   relative;
     min-height: 100svh;
-    background: var(--color-obsidian);
+    background: var(--color-void);
     overflow:   hidden;
     display:    flex;
     flex-direction: column;
   }
 
-  /* ── Hex grid ──────────────────────────────── */
-  .hero-hex {
+  /* ── Background ────────────────────────────── */
+  .hero-bg {
     position: absolute;
     inset:    0;
-    opacity:  0.038;
-  }
-
-  /* ── Radial warm glow ──────────────────────── */
-  .hero-glow {
-    position:   absolute;
-    inset:      0;
-    background: radial-gradient(
-      ellipse 75% 55% at 50% 0%,
-      rgba(196, 154, 60, 0.15) 0%,
-      transparent 65%
-    );
-    pointer-events: none;
   }
 
   /* ── Content wrapper ───────────────────────── */
   .hero-body {
-    position:        relative;
-    z-index:         10;
     flex:            1;
     display:         flex;
     flex-direction:  column;
-    align-items:     center;
+    align-items:     flex-start; /* Left aligned, editorial feel */
     justify-content: center;
-    text-align:      center;
-    padding:         clamp(5rem, 12vw, 9rem) clamp(1.25rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
-    gap:             0;
-  }
-
-  /* ── Eyebrow ───────────────────────────────── */
-  .hero-eyebrow {
-    display:     flex;
-    align-items: center;
-    gap:         1.25rem;
-    margin-bottom: 2.5rem;
-  }
-  .hero-rule {
-    display:    block;
-    width:      2.5rem;
-    height:     1px;
-    background: rgba(196, 154, 60, 0.55);
-    flex-shrink: 0;
-  }
-  .hero-eyebrow-text {
-    font-size:      0.6875rem;
-    font-weight:    500;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color:          rgba(196, 154, 60, 0.7);
+    padding:         clamp(6rem, 12vw, 10rem) clamp(1.5rem, 5vw, 5rem);
+    max-width:     1440px;
+    margin: 0 auto;
+    width: 100%;
   }
 
   /* ── Headline ──────────────────────────────── */
   .hero-headline {
     font-family:    var(--font-display);
-    font-size:      clamp(3.25rem, 10vw, 8.5rem);
-    font-weight:    300;
-    letter-spacing: -0.03em;
+    font-size:      clamp(4rem, 10vw, 9rem);
+    font-weight:    400;
+    letter-spacing: -0.04em;
     line-height:    0.9;
-    color:          white;
-    margin-bottom:  2rem;
+    color:          var(--color-titanium);
+    margin-bottom:  2.5rem;
     font-style:     normal;
   }
   .hero-em {
-    color:      var(--color-gold);
+    color:      var(--color-amber);
     font-style: italic;
   }
   .hero-line3 {
-    color:      rgba(255, 255, 255, 0.55);
+    color:      rgba(245, 245, 247, 0.4);
     font-style: normal;
   }
 
   /* ── Subtitle ──────────────────────────────── */
   .hero-subtitle {
-    font-size:      clamp(0.9rem, 1.8vw, 1.125rem);
-    font-weight:    300;
-    color:          rgba(255, 255, 255, 0.45);
-    max-width:      38rem;
-    line-height:    1.75;
-    letter-spacing: 0;
-    margin-bottom:  3rem;
+    font-size:      clamp(0.875rem, 1.5vw, 1rem);
+    color:          var(--color-steel);
+    max-width:      32rem;
+    line-height:    1.6;
+    margin-bottom:  4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   /* ── CTAs ──────────────────────────────────── */
   .hero-ctas {
     display:     flex;
     flex-wrap:   wrap;
-    gap:         1rem;
+    gap:         1.5rem;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 4.5rem;
+    margin-bottom: 5rem;
   }
 
   /* ── Stats ─────────────────────────────────── */
@@ -219,95 +163,83 @@ const stats = lang === 'de'
     gap:         3rem;
   }
   .hero-stat {
-    text-align: center;
+    text-align: left;
   }
   .hero-stat-val {
-    font-family:    var(--font-display);
-    font-weight:    300;
-    color:          var(--color-gold);
-    font-size:      clamp(1.6rem, 4vw, 2.25rem);
+    color:          var(--color-amber);
+    font-size:      clamp(1.25rem, 3vw, 1.5rem);
     line-height:    1;
-    margin-bottom:  0.35rem;
+    margin-bottom:  0.5rem;
+    font-weight: 700;
   }
   .hero-stat-label {
-    font-size:      0.6rem;
-    font-weight:    500;
-    letter-spacing: 0.2em;
+    font-size:      0.65rem;
+    font-weight:    700;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
-    color:          rgba(255, 255, 255, 0.3);
+    color:          var(--color-steel);
   }
   .hero-stat-divider {
     width:      1px;
-    height:     2rem;
-    background: rgba(255, 255, 255, 0.1);
+    height:     2.5rem;
+    background: var(--color-machined);
   }
 
   /* ── Scroll line ───────────────────────────── */
   .hero-scroll {
     position:   absolute;
     bottom:     2.5rem;
-    left:       50%;
-    transform:  translateX(-50%);
-    z-index:    10;
-    animation:  heroScrollFade 1s ease 1.4s both;
+    right:      clamp(1.5rem, 5vw, 5rem);
+    z-index:    30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .hero-scroll-line {
     width:       1px;
-    height:      3rem;
-    background:  linear-gradient(to bottom, rgba(196,154,60,0.6), transparent);
-    animation:   scrollPulse 2.4s ease-in-out infinite;
+    height:      4rem;
+    background:  var(--color-machined);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 50%;
+    background: var(--color-amber);
+    animation: scrollDrop 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
   }
 
-  /* ── Bottom fade to cream ──────────────────── */
-  .hero-fade-out {
-    position:       absolute;
-    bottom:         0;
-    left:           0;
-    right:          0;
-    height:         8rem;
-    background:     linear-gradient(to bottom, transparent, var(--color-cream));
-    pointer-events: none;
-    z-index:        5;
+  @keyframes scrollDrop {
+    0% { transform: translateY(-100%); }
+    60%, 100% { transform: translateY(200%); }
   }
 
   /* ── Hero item entrance animation ─────────── */
   .hi-1, .hi-2, .hi-3, .hi-4, .hi-5 {
-    animation:  heroItem 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation:  heroItem 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
     will-change: transform, opacity;
   }
-  .hi-1 { animation-delay: 0.05s; }
-  .hi-2 { animation-delay: 0.18s; }
-  .hi-3 { animation-delay: 0.34s; }
-  .hi-4 { animation-delay: 0.48s; }
-  .hi-5 { animation-delay: 0.62s; }
+  .hi-1 { animation-delay: 0.1s; }
+  .hi-2 { animation-delay: 0.25s; }
+  .hi-3 { animation-delay: 0.4s; }
+  .hi-4 { animation-delay: 0.55s; }
+  .hi-5 { animation-delay: 0.8s; }
 
   @keyframes heroItem {
     from {
       opacity:   0;
-      transform: translateY(18px);
-      filter:    blur(6px);
+      transform: translateY(24px);
     }
     to {
       opacity:   1;
       transform: translateY(0);
-      filter:    blur(0);
     }
-  }
-
-  @keyframes heroScrollFade {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.35; transform: scaleY(0.7); transform-origin: top; }
-    55%       { opacity: 0.85; transform: scaleY(1);   transform-origin: top; }
   }
 
   /* ── Mobile adjustments ────────────────────── */
   @media (max-width: 480px) {
-    .hero-stats { gap: 1.75rem; }
-    .hero-ctas  { flex-direction: column; width: 100%; max-width: 22rem; }
-    .hero-ctas a { width: 100%; justify-content: center; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    .hero-ctas  { flex-direction: column; width: 100%; max-width: none; align-items: stretch; }
   }
 </style>

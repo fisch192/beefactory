@@ -12,13 +12,13 @@ interface Props {
 
 const { title, description, lang, canonicalPath } = Astro.props;
 const altLang = getAlternateLang(lang);
-const siteTitle = title ? `${title} | Bee Factory` : t('site.title', lang);
+const siteTitle = title ? `${title} | Beefactory` : t('site.title', lang);
 const siteDescription = description || t('site.description', lang);
 const altPath = canonicalPath?.replace(`/${lang}/`, `/${altLang}/`) ?? `/${altLang}/`;
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} class="bg-void text-titanium scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,14 +32,10 @@ const altPath = canonicalPath?.replace(`/${lang}/`, `/${altLang}/`) ?? `/${altLa
     <link rel="alternate" hreflang={lang} href={`https://beefactory.shop${canonicalPath ?? Astro.url.pathname}`} />
     <link rel="alternate" hreflang={altLang} href={`https://beefactory.shop${altPath}`} />
 
-    <!-- Inter Variable font -->
-    <link rel="preconnect" href="https://rsms.me/" />
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-
-    <!-- Cormorant Garamond (display) + Poppins (legacy) -->
+    <!-- JetBrains Mono + Newsreader -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Poppins:wght@600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap" rel="stylesheet" />
 
     <!-- OG -->
     <meta property="og:title" content={siteTitle} />
@@ -48,7 +44,7 @@ const altPath = canonicalPath?.replace(`/${lang}/`, `/${altLang}/`) ?? `/${altLa
     <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'it_IT'} />
 
   </head>
-  <body class="antialiased">
+  <body class="antialiased min-h-screen font-sans selection:bg-amber selection:text-void">
     <slot />
     <script>
       // Intersection observer for fade-in animations
