@@ -430,7 +430,7 @@ export default function BeeFactoryScene() {
 
     // Logo
     const logoLoader = new THREE.TextureLoader();
-    const logoTex = logoLoader.load('/images/logook.png');
+    const logoTex = logoLoader.load('/images/logook.svg');
     logoTex.colorSpace = THREE.SRGBColorSpace;
     logoTex.anisotropy = 16;
     // Matches beefactory/public/images/logo.png (1184x864).
