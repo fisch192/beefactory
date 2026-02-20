@@ -5,6 +5,10 @@ import 'package:provider/provider.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../domain/models/site.dart';
 import '../../providers/sites_provider.dart';
+import '../../../services/ai_service.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:convert';
+import 'package:geolocator/geolocator.dart';
 
 class CreateSiteScreen extends StatefulWidget {
   const CreateSiteScreen({super.key});
@@ -22,6 +26,8 @@ class _CreateSiteScreenState extends State<CreateSiteScreen> {
   final _elevationController = TextEditingController();
   final _notesController = TextEditingController();
   bool _isSaving = false;
+  bool _isLoadingGps = false;
+  bool _isAnalyzingImg = false;
 
   @override
   void dispose() {
@@ -32,6 +38,87 @@ class _CreateSiteScreenState extends State<CreateSiteScreen> {
     _elevationController.dispose();
     _notesController.dispose();
     super.dispose();
+  }
+
+  Future<void> _fetchGps() async {
+    setState(() => _isLoadingGps = true);
+    try {
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        throw Exception('Location services are disabled.');
+      }
+
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          throw Exception('Location permissions are denied');
+        }
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        throw Exception(
+            'Location permissions are permanently denied, we cannot request permissions.');
+      }
+
+      final position = await Geolocator.getCurrentPosition(
+          locationSettings: const LocationSettings(accuracy: LocationAccuracy.high));
+      
+      if (mounted) {
+        setState(() {
+          _latController.text = position.latitude.toStringAsFixed(6);
+          _lngController.text = position.longitude.toStringAsFixed(6);
+          if (position.altitude != 0) {
+            _elevationController.text = position.altitude.toStringAsFixed(0);
+          }
+        });
+      }
+    } catch (_) {
+      if (mounted) {
+        final l = AppLocalizations.of(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('GPS Fehler: ${_}')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isLoadingGps = false);
+    }
+  }
+
+  Future<void> _analyzeAreaWithAi() async {
+    final picker = ImagePicker();
+    final xFile = await picker.pickImage(source: ImageSource.camera, imageQuality: 70);
+    if (xFile == null) return;
+
+    setState(() => _isAnalyzingImg = true);
+
+    try {
+      final bytes = await xFile.readAsBytes();
+      final base64String = base64Encode(bytes);
+
+      final response = await AiService.chat(
+        history: [],
+        userMessage: 'Bitte analysiere dieses Bild des geplanten Bienenstandorts. Nenne mir kurz die Vorteile und Nachteile der Umgebung für Bienen hinsichtlich Flora, Windschutz, Sonneneinstrahlung etc. als Aufzählungsliste.',
+        imageBase64: base64String,
+        imageMime: 'image/jpeg',
+      );
+
+      if (mounted) {
+        final currentNotes = _notesController.text.trim();
+        _notesController.text = currentNotes.isEmpty 
+            ? response 
+            : '$currentNotes\n\n--- KI Analyse ---\n$response';
+      }
+    } catch (e) {
+      if (mounted) {
+        final l = AppLocalizations.of(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('KI Fehler: $e')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isAnalyzingImg = false);
+    }
   }
 
   Future<void> _save() async {
@@ -115,6 +202,32 @@ class _CreateSiteScreenState extends State<CreateSiteScreen> {
               const SizedBox(height: 16),
 
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                   Text(
+                    'Koordinaten',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                  TextButton.icon(
+                    onPressed: _isLoadingGps ? null : _fetchGps,
+                    icon: _isLoadingGps 
+                        ? const SizedBox(width: 14, height: 14, child: CircularProgressIndicator(strokeWidth: 2))
+                        : const Icon(Icons.my_location, size: 16),
+                    label: Text(_isLoadingGps ? 'Ermittle...' : 'GPS abrufen'),
+                    style: TextButton.styleFrom(
+                      foregroundColor: const Color(0xFFFFA000),
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+
+              Row(
                 children: [
                   Expanded(
                     child: TextFormField(
@@ -187,6 +300,25 @@ class _CreateSiteScreenState extends State<CreateSiteScreen> {
                   ),
                 ),
               ),
+              const SizedBox(height: 12),
+              
+              OutlinedButton.icon(
+                onPressed: _isAnalyzingImg ? null : _analyzeAreaWithAi,
+                icon: _isAnalyzingImg
+                    ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
+                    : const Icon(Icons.smart_toy, size: 18),
+                label: Text(
+                  _isAnalyzingImg ? 'Analysiere Umgebung...' : 'Umgebung mit KI analysieren (Foto)',
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.deepPurple,
+                  side: const BorderSide(color: Colors.deepPurple),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+              ),
+
               const SizedBox(height: 32),
 
               ElevatedButton(

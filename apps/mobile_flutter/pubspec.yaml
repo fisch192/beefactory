@@ -1,4 +1,4 @@
-name: bee_app
+name: beefactory
 description: "A beekeeping management app."
 publish_to: 'none'
 version: 1.0.0+1
@@ -29,6 +29,8 @@ dependencies:
   flutter_map: ^7.0.2
   latlong2: ^0.9.1
   google_sign_in: ^6.2.2
+  geolocator: ^13.0.2
+  flutter_animate: ^4.5.2
 
 dev_dependencies:
   flutter_test:
@@ -44,3 +46,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/data/

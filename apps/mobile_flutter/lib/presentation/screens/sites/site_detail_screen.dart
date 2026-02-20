@@ -13,6 +13,7 @@ import '../../../domain/models/site.dart';
 import '../../../domain/repositories/hive_repository.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../providers/sites_provider.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 const _kAmber = Color(0xFFFFA000);
 const _kSurface = Color(0xFFFFF8E1);
@@ -30,6 +31,7 @@ class _SiteDetailScreenState extends State<SiteDetailScreen> {
   SiteModel? _site;
   List<HiveModel> _hives = [];
   bool _isLoading = true;
+  bool _isSatellite = true;
 
   @override
   void initState() {
@@ -75,6 +77,8 @@ class _SiteDetailScreenState extends State<SiteDetailScreen> {
       site: _site!,
       hives: _hives,
       onRefresh: _loadData,
+      isSatellite: _isSatellite,
+      onToggleLayer: () => setState(() => _isSatellite = !_isSatellite),
     );
   }
 }
@@ -83,11 +87,15 @@ class _SiteDetailBody extends StatelessWidget {
   final SiteModel site;
   final List<HiveModel> hives;
   final VoidCallback onRefresh;
+  final bool isSatellite;
+  final VoidCallback onToggleLayer;
 
   const _SiteDetailBody({
     required this.site,
     required this.hives,
     required this.onRefresh,
+    required this.isSatellite,
+    required this.onToggleLayer,
   });
 
   @override
@@ -113,8 +121,33 @@ class _SiteDetailBody extends StatelessWidget {
                             lat: site.latitude!,
                             lng: site.longitude!,
                             hivesCount: hives.length,
+                            isSatellite: isSatellite,
                           )
                         : _MapPlaceholder(site: site),
+
+                    if (hasCoords)
+                      Positioned(
+                        top: MediaQuery.of(context).padding.top + 4,
+                        right: 8,
+                        child: Material(
+                          color: Colors.transparent,
+                          child: IconButton(
+                            icon: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Colors.black45,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Icon(
+                                isSatellite ? Icons.map : Icons.satellite,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                            onPressed: onToggleLayer,
+                          ),
+                        ),
+                      ),
 
                     // Bottom gradient overlay
                     Positioned.fill(
@@ -188,7 +221,7 @@ class _SiteDetailBody extends StatelessWidget {
                             ),
                         ],
                       ),
-                    ),
+                    ).animate().fade(duration: 600.ms).slideY(begin: 0.1, end: 0),
                   ],
                 ),
               ),
@@ -226,7 +259,7 @@ class _SiteDetailBody extends StatelessWidget {
                       color: Colors.blue,
                     ),
                   ],
-                ),
+                ).animate().fade(delay: 200.ms, duration: 400.ms),
               ),
             ),
 
@@ -279,7 +312,7 @@ class _SiteDetailBody extends StatelessWidget {
                   mainAxisSpacing: 10,
                   childAspectRatio: 1.45,
                   children: hives
-                      .map((h) => _HiveCard(hive: h))
+                      .map((h) => _HiveCard(hive: h).animate().fade().scale(begin: const Offset(0.9, 0.9)))
                       .toList(),
                 ),
               ),
@@ -307,11 +340,13 @@ class _SiteMap extends StatelessWidget {
   final double lat;
   final double lng;
   final int hivesCount;
+  final bool isSatellite;
 
   const _SiteMap({
     required this.lat,
     required this.lng,
     required this.hivesCount,
+    required this.isSatellite,
   });
 
   @override
@@ -326,11 +361,19 @@ class _SiteMap extends StatelessWidget {
         ),
       ),
       children: [
-        TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.bee.bee_app',
-          maxZoom: 19,
-        ),
+        if (isSatellite)
+          TileLayer(
+            urlTemplate:
+                'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            userAgentPackageName: 'com.bee.bee_app',
+            maxZoom: 19,
+          )
+        else
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.bee.bee_app',
+            maxZoom: 19,
+          ),
         // 3km flight range circle
         CircleLayer(
           circles: [

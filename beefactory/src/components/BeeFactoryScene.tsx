@@ -51,7 +51,7 @@ export default function BeeFactoryScene() {
     if (!mountRef.current) return;
 
     const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl2', { 
+    const gl = canvas.getContext('webgl2', {
       powerPreference: 'high-performance',
       antialias: true,
       alpha: false,
@@ -66,8 +66,8 @@ export default function BeeFactoryScene() {
     const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.01, 500);
     camera.position.set(20, 7.5, 24);
 
-    const renderer = new THREE.WebGLRenderer({ 
-      antialias: true, 
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
       powerPreference: "high-performance",
       canvas
     });
@@ -126,7 +126,7 @@ export default function BeeFactoryScene() {
 
     const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.03, 0.35, 0.97);
     composer.addPass(bloom);
-    
+
     const grainPass = new ShaderPass(FilmGrainShader);
     composer.addPass(grainPass);
     composer.addPass(new OutputPass());
@@ -175,7 +175,7 @@ export default function BeeFactoryScene() {
       terrainPos[i + 2] = Math.sin(x * 0.1) * Math.cos(y * 0.1) * 0.5 + Math.random() * 0.3 - dist * 0.01;
     }
     terrainGeo.computeVertexNormals();
-    
+
     const terrainMat = new THREE.MeshStandardMaterial({
       color: 0x4e7436,
       roughness: 0.92,
@@ -191,30 +191,30 @@ export default function BeeFactoryScene() {
     // === GRASS ===
     const grassGroup = new THREE.Group();
     const grassColors = [0x2a4518, 0x3a5520, 0x1f3510, 0x3d5a25];
-    
+
     const grassGeom = new THREE.BufferGeometry();
     const grassCount = 5000;
     const grassPositions = new Float32Array(grassCount * 6);
     const grassColorsAttr = new Float32Array(grassCount * 6);
-    
+
     for (let i = 0; i < grassCount; i++) {
       const x = (Math.random() - 0.5) * 80;
       const z = (Math.random() - 0.5) * 80;
       const dist = Math.sqrt(x * x + z * z);
-      
+
       if (dist < 7) continue;
-      
+
       const height = 0.3 + Math.random() * 0.5;
       const colorIdx = Math.floor(Math.random() * 4);
       const color = new THREE.Color(grassColors[colorIdx]);
-      
+
       grassPositions[i * 6] = x;
       grassPositions[i * 6 + 1] = -3.8;
       grassPositions[i * 6 + 2] = z;
       grassPositions[i * 6 + 3] = x;
       grassPositions[i * 6 + 4] = -3.8 + height;
       grassPositions[i * 6 + 5] = z;
-      
+
       grassColorsAttr[i * 6] = color.r;
       grassColorsAttr[i * 6 + 1] = color.g;
       grassColorsAttr[i * 6 + 2] = color.b;
@@ -222,15 +222,15 @@ export default function BeeFactoryScene() {
       grassColorsAttr[i * 6 + 4] = color.g * 0.8;
       grassColorsAttr[i * 6 + 5] = color.b * 0.8;
     }
-    
+
     grassGeom.setAttribute('position', new THREE.BufferAttribute(grassPositions, 3));
     grassGeom.setAttribute('color', new THREE.BufferAttribute(grassColorsAttr, 3));
-    
+
     const grassMat = new THREE.MeshBasicMaterial({
       vertexColors: true,
       side: THREE.DoubleSide
     });
-    
+
     const grass = new THREE.LineSegments(grassGeom, grassMat);
     scene.add(grass);
 
@@ -239,8 +239,8 @@ export default function BeeFactoryScene() {
     for (let i = 0; i < 300; i++) {
       const x = (Math.random() - 0.5) * 65;
       const z = (Math.random() - 0.5) * 65;
-      if (Math.sqrt(x*x + z*z) < 6) continue;
-      
+      if (Math.sqrt(x * x + z * z) < 6) continue;
+
       const flowerMat = new THREE.MeshStandardMaterial({
         color: flowerColors[Math.floor(Math.random() * flowerColors.length)],
         roughness: 0.5,
@@ -258,10 +258,10 @@ export default function BeeFactoryScene() {
     // === TREES ===
     const treeGroup = new THREE.Group();
     const trunkMat = new THREE.MeshStandardMaterial({ color: 0x2d1a10, roughness: 0.95 });
-    
+
     for (let i = 0; i < 25; i++) {
       const tree = new THREE.Group();
-      
+
       const trunkH = 5 + Math.random() * 5;
       const trunk = new THREE.Mesh(
         new THREE.CylinderGeometry(0.2, 0.35, trunkH, 10),
@@ -272,12 +272,12 @@ export default function BeeFactoryScene() {
       tree.add(trunk);
 
       const leafColors = [0x142810, 0x1f3512, 0x1a3010];
-      const leafMat = new THREE.MeshStandardMaterial({ 
-        color: leafColors[Math.floor(Math.random() * leafColors.length)], 
+      const leafMat = new THREE.MeshStandardMaterial({
+        color: leafColors[Math.floor(Math.random() * leafColors.length)],
         roughness: 0.88,
         flatShading: true
       });
-      
+
       for (let j = 0; j < 4; j++) {
         const foliage = new THREE.Mesh(
           new THREE.ConeGeometry(3 - j * 0.6, 3.5 - j * 0.7, 9),
@@ -351,11 +351,11 @@ export default function BeeFactoryScene() {
         clearcoatRoughness: 0.45
       });
 
-	      const metalMat = new THREE.MeshStandardMaterial({
-	        color: 0xcdd5db,
-	        roughness: 0.68,
-	        metalness: 0.65
-	      });
+      const metalMat = new THREE.MeshStandardMaterial({
+        color: 0xcdd5db,
+        roughness: 0.68,
+        metalness: 0.65
+      });
 
       const base = new THREE.Mesh(new THREE.BoxGeometry(6.4, 0.25, 5.6), woodMat);
       base.position.y = -3.55;
@@ -428,44 +428,44 @@ export default function BeeFactoryScene() {
 
     hiveGroup.add(createBeekeeperHive());
 
-	    // Logo
-	    const logoLoader = new THREE.TextureLoader();
-	    const logoTex = logoLoader.load('/images/bee_factory_logo.svg');
-	    logoTex.colorSpace = THREE.SRGBColorSpace;
-	    logoTex.anisotropy = 16;
-	    // Matches beefactory/public/images/logo.png (1184x864).
-	    const LOGO_ASPECT = 1184 / 864;
-	    
-	    const logoMat = new THREE.MeshStandardMaterial({
-	      map: logoTex,
-	      transparent: true,
-	      opacity: 0.98,
-	      roughness: 0.65,
-	      metalness: 0.0,
-	      side: THREE.DoubleSide
-	    });
+    // Logo
+    const logoLoader = new THREE.TextureLoader();
+    const logoTex = logoLoader.load('/images/logook.png');
+    logoTex.colorSpace = THREE.SRGBColorSpace;
+    logoTex.anisotropy = 16;
+    // Matches beefactory/public/images/logo.png (1184x864).
+    const LOGO_ASPECT = 1184 / 864;
 
-	    // Inner logo gets a tiny emissive boost so it's clearly readable inside the hive
-	    // without looking like a light source.
-	    const innerLogoMat = logoMat.clone();
-	    (innerLogoMat as THREE.MeshStandardMaterial).emissive = new THREE.Color(0xffffff);
-	    (innerLogoMat as THREE.MeshStandardMaterial).emissiveMap = logoTex;
-	    (innerLogoMat as THREE.MeshStandardMaterial).emissiveIntensity = 0.55;
+    const logoMat = new THREE.MeshStandardMaterial({
+      map: logoTex,
+      transparent: true,
+      opacity: 0.98,
+      roughness: 0.65,
+      metalness: 0.0,
+      side: THREE.DoubleSide
+    });
 
-	    const plaqueMat = new THREE.MeshStandardMaterial({ color: 0xf7f2e8, roughness: 0.9, metalness: 0.0 });
-	    const plaque = new THREE.Mesh(new THREE.PlaneGeometry(2.55, 1.55), plaqueMat);
-	    plaque.position.set(hiveEntrance.x + 0.035, hiveEntrance.y + 1.05, hiveEntrance.z);
-	    plaque.rotation.y = Math.PI / 2;
-	    plaque.castShadow = true;
-	    plaque.receiveShadow = true;
-	    hiveGroup.add(plaque);
+    // Inner logo gets a tiny emissive boost so it's clearly readable inside the hive
+    // without looking like a light source.
+    const innerLogoMat = logoMat.clone();
+    (innerLogoMat as THREE.MeshStandardMaterial).emissive = new THREE.Color(0xffffff);
+    (innerLogoMat as THREE.MeshStandardMaterial).emissiveMap = logoTex;
+    (innerLogoMat as THREE.MeshStandardMaterial).emissiveIntensity = 0.55;
 
-	    const outerLogoH = 1.35;
-	    const outerLogoW = outerLogoH * LOGO_ASPECT;
-	    const logo = new THREE.Mesh(new THREE.PlaneGeometry(outerLogoW, outerLogoH), logoMat);
-	    logo.position.set(plaque.position.x + 0.01, plaque.position.y, plaque.position.z);
-	    logo.rotation.y = Math.PI / 2;
-	    hiveGroup.add(logo);
+    const plaqueMat = new THREE.MeshStandardMaterial({ color: 0xf7f2e8, roughness: 0.9, metalness: 0.0 });
+    const plaque = new THREE.Mesh(new THREE.PlaneGeometry(2.55, 1.55), plaqueMat);
+    plaque.position.set(hiveEntrance.x + 0.035, hiveEntrance.y + 1.05, hiveEntrance.z);
+    plaque.rotation.y = Math.PI / 2;
+    plaque.castShadow = true;
+    plaque.receiveShadow = true;
+    hiveGroup.add(plaque);
+
+    const outerLogoH = 1.35;
+    const outerLogoW = outerLogoH * LOGO_ASPECT;
+    const logo = new THREE.Mesh(new THREE.PlaneGeometry(outerLogoW, outerLogoH), logoMat);
+    logo.position.set(plaque.position.x + 0.01, plaque.position.y, plaque.position.z);
+    logo.rotation.y = Math.PI / 2;
+    hiveGroup.add(logo);
 
     // === BEEKEEPER APIARY HOUSE (BIENENHAUS) ===
     const createBienenhaus = (): THREE.Group => {
@@ -579,25 +579,25 @@ export default function BeeFactoryScene() {
     const interior = new THREE.Group();
     interior.position.copy(hiveInsideCenter);
 
-	    // Matte wax (avoid glossy/translucent look that reads as "lit up").
-	    const waxMat = new THREE.MeshStandardMaterial({
-	      color: 0xc9972a,
-	      metalness: 0.0,
-	      roughness: 0.78
-	    });
+    // Matte wax (avoid glossy/translucent look that reads as "lit up").
+    const waxMat = new THREE.MeshStandardMaterial({
+      color: 0xc9972a,
+      metalness: 0.0,
+      roughness: 0.78
+    });
 
-	    const honeyMat = new THREE.MeshPhysicalMaterial({
-	      color: 0xffb02e,
-	      metalness: 0.0,
-	      roughness: 0.22,
-	      transmission: 0.35,
-	      thickness: 0.25,
-	      clearcoat: 0.7,
-	      clearcoatRoughness: 0.14,
-	      ior: 1.47,
-	      transparent: true,
-	      opacity: 0.88
-	    });
+    const honeyMat = new THREE.MeshPhysicalMaterial({
+      color: 0xffb02e,
+      metalness: 0.0,
+      roughness: 0.22,
+      transmission: 0.35,
+      thickness: 0.25,
+      clearcoat: 0.7,
+      clearcoatRoughness: 0.14,
+      ior: 1.47,
+      transparent: true,
+      opacity: 0.88
+    });
 
     const cellR = 0.26;
     const cellDepth = 0.56;
@@ -621,152 +621,152 @@ export default function BeeFactoryScene() {
         tube.position.set(x, y, z);
         interior.add(tube);
 
-	        if (Math.random() < 0.15) {
-	          const honey = new THREE.Mesh(honeyCapGeo, honeyMat);
-	          honey.position.set(x - cellDepth / 2 + 0.01, y, z);
-	          interior.add(honey);
-	        }
+        if (Math.random() < 0.15) {
+          const honey = new THREE.Mesh(honeyCapGeo, honeyMat);
+          honey.position.set(x - cellDepth / 2 + 0.01, y, z);
+          interior.add(honey);
+        }
       }
     }
 
-	    // Subtle entrance fill (avoid a "spotlight" look).
-	    const entranceFill = new THREE.PointLight(0xfff1d2, 0.55, 6, 2.0);
-	    entranceFill.position.set(hiveEntrance.x + 0.45, hiveEntrance.y + 0.35, hiveEntrance.z + 0.3);
-	    hiveGroup.add(entranceFill);
+    // Subtle entrance fill (avoid a "spotlight" look).
+    const entranceFill = new THREE.PointLight(0xfff1d2, 0.55, 6, 2.0);
+    entranceFill.position.set(hiveEntrance.x + 0.45, hiveEntrance.y + 0.35, hiveEntrance.z + 0.3);
+    hiveGroup.add(entranceFill);
 
-	    // Soft logo fill: tiny warm light just in front of the inner badge so the logo
-	    // is always readable regardless of scene exposure.
-	    const logoFill = new THREE.PointLight(0xfff5e8, 1.2, 2.8, 1.5);
-	    logoFill.position.set(hiveInsideCenter.x + 1.2, hiveInsideCenter.y + 0.35, hiveInsideCenter.z);
-	    hiveGroup.add(logoFill);
+    // Soft logo fill: tiny warm light just in front of the inner badge so the logo
+    // is always readable regardless of scene exposure.
+    const logoFill = new THREE.PointLight(0xfff5e8, 1.2, 2.8, 1.5);
+    logoFill.position.set(hiveInsideCenter.x + 1.2, hiveInsideCenter.y + 0.35, hiveInsideCenter.z);
+    hiveGroup.add(logoFill);
 
-	    // Interior logo badge: centered + 3D plaque so it feels "real" without being overly bright.
-	    const innerBadge = new THREE.Group();
-	    innerBadge.position.set(0.0, 0.35, 0.0);
-	    innerBadge.rotation.y = Math.PI / 2; // face the incoming camera (+X)
+    // Interior logo badge: centered + 3D plaque so it feels "real" without being overly bright.
+    const innerBadge = new THREE.Group();
+    innerBadge.position.set(0.0, 0.35, 0.0);
+    innerBadge.rotation.y = Math.PI / 2; // face the incoming camera (+X)
 
-	    // Hex plaque (extruded) like a wax/wood emblem.
-	    const hex = new THREE.Shape();
-	    const hexR = 0.92;
-	    for (let i = 0; i < 6; i++) {
-	      const a = (Math.PI / 3) * i + Math.PI / 6;
-	      const px = Math.cos(a) * hexR;
-	      const py = Math.sin(a) * hexR;
-	      if (i === 0) hex.moveTo(px, py);
-	      else hex.lineTo(px, py);
-	    }
-	    hex.closePath();
+    // Hex plaque (extruded) like a wax/wood emblem.
+    const hex = new THREE.Shape();
+    const hexR = 0.92;
+    for (let i = 0; i < 6; i++) {
+      const a = (Math.PI / 3) * i + Math.PI / 6;
+      const px = Math.cos(a) * hexR;
+      const py = Math.sin(a) * hexR;
+      if (i === 0) hex.moveTo(px, py);
+      else hex.lineTo(px, py);
+    }
+    hex.closePath();
 
-	    const plaqueGeo = new THREE.ExtrudeGeometry(hex, {
-	      depth: 0.11,
-	      bevelEnabled: true,
-	      bevelThickness: 0.03,
-	      bevelSize: 0.03,
-	      bevelOffset: 0,
-	      bevelSegments: 3,
-	      curveSegments: 12,
-	      steps: 1
-	    });
-	    // Center the geometry around the origin and orient its depth forward (+Z).
-	    plaqueGeo.center();
+    const plaqueGeo = new THREE.ExtrudeGeometry(hex, {
+      depth: 0.11,
+      bevelEnabled: true,
+      bevelThickness: 0.03,
+      bevelSize: 0.03,
+      bevelOffset: 0,
+      bevelSegments: 3,
+      curveSegments: 12,
+      steps: 1
+    });
+    // Center the geometry around the origin and orient its depth forward (+Z).
+    plaqueGeo.center();
 
-	    const plaque3DMat = new THREE.MeshPhysicalMaterial({
-	      color: 0xf0e7d6,
-	      roughness: 0.85,
-	      metalness: 0.0,
-	      clearcoat: 0.18,
-	      clearcoatRoughness: 0.45
-	    });
-	    const plaque3D = new THREE.Mesh(plaqueGeo, plaque3DMat);
-	    plaque3D.castShadow = true;
-	    plaque3D.receiveShadow = true;
-	    innerBadge.add(plaque3D);
+    const plaque3DMat = new THREE.MeshPhysicalMaterial({
+      color: 0xf0e7d6,
+      roughness: 0.85,
+      metalness: 0.0,
+      clearcoat: 0.18,
+      clearcoatRoughness: 0.45
+    });
+    const plaque3D = new THREE.Mesh(plaqueGeo, plaque3DMat);
+    plaque3D.castShadow = true;
+    plaque3D.receiveShadow = true;
+    innerBadge.add(plaque3D);
 
-	    // Raised logo block (gives real 3D depth + shadow).
-	    const innerLogoH = 0.85;
-	    const innerLogoW = innerLogoH * LOGO_ASPECT;
-	    const logoDepth = 0.08;
-	    const logoBoxGeo = new THREE.BoxGeometry(innerLogoW, innerLogoH, logoDepth);
+    // Raised logo block (gives real 3D depth + shadow).
+    const innerLogoH = 0.85;
+    const innerLogoW = innerLogoH * LOGO_ASPECT;
+    const logoDepth = 0.08;
+    const logoBoxGeo = new THREE.BoxGeometry(innerLogoW, innerLogoH, logoDepth);
 
-	    const logoSideMat = new THREE.MeshStandardMaterial({ color: 0x2b1c12, roughness: 0.9, metalness: 0.0 });
-	    const logoBackMat = new THREE.MeshStandardMaterial({ color: 0xe8decc, roughness: 0.95, metalness: 0.0 });
-	    const logoFrontMat = innerLogoMat;
+    const logoSideMat = new THREE.MeshStandardMaterial({ color: 0x2b1c12, roughness: 0.9, metalness: 0.0 });
+    const logoBackMat = new THREE.MeshStandardMaterial({ color: 0xe8decc, roughness: 0.95, metalness: 0.0 });
+    const logoFrontMat = innerLogoMat;
 
-	    // BoxGeometry material order: right, left, top, bottom, front, back
-	    const innerLogo = new THREE.Mesh(logoBoxGeo, [
-	      logoSideMat,
-	      logoSideMat,
-	      logoSideMat,
-	      logoSideMat,
-	      logoFrontMat,
-	      logoBackMat
-	    ]);
-	    innerLogo.position.z = 0.11 / 2 + logoDepth / 2 + 0.015;
-	    innerLogo.castShadow = true;
-	    innerLogo.receiveShadow = true;
-	    innerBadge.add(innerLogo);
+    // BoxGeometry material order: right, left, top, bottom, front, back
+    const innerLogo = new THREE.Mesh(logoBoxGeo, [
+      logoSideMat,
+      logoSideMat,
+      logoSideMat,
+      logoSideMat,
+      logoFrontMat,
+      logoBackMat
+    ]);
+    innerLogo.position.z = 0.11 / 2 + logoDepth / 2 + 0.015;
+    innerLogo.castShadow = true;
+    innerLogo.receiveShadow = true;
+    innerBadge.add(innerLogo);
 
-	    interior.add(innerBadge);
+    interior.add(innerBadge);
 
     hiveGroup.add(interior);
 
     // === PHOTOREALISTIC BEE ===
     type BeeQuality = 'hero' | 'mid' | 'low';
 
-	    const createBee = (scale = 1, quality?: BeeQuality): THREE.Group => {
-	      const q: BeeQuality = quality ?? (scale >= 1.05 ? 'hero' : scale >= 0.6 ? 'mid' : 'low');
-	      const cast = q !== 'low';
-	      const bee = new THREE.Group();
-	      bee.userData.quality = q;
+    const createBee = (scale = 1, quality?: BeeQuality): THREE.Group => {
+      const q: BeeQuality = quality ?? (scale >= 1.05 ? 'hero' : scale >= 0.6 ? 'mid' : 'low');
+      const cast = q !== 'low';
+      const bee = new THREE.Group();
+      bee.userData.quality = q;
 
-	      // Keep the body "fuzzy" (sheen + high roughness), avoid plastic shine.
-	      const thoraxMat = new THREE.MeshPhysicalMaterial({
-	        color: 0x171310,
-	        metalness: 0.0,
-	        roughness: 0.9,
-	        sheen: 1.0,
-	        sheenRoughness: 0.95,
-	        sheenColor: new THREE.Color(0x2b241f),
-	        clearcoat: 0.05,
-	        clearcoatRoughness: 0.6
-	      });
+      // Keep the body "fuzzy" (sheen + high roughness), avoid plastic shine.
+      const thoraxMat = new THREE.MeshPhysicalMaterial({
+        color: 0x171310,
+        metalness: 0.0,
+        roughness: 0.9,
+        sheen: 1.0,
+        sheenRoughness: 0.95,
+        sheenColor: new THREE.Color(0x2b241f),
+        clearcoat: 0.05,
+        clearcoatRoughness: 0.6
+      });
 
-	      const abdomenYellowMat = new THREE.MeshPhysicalMaterial({
-	        color: 0xd1a03a,
-	        metalness: 0.0,
-	        roughness: 0.58,
-	        clearcoat: 0.08,
-	        clearcoatRoughness: 0.45,
-	        sheen: 0.55,
-	        sheenRoughness: 0.85,
-	        sheenColor: new THREE.Color(0xffe1b8)
-	      });
+      const abdomenYellowMat = new THREE.MeshPhysicalMaterial({
+        color: 0xd1a03a,
+        metalness: 0.0,
+        roughness: 0.58,
+        clearcoat: 0.08,
+        clearcoatRoughness: 0.45,
+        sheen: 0.55,
+        sheenRoughness: 0.85,
+        sheenColor: new THREE.Color(0xffe1b8)
+      });
 
-	      const abdomenBlackMat = new THREE.MeshPhysicalMaterial({
-	        color: 0x1a1410,
-	        metalness: 0.0,
-	        roughness: 0.52,
-	        clearcoat: 0.1,
-	        clearcoatRoughness: 0.5
-	      });
+      const abdomenBlackMat = new THREE.MeshPhysicalMaterial({
+        color: 0x1a1410,
+        metalness: 0.0,
+        roughness: 0.52,
+        clearcoat: 0.1,
+        clearcoatRoughness: 0.5
+      });
 
-	      const wingMat = new THREE.MeshPhysicalMaterial({
-	        color: 0xffffff,
-	        metalness: 0.0,
-	        roughness: 0.18,
-	        transparent: true,
-	        opacity: 0.45,
-	        transmission: 0.9,
-	        thickness: 0.004,
-	        ior: 1.1,
-	        clearcoat: 0.4,
-	        clearcoatRoughness: 0.25,
-	        iridescence: 0.45,
-	        iridescenceIOR: 1.15,
-	        iridescenceThicknessRange: [200, 700],
-	        side: THREE.DoubleSide,
-	        depthWrite: false
-	      });
+      const wingMat = new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        metalness: 0.0,
+        roughness: 0.18,
+        transparent: true,
+        opacity: 0.45,
+        transmission: 0.9,
+        thickness: 0.004,
+        ior: 1.1,
+        clearcoat: 0.4,
+        clearcoatRoughness: 0.25,
+        iridescence: 0.45,
+        iridescenceIOR: 1.15,
+        iridescenceThicknessRange: [200, 700],
+        side: THREE.DoubleSide,
+        depthWrite: false
+      });
 
       const veinMat = new THREE.MeshBasicMaterial({
         color: 0x7f9cab,
@@ -774,15 +774,15 @@ export default function BeeFactoryScene() {
         opacity: 0.22,
         side: THREE.DoubleSide,
         depthWrite: false
-	      });
+      });
 
-	      // Fuzz / hairs (instanced for better perf)
-	      const fuzzCount = q === 'hero' ? 220 : q === 'mid' ? 110 : 16;
-	      const fuzzH = (q === 'hero' ? 0.018 : q === 'mid' ? 0.015 : 0.012) * scale;
-	      const fuzzGeo = new THREE.ConeGeometry(0.0023 * scale, fuzzH, 4);
-	      const fuzzMat = new THREE.MeshStandardMaterial({ color: 0x120d0a, roughness: 1.0, metalness: 0.0 });
-	      const fuzz = new THREE.InstancedMesh(fuzzGeo, fuzzMat, fuzzCount);
-	      fuzz.castShadow = cast;
+      // Fuzz / hairs (instanced for better perf)
+      const fuzzCount = q === 'hero' ? 220 : q === 'mid' ? 110 : 16;
+      const fuzzH = (q === 'hero' ? 0.018 : q === 'mid' ? 0.015 : 0.012) * scale;
+      const fuzzGeo = new THREE.ConeGeometry(0.0023 * scale, fuzzH, 4);
+      const fuzzMat = new THREE.MeshStandardMaterial({ color: 0x120d0a, roughness: 1.0, metalness: 0.0 });
+      const fuzz = new THREE.InstancedMesh(fuzzGeo, fuzzMat, fuzzCount);
+      fuzz.castShadow = cast;
 
       const dummy = new THREE.Object3D();
       const normal = new THREE.Vector3();
@@ -802,17 +802,17 @@ export default function BeeFactoryScene() {
         // Keep hairs mostly on head/thorax (not the shiny abdomen).
         if (z < -0.11 * scale) continue;
 
-	        dummy.position.set(x, y, z);
-	        normal.set(x, y * 0.9, z + 0.05 * scale).normalize();
-	        dummy.quaternion.setFromUnitVectors(up, normal);
-	        dummy.rotation.y += (Math.random() - 0.5) * 0.8;
-	        // Slight per-hair variation (short, fluffy look).
-	        const s = 0.75 + Math.random() * 0.55;
-	        dummy.scale.set(1, s, 1);
-	        dummy.updateMatrix();
-	        fuzz.setMatrixAt(written, dummy.matrix);
-	        written++;
-	      }
+        dummy.position.set(x, y, z);
+        normal.set(x, y * 0.9, z + 0.05 * scale).normalize();
+        dummy.quaternion.setFromUnitVectors(up, normal);
+        dummy.rotation.y += (Math.random() - 0.5) * 0.8;
+        // Slight per-hair variation (short, fluffy look).
+        const s = 0.75 + Math.random() * 0.55;
+        dummy.scale.set(1, s, 1);
+        dummy.updateMatrix();
+        fuzz.setMatrixAt(written, dummy.matrix);
+        written++;
+      }
       fuzz.count = written;
       fuzz.instanceMatrix.needsUpdate = true;
       bee.add(fuzz);
@@ -829,25 +829,25 @@ export default function BeeFactoryScene() {
 
       // Abdomen (slightly glossier)
       const abdomen = new THREE.Group();
-	      const abd = new THREE.Mesh(
-	        new THREE.CapsuleGeometry(0.095 * scale, 0.285 * scale, 10, q === 'hero' ? 18 : 14),
-	        abdomenYellowMat
-	      );
-	      // Three.js capsules are built along +Y; rotate so the bee faces +Z.
-	      abd.rotation.x = Math.PI / 2;
-	      abd.castShadow = cast;
-	      abd.receiveShadow = cast;
-	      abdomen.add(abd);
+      const abd = new THREE.Mesh(
+        new THREE.CapsuleGeometry(0.095 * scale, 0.285 * scale, 10, q === 'hero' ? 18 : 14),
+        abdomenYellowMat
+      );
+      // Three.js capsules are built along +Y; rotate so the bee faces +Z.
+      abd.rotation.x = Math.PI / 2;
+      abd.castShadow = cast;
+      abd.receiveShadow = cast;
+      abdomen.add(abd);
 
-	      for (let i = 0; i < 4; i++) {
-	        const stripe = new THREE.Mesh(
-	          new THREE.TorusGeometry(0.092 * scale, 0.0105 * scale, 8, 18),
-	          abdomenBlackMat
-	        );
-	        stripe.position.z = -0.09 * scale + i * 0.085 * scale;
-	        stripe.castShadow = cast;
-	        abdomen.add(stripe);
-	      }
+      for (let i = 0; i < 4; i++) {
+        const stripe = new THREE.Mesh(
+          new THREE.TorusGeometry(0.092 * scale, 0.0105 * scale, 8, 18),
+          abdomenBlackMat
+        );
+        stripe.position.z = -0.09 * scale + i * 0.085 * scale;
+        stripe.castShadow = cast;
+        abdomen.add(stripe);
+      }
 
       const tip = new THREE.Mesh(new THREE.ConeGeometry(0.07 * scale, 0.1 * scale, 10), abdomenBlackMat);
       tip.position.z = -0.265 * scale;
@@ -1004,9 +1004,9 @@ export default function BeeFactoryScene() {
       return bee;
     };
 
-	    // Greeting composition: close enough to feel personal, not so close that it looks like a giant toy.
-	    const greetCamPos = new THREE.Vector3(20, 7.6, 24.4);
-	    const greetBeePos = new THREE.Vector3(19.2, 7.25, 22.15);
+    // Greeting composition: close enough to feel personal, not so close that it looks like a giant toy.
+    const greetCamPos = new THREE.Vector3(20, 7.6, 24.4);
+    const greetBeePos = new THREE.Vector3(19.2, 7.25, 22.15);
 
     const beePath = new THREE.CatmullRomCurve3(
       [
@@ -1024,27 +1024,27 @@ export default function BeeFactoryScene() {
     );
 
     // Main bee (hero LOD)
-	    const mainBee = createBee(1.05, 'hero');
-	    mainBee.position.copy(greetBeePos);
-	    mainBee.scale.setScalar(2.15);
-	    scene.add(mainBee);
+    const mainBee = createBee(1.05, 'hero');
+    mainBee.position.copy(greetBeePos);
+    mainBee.scale.setScalar(2.15);
+    scene.add(mainBee);
 
-	    // Worker bees (inside)
-	    const workers: { mesh: THREE.Group; data: { offset: number; speed: number; r: number; yOff: number; mode: 'work' | 'inout' } }[] = [];
-	    const workerCenterX = hiveInsideCenter.x - 0.75; // keep the middle clear for the inner logo badge
-	    for (let i = 0; i < 18; i++) {
-	      const wBee = createBee(0.55 + Math.random() * 0.35, 'low');
-	      const ang = Math.random() * Math.PI * 2;
-	      const r = 0.45 + Math.random() * 1.1;
-	      const yOff = (Math.random() - 0.5) * 1.2;
-	      
-	      wBee.position.set(
-	        workerCenterX + Math.cos(ang) * r,
-	        hiveInsideCenter.y + yOff,
-	        hiveInsideCenter.z + Math.sin(ang) * r * 0.7
-	      );
-	      hiveGroup.add(wBee);
-	      workers.push({
+    // Worker bees (inside)
+    const workers: { mesh: THREE.Group; data: { offset: number; speed: number; r: number; yOff: number; mode: 'work' | 'inout' } }[] = [];
+    const workerCenterX = hiveInsideCenter.x - 0.75; // keep the middle clear for the inner logo badge
+    for (let i = 0; i < 18; i++) {
+      const wBee = createBee(0.55 + Math.random() * 0.35, 'low');
+      const ang = Math.random() * Math.PI * 2;
+      const r = 0.45 + Math.random() * 1.1;
+      const yOff = (Math.random() - 0.5) * 1.2;
+
+      wBee.position.set(
+        workerCenterX + Math.cos(ang) * r,
+        hiveInsideCenter.y + yOff,
+        hiveInsideCenter.z + Math.sin(ang) * r * 0.7
+      );
+      hiveGroup.add(wBee);
+      workers.push({
         mesh: wBee,
         data: {
           offset: Math.random() * Math.PI * 2,
@@ -1062,7 +1062,7 @@ export default function BeeFactoryScene() {
       const bee = createBee(0.32 + Math.random() * 0.38, 'low');
       const ang = Math.random() * Math.PI * 2;
       const r = 6 + Math.random() * 16;
-      
+
       bee.position.set(Math.cos(ang) * r, -1.2 + (Math.random() - 0.25) * 8.5, Math.sin(ang) * r);
       bee.rotation.y = Math.random() * Math.PI * 2;
       scene.add(bee);
@@ -1082,7 +1082,7 @@ export default function BeeFactoryScene() {
       particlePos[i + 2] = (Math.random() - 0.5) * 40;
     }
     particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
-    
+
     const particles = new THREE.Points(particleGeo, new THREE.PointsMaterial({
       color: 0xddcc77,
       size: 0.1,
@@ -1095,12 +1095,12 @@ export default function BeeFactoryScene() {
     // === SIGNS ===
     const createSign = () => {
       const sg = new THREE.Group();
-      
+
       const boardMat = new THREE.MeshStandardMaterial({ color: 0x5a4535, roughness: 0.88 });
       const board = new THREE.Mesh(new THREE.BoxGeometry(5.5, 1.6, 0.2), boardMat);
       board.castShadow = true;
       sg.add(board);
-      
+
       // Text
       const c = document.createElement('canvas');
       c.width = 720;
@@ -1113,34 +1113,34 @@ export default function BeeFactoryScene() {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('BEEFACTORY.SHOP', 360, 105);
-      
+
       const tex = new THREE.CanvasTexture(c);
       tex.colorSpace = THREE.SRGBColorSpace;
-      
+
       const txt = new THREE.Mesh(new THREE.PlaneGeometry(5.2, 1.5), new THREE.MeshBasicMaterial({ map: tex, transparent: true }));
       txt.position.z = 0.11;
       sg.add(txt);
-      
+
       const postMat = new THREE.MeshStandardMaterial({ color: 0x3d2515, roughness: 0.92 });
       const postGeo = new THREE.CylinderGeometry(0.11, 0.14, 3.2, 8);
-      
+
       const p1 = new THREE.Mesh(postGeo, postMat);
       p1.position.set(2.4, -2.4, 0);
       p1.castShadow = true;
       sg.add(p1);
-      
+
       const p2 = p1.clone();
       p2.position.x = -2.4;
       sg.add(p2);
-      
+
       return sg;
     };
-    
+
     const shopSign = createSign();
     shopSign.position.set(11, -2, 9);
     shopSign.rotation.y = -0.45;
     scene.add(shopSign);
-    
+
     const smallSign = createSign();
     smallSign.scale.setScalar(0.42);
     smallSign.position.set(-5.5, -3.2, 5.5);
@@ -1158,11 +1158,11 @@ export default function BeeFactoryScene() {
     controls.target.copy(hiveInsideCenter);
     controls.enabled = false;
 
-	    const clock = new THREE.Clock();
-	    let animTime = 0;
-	    let scrollY = window.scrollY;
-	    const onScroll = () => { scrollY = window.scrollY; };
-	    window.addEventListener('scroll', onScroll, { passive: true });
+    const clock = new THREE.Clock();
+    let animTime = 0;
+    let scrollY = window.scrollY;
+    const onScroll = () => { scrollY = window.scrollY; };
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     let currentPhase: SceneState['phase'] = 'greeting';
     const setPhase = (phase: SceneState['phase']) => {
@@ -1193,48 +1193,48 @@ export default function BeeFactoryScene() {
     const tmpBeePos = new THREE.Vector3();
     const tmpOrbitPos = new THREE.Vector3();
     const tmpTangent = new THREE.Vector3();
-	    const tmpCamPos = new THREE.Vector3();
-	    const tmpLookPos = new THREE.Vector3();
-	    const tmpLogoPos = new THREE.Vector3();
-	    const rotMat = new THREE.Matrix4();
-	    const rotQuat = new THREE.Quaternion();
+    const tmpCamPos = new THREE.Vector3();
+    const tmpLookPos = new THREE.Vector3();
+    const tmpLogoPos = new THREE.Vector3();
+    const rotMat = new THREE.Matrix4();
+    const rotQuat = new THREE.Quaternion();
 
     // Animation loop using setAnimationLoop
-	    renderer.setAnimationLoop(() => {
-	      animTime = clock.getElapsedTime();
-	      const t = animTime;
+    renderer.setAnimationLoop(() => {
+      animTime = clock.getElapsedTime();
+      const t = animTime;
 
-	      // Travel can be scroll-driven, but also auto-plays on first view so the user
-	      // immediately experiences the "follow the bee into the hive" story.
-	      const scrollF = Math.min(scrollY / 650, 1);
-	      const scrollTravelRaw = Math.max(0, (scrollF - 0.08) / 0.92);
-	      const autoHold = 1.25; // seconds
-	      const autoDuration = 7.8; // seconds from takeoff to "inside"
-	      const autoTravelRaw = THREE.MathUtils.clamp((t - autoHold) / autoDuration, 0, 1);
-	      const travelRaw = Math.max(scrollTravelRaw, autoTravelRaw);
-	      const travel = travelRaw * travelRaw * (3 - 2 * travelRaw); // smoothstep
+      // Travel can be scroll-driven, but also auto-plays on first view so the user
+      // immediately experiences the "follow the bee into the hive" story.
+      const scrollF = Math.min(scrollY / 650, 1);
+      const scrollTravelRaw = Math.max(0, (scrollF - 0.08) / 0.92);
+      const autoHold = 1.25; // seconds
+      const autoDuration = 7.8; // seconds from takeoff to "inside"
+      const autoTravelRaw = THREE.MathUtils.clamp((t - autoHold) / autoDuration, 0, 1);
+      const travelRaw = Math.max(scrollTravelRaw, autoTravelRaw);
+      const travel = travelRaw * travelRaw * (3 - 2 * travelRaw); // smoothstep
 
-	      const isGreeting = travelRaw < 0.001;
+      const isGreeting = travelRaw < 0.001;
 
-	      if (isGreeting) setPhase('greeting');
-	      else if (travelRaw < 0.78) setPhase('flying');
-	      else if (travelRaw < 0.98) setPhase('entering');
-	      else setPhase('inside');
+      if (isGreeting) setPhase('greeting');
+      else if (travelRaw < 0.78) setPhase('flying');
+      else if (travelRaw < 0.98) setPhase('entering');
+      else setPhase('inside');
 
-	      const controlsActive = travelRaw >= 0.98;
-	      controls.enabled = controlsActive;
-	      if (controlsActive) {
-	        innerLogo.getWorldPosition(tmpLogoPos);
-	        controls.target.lerp(tmpLogoPos, 0.1);
-	      }
+      const controlsActive = travelRaw >= 0.98;
+      controls.enabled = controlsActive;
+      if (controlsActive) {
+        innerLogo.getWorldPosition(tmpLogoPos);
+        controls.target.lerp(tmpLogoPos, 0.1);
+      }
 
-	      // Greeting: big hero bee looks at the user.
-	      if (isGreeting) {
-	        mainBee.position.copy(greetBeePos);
-	        mainBee.position.x += Math.sin(t * 1.8) * 0.18;
-	        mainBee.position.y += Math.cos(t * 1.6) * 0.13;
-	        mainBee.position.z += Math.sin(t * 1.3) * 0.14;
-	        mainBee.scale.setScalar(2.15);
+      // Greeting: big hero bee looks at the user.
+      if (isGreeting) {
+        mainBee.position.copy(greetBeePos);
+        mainBee.position.x += Math.sin(t * 1.8) * 0.18;
+        mainBee.position.y += Math.cos(t * 1.6) * 0.13;
+        mainBee.position.z += Math.sin(t * 1.3) * 0.14;
+        mainBee.scale.setScalar(2.15);
 
         camera.position.lerp(greetCamPos, 0.08);
         camera.lookAt(mainBee.position);
@@ -1265,7 +1265,7 @@ export default function BeeFactoryScene() {
         tmpBeePos.lerp(tmpOrbitPos, insideBlend);
 
         mainBee.position.copy(tmpBeePos);
-	        mainBee.scale.setScalar(THREE.MathUtils.lerp(2.15, 0.86, travel));
+        mainBee.scale.setScalar(THREE.MathUtils.lerp(2.15, 0.86, travel));
 
         rotMat.lookAt(tmpTangent, vZero, vUp);
         rotQuat.setFromRotationMatrix(rotMat);
@@ -1273,39 +1273,39 @@ export default function BeeFactoryScene() {
 
         wingFlap(mainBee, 125, 0);
 
-	        // Camera: follow until we hand off to OrbitControls inside the hive.
-	        if (!controlsActive) {
-	          const insideT = THREE.MathUtils.smoothstep(travelRaw, 0.72, 1.0);
-	          const backDist = THREE.MathUtils.lerp(5.6, 1.1, insideT);
-	          const upDist = THREE.MathUtils.lerp(2.0, 0.75, insideT);
+        // Camera: follow until we hand off to OrbitControls inside the hive.
+        if (!controlsActive) {
+          const insideT = THREE.MathUtils.smoothstep(travelRaw, 0.72, 1.0);
+          const backDist = THREE.MathUtils.lerp(5.6, 1.1, insideT);
+          const upDist = THREE.MathUtils.lerp(2.0, 0.75, insideT);
 
           tmpCamPos.copy(tmpTangent).multiplyScalar(-backDist).add(tmpBeePos);
           tmpCamPos.y += upDist;
           camera.position.lerp(tmpCamPos, 0.08);
 
-	          const lookAhead = THREE.MathUtils.lerp(2.35, 1.4, insideT);
-	          tmpLookPos.copy(tmpTangent).multiplyScalar(lookAhead).add(tmpBeePos);
+          const lookAhead = THREE.MathUtils.lerp(2.35, 1.4, insideT);
+          tmpLookPos.copy(tmpTangent).multiplyScalar(lookAhead).add(tmpBeePos);
 
-	          // As we enter the hive, bias the camera towards the integrated inner logo
-	          // so it's clearly visible during the "fly inside" moment.
-	          const logoBias = THREE.MathUtils.smoothstep(travelRaw, 0.8, 0.97);
-	          if (logoBias > 0.001) {
-	            innerLogo.getWorldPosition(tmpLogoPos);
-	            tmpLookPos.lerp(tmpLogoPos, logoBias * 0.78);
-	          }
-	          camera.lookAt(tmpLookPos);
-	        }
-	      }
+          // As we enter the hive, bias the camera towards the integrated inner logo
+          // so it's clearly visible during the "fly inside" moment.
+          const logoBias = THREE.MathUtils.smoothstep(travelRaw, 0.8, 0.97);
+          if (logoBias > 0.001) {
+            innerLogo.getWorldPosition(tmpLogoPos);
+            tmpLookPos.lerp(tmpLogoPos, logoBias * 0.78);
+          }
+          camera.lookAt(tmpLookPos);
+        }
+      }
 
       // Workers
-	      workers.forEach((w, i) => {
-	        if (w.data.mode === 'work') {
-	          const ang = t * w.data.speed + w.data.offset;
-	          w.mesh.position.x = workerCenterX + Math.cos(ang) * w.data.r;
-	          w.mesh.position.z = hiveInsideCenter.z + Math.sin(ang) * w.data.r * 0.7;
-	          w.mesh.position.y = hiveInsideCenter.y + w.data.yOff + Math.sin(t * 1.6 + i) * 0.12;
-	        } else {
-	          const ent = (Math.sin(t * 0.38 + w.data.offset) + 1) / 2;
+      workers.forEach((w, i) => {
+        if (w.data.mode === 'work') {
+          const ang = t * w.data.speed + w.data.offset;
+          w.mesh.position.x = workerCenterX + Math.cos(ang) * w.data.r;
+          w.mesh.position.z = hiveInsideCenter.z + Math.sin(ang) * w.data.r * 0.7;
+          w.mesh.position.y = hiveInsideCenter.y + w.data.yOff + Math.sin(t * 1.6 + i) * 0.12;
+        } else {
+          const ent = (Math.sin(t * 0.38 + w.data.offset) + 1) / 2;
           w.mesh.position.x = THREE.MathUtils.lerp(hiveInsideCenter.x, hiveEntrance.x + 0.55, ent);
           w.mesh.position.y = THREE.MathUtils.lerp(hiveInsideCenter.y, hiveEntrance.y + 0.15, ent);
           w.mesh.position.z = THREE.MathUtils.lerp(hiveInsideCenter.z, hiveEntrance.z, ent);
@@ -1317,7 +1317,7 @@ export default function BeeFactoryScene() {
       // Flyers
       flyers.forEach((f, i) => {
         const ang = t * f.data.speed + f.data.offset;
-        
+
         if (f.data.pat === '8') {
           f.mesh.position.x = Math.cos(ang) * f.data.r;
           f.mesh.position.z = Math.sin(ang * 2) * f.data.r * 0.45;
@@ -1327,7 +1327,7 @@ export default function BeeFactoryScene() {
           f.mesh.position.z = Math.sin(ang) * f.data.r * 0.65;
           f.mesh.position.y = -1.2 + Math.sin(ang * 1.4) * f.data.yR * 0.45;
         }
-        
+
         f.mesh.rotation.y = -ang + Math.PI / 2;
         wingFlap(f.mesh, 60 + i * 1.8, i * 0.28);
       });
@@ -1335,7 +1335,7 @@ export default function BeeFactoryScene() {
       // Environment
       grass.rotation.x = -Math.PI / 2;
       grass.position.y = -3.8 + Math.sin(t * 0.35) * 0.03;
-      
+
       particles.rotation.y = t * 0.012;
       particles.position.y = Math.sin(t * 0.07) * 0.25;
 
@@ -1374,7 +1374,7 @@ export default function BeeFactoryScene() {
   return (
     <div className="relative w-full h-full">
       <div ref={mountRef} className="absolute inset-0 z-0" />
-      
+
       {sceneState.phase === 'greeting' && (
         <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
           <div className="text-black/80 text-2xl tracking-wide bg-white/65 px-10 py-5 rounded-full backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.18)]">
@@ -1382,7 +1382,7 @@ export default function BeeFactoryScene() {
           </div>
         </div>
       )}
-      
+
       {sceneState.phase === 'flying' && (
         <div className="absolute bottom-14 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
           <div className="text-black/75 text-sm tracking-widest bg-white/60 px-5 py-2.5 rounded-full backdrop-blur-sm shadow-[0_10px_30px_rgba(0,0,0,0.14)]">
@@ -1390,7 +1390,7 @@ export default function BeeFactoryScene() {
           </div>
         </div>
       )}
-      
+
       {sceneState.phase === 'entering' && (
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
           <p className="text-black/70 text-xs tracking-widest bg-white/65 px-4 py-2 rounded-full backdrop-blur-sm shadow-[0_10px_30px_rgba(0,0,0,0.14)]">
@@ -1398,7 +1398,7 @@ export default function BeeFactoryScene() {
           </p>
         </div>
       )}
-      
+
       {sceneState.phase === 'inside' && (
         <div className="absolute top-5 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
           <p className="text-black/70 text-xs tracking-widest bg-white/65 px-4 py-2 rounded-full backdrop-blur-sm shadow-[0_10px_30px_rgba(0,0,0,0.14)]">

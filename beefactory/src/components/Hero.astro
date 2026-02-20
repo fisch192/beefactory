@@ -11,18 +11,18 @@ const neuimkerPath = lang === 'de' ? 'neuimker' : 'nuovi-apicoltori';
 const catSlug      = lang === 'de' ? 'kategorien' : 'categorie';
 
 const headline = lang === 'de'
-  ? { line1: 'Nature.', em: 'Engineered.', line3: 'The Apex Hive.' }
-  : { line1: 'Natura.', em: 'Ingegnerizzata.', line3: 'L’Alveare Apex.' };
+  ? { line1: 'Die Kunst der', em: 'Imkerei.', line3: 'Meisterhaft.' }
+  : { line1: "L'Arte dell'", em: 'Apicoltura.', line3: 'Perfezionata.' };
 
-const ctaPrimary   = lang === 'de' ? 'Enter the Factory' : 'Entra nella Fabbrica';
-const ctaSecondary = lang === 'de' ? 'Specifications'    : 'Specifiche';
+const ctaPrimary   = lang === 'de' ? 'Sortiment entdecken' : 'Scopri il catalogo';
+const ctaSecondary = lang === 'de' ? 'Einsteiger-Guide'    : 'Guida principianti';
 const subtitle     = lang === 'de'
-  ? 'The first modular apiary system designed with the tolerances of an aerospace lab.'
-  : 'Il primo sistema d’apiario modulare progettato con le tolleranze di un laboratorio aerospaziale.';
+  ? 'Professionelle Imkerei-Ausrüstung für Einsteiger und erfahrene Imker in der Alpenregion.'
+  : 'Attrezzatura apistica professionale per principianti ed esperti in tutta la regione alpina.';
 
 const stats = lang === 'de'
-  ? [{ val: '±0.1mm', label: 'Toleranz' }, { val: '2.5mm', label: 'Material' }, { val: '∞', label: 'Lebensdauer' }]
-  : [{ val: '±0.1mm', label: 'Tolleranza' }, { val: '2.5mm', label: 'Materiale' }, { val: '∞', label: 'Durata' }];
+  ? [{ val: '500+', label: 'Kunden' }, { val: '50+', label: 'Produkte' }, { val: '5 ★', label: 'Bewertung' }]
+  : [{ val: '500+', label: 'Clienti' }, { val: '50+', label: 'Prodotti' }, { val: '5 ★', label: 'Valutazione' }];
 ---
 
 <section class="hero-section">
@@ -31,7 +31,23 @@ const stats = lang === 'de'
   <div class="hero-bg" aria-hidden="true">
     <div class="absolute inset-0 bg-void/60 z-10 mix-blend-multiply"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-void via-void/40 to-transparent z-20"></div>
-    <img src="/images/bee_factory_header2_150dpi.jpg" alt="Macro honeycomb" class="w-full h-full object-cover opacity-80" />
+    <img src="/images/background.png" alt="Beekeeping Background" class="w-full h-full object-cover opacity-80" />
+  </div>
+
+  <!-- ── Floating Bee Animation ───────────────────────────── -->
+  <div class="hero-flying-bee" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 6c-2.8 0-5 2.2-5 5v5c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5v-5c0-2.8-2.2-5-5-5H7Z"></path>
+      <path d="M12 2v4"></path>
+      <path d="M8 2v4"></path>
+      <path d="M16 2v4"></path>
+      <path d="M4 11h16"></path>
+      <path d="M4 16h16"></path>
+      <path d="M12 21v2"></path>
+      <!-- wings -->
+      <path d="M16 11c3 0 5-2 5-5C21 3 18 2 16 2c-2 0-3 2-3 4"></path>
+      <path d="M8 11c-3 0-5-2-5-5C3 3 6 2 8 2c2 0 3 2 3 4"></path>
+    </svg>
   </div>
 
   <!-- ── Content ──────────────────────────────────── -->
@@ -235,6 +251,27 @@ const stats = lang === 'de'
       opacity:   1;
       transform: translateY(0);
     }
+  }
+
+  /* ── Flying Bee Animation ─────────────────────────── */
+  .hero-flying-bee {
+    position: absolute;
+    top: 25%;
+    left: -10%;
+    z-index: 25;
+    animation: flyAcross 20s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    opacity: 0.8;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+  }
+  
+  @keyframes flyAcross {
+    0%   { transform: translate(0, 0) rotate(15deg); }
+    15%  { transform: translate(20vw, -10vh) rotate(-5deg); }
+    35%  { transform: translate(45vw, 5vh) rotate(10deg); }
+    60%  { transform: translate(75vw, -15vh) rotate(-15deg); }
+    85%  { transform: translate(110vw, 5vh) rotate(10deg); }
+    100% { transform: translate(130vw, 0) rotate(15deg); }
   }
 
   /* ── Mobile adjustments ────────────────────── */

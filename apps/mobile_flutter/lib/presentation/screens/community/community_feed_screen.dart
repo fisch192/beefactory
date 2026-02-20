@@ -7,6 +7,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../providers/community_provider.dart';
 import 'create_post_screen.dart';
 import 'post_detail_screen.dart';
+import 'package:go_router/go_router.dart';
 
 /// Honey amber theme colours used across community screens.
 const Color kHoneyAmber = Color(0xFFFFA000);
@@ -109,6 +110,12 @@ class _CommunityFeedScreenState extends State<CommunityFeedScreen> {
         foregroundColor: Colors.white,
         elevation: 0,
         actions: [
+          IconButton(
+            icon: const Icon(Icons.group_add),
+            tooltip: 'Vereine & Gruppen',
+            onPressed: () => context.push('/community/groups'),
+          ),
+          const SizedBox(width: 4),
           Chip(
             label: Text(
               '$_region / $_elevationBand',

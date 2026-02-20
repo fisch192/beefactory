@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart';
 
 import '../../../data/local/daos/events_dao.dart';
 import '../../../data/local/daos/tasks_dao.dart';
@@ -11,6 +13,7 @@ import '../../../services/gamification_service.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/sync_provider.dart';
 import '../../providers/sites_provider.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class HomeScreen extends StatefulWidget {
   final Widget child;
@@ -135,6 +138,7 @@ class _HomeTabContentState extends State<HomeTabContent> {
   List<db.Task> _todayTasks = [];
   List<db.Task> _weekTasks = [];
   int _inspectionCount = 0;
+  List<dynamic> _products = [];
 
   @override
   void initState() {
@@ -175,6 +179,10 @@ class _HomeTabContentState extends State<HomeTabContent> {
           .where((e) => e.type == 'inspection' || e.type == 'INSPECTION')
           .length;
 
+      final String jsonStr =
+          await rootBundle.loadString('assets/data/products.json');
+      final List<dynamic> productsData = json.decode(jsonStr);
+
       if (mounted) {
         setState(() {
           _achievements =
@@ -183,10 +191,11 @@ class _HomeTabContentState extends State<HomeTabContent> {
           _todayTasks = todayTasks;
           _weekTasks = weekTasks;
           _inspectionCount = inspectionCount;
+          _products = productsData;
           _gamLoaded = true;
         });
       }
-    } catch (_) {
+    } catch (e) {
       if (mounted) setState(() => _gamLoaded = true);
     }
   }
@@ -199,6 +208,73 @@ class _HomeTabContentState extends State<HomeTabContent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Hero Banner
+          Container(
+            height: 140,
+            margin: const EdgeInsets.only(bottom: 24),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26, 
+                  blurRadius: 10, 
+                  offset: Offset(0, 4)
+                ),
+              ],
+              image: const DecorationImage(
+                image: AssetImage('assets/images/honeycomb_bg.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: LinearGradient(
+                  colors: [Colors.black.withAlpha(220), Colors.black.withAlpha(100)],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ),
+              ),
+              padding: const EdgeInsets.all(16),
+              alignment: Alignment.centerLeft,
+              child: Row(
+                children: [
+                  Image.asset(
+                    'assets/images/app_logo.png',
+                    height: 80,
+                    errorBuilder: (context, error, stackTrace) =>
+                        const Icon(Icons.hive, size: 80, color: Color(0xFFFFB400)),
+                  ).animate().scale(delay: 200.ms, duration: 600.ms, curve: Curves.elasticOut),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Beefactory',
+                          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.2,
+                              ),
+                        ).animate().fade(duration: 800.ms).slideX(),
+                        const Text(
+                          'Industrial Organic Beekeeping',
+                          style: TextStyle(
+                            color: Color(0xFF8E8E93),
+                            fontSize: 12,
+                            letterSpacing: 2,
+                          ),
+                        ).animate().fade(delay: 400.ms),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ).animate().fade(duration: 800.ms).slideY(begin: -0.1, end: 0),
+          
           // Greeting + streak
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -273,7 +349,10 @@ class _HomeTabContentState extends State<HomeTabContent> {
                 scrollDirection: Axis.horizontal,
                 children: _achievements
                     .map((a) => _AchievementBadge(achievement: a))
-                    .toList(),
+                    .toList()
+                    .animate(interval: 50.ms)
+                    .scale(begin: const Offset(0.8, 0.8), curve: Curves.easeOutBack)
+                    .fade(),
               ),
             ),
             const SizedBox(height: 20),
@@ -308,7 +387,7 @@ class _HomeTabContentState extends State<HomeTabContent> {
                   },
                 ),
               ),
-            ],
+            ].animate(interval: 100.ms).fade(duration: 500.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutQuad),
           ),
           const SizedBox(height: 16),
 
@@ -341,7 +420,7 @@ class _HomeTabContentState extends State<HomeTabContent> {
                   onTap: () => context.push('/ai'),
                 ),
               ),
-            ],
+            ].animate(interval: 100.ms, delay: 100.ms).fade(duration: 500.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutQuad),
           ),
           const SizedBox(height: 24),
 
@@ -373,7 +452,7 @@ class _HomeTabContentState extends State<HomeTabContent> {
               ),
             )
           else
-            ...(_todayTasks.map((t) => _HomeTaskTile(task: t))),
+            ...(_todayTasks.map((t) => _HomeTaskTile(task: t).animate().fade().slideX(begin: 0.05))),
           const SizedBox(height: 24),
 
           // Weekly Focus (next 7 days)
@@ -443,10 +522,115 @@ class _HomeTabContentState extends State<HomeTabContent> {
                       ),
                     ],
                   ),
-                ),
-              );
-            },
+                ).animate().fade(duration: 600.ms).scale(begin: const Offset(0.95, 0.95), curve: Curves.easeOutCubic);
+              },
+            ),
           ),
+          const SizedBox(height: 32),
+
+          // Webshop Section
+          if (_products.isNotEmpty) ...[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Imkereibedarf',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text('Alle ansehen',
+                      style: TextStyle(color: Color(0xFFFFB400))),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            SizedBox(
+              height: 200,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: _products.length,
+                itemBuilder: (context, index) {
+                  final product = _products[index];
+                  final title = product['title']?['de'] ?? 'Produkt';
+                  final price = product['price']?.toString() ?? '0.00';
+                  
+                  return Container(
+                    width: 160,
+                    margin: const EdgeInsets.only(right: 16),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF1C1C1E),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.white.withAlpha(20)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withAlpha(50),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        )
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.black.withAlpha(100),
+                              borderRadius: const BorderRadius.vertical(
+                                  top: Radius.circular(12)),
+                            ),
+                            child: const Center(
+                              child: Icon(Icons.shopping_bag_outlined,
+                                  size: 48, color: Color(0xFF8E8E93)),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                title,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '€$price',
+                                    style: const TextStyle(
+                                      color: Color(0xFFFFB400),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  const Icon(Icons.add_shopping_cart,
+                                      size: 16, color: Color(0xFF8E8E93)),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ).animate().fade(delay: (index * 100).ms).slideX(begin: 0.1);
+                },
+              ),
+            ),
+            const SizedBox(height: 32),
+          ],
         ],
       ),
     );

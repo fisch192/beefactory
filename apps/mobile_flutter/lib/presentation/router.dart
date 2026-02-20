@@ -226,6 +226,11 @@ class AppRouter {
           return PostDetailScreen(postId: postId);
         },
       ),
+      GoRoute(
+        path: '/community/groups',
+        name: 'groups',
+        builder: (context, state) => const GroupsScreen(),
+      ),
     ],
   );
 }

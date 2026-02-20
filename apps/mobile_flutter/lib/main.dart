@@ -141,7 +141,7 @@ void main() async {
           ),
         ),
       ],
-      child: const BeeApp(),
+      child: const BeefactoryApp(),
     ),
   );
 }
