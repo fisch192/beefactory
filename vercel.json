@@ -1,0 +1,11 @@
+{
+    "buildCommand": "cd beefactory && npm run build",
+    "outputDirectory": "beefactory/dist",
+    "installCommand": "cd beefactory && npm install",
+    "rewrites": [
+        {
+            "source": "/",
+            "destination": "/de/"
+        }
+    ]
+}
