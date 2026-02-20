@@ -29,6 +29,7 @@ const navItems = [
     <a href={`${prefix}/`} class="header-logo" aria-label="Beefactory">
       <!-- We use the precise, uploaded hexagon logo -->
       <img src="/images/bee_factory_logo.svg" alt="Beefactory" class="logo-img" />
+      <span class="logo-text">BEE FACTORY</span>
     </a>
 
     <!-- Desktop nav (JetBrains Mono) -->
@@ -127,7 +128,12 @@ const navItems = [
   .header-logo {
     position:    relative;
     flex-shrink: 0;
-    line-height: 0;
+    line-height: 1;
+    display:     flex;
+    flex-direction: column;
+    align-items: center;
+    gap:         0.25rem;
+    text-decoration: none;
     transition:  transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .header-logo:hover {
@@ -135,9 +141,18 @@ const navItems = [
   }
 
   .logo-img {
-    height:     3rem;
+    height:     2.5rem; /* slightly smaller to fit text */
     width:      auto;
     object-fit: contain;
+  }
+  
+  .logo-text {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: var(--color-titanium);
+    text-transform: uppercase;
   }
 
   /* ── Desktop nav ───────────────────────────── */
