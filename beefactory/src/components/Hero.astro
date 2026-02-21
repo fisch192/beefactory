@@ -30,8 +30,10 @@ const stats = lang === 'de'
   <!-- ── Macro Photography Background ───────────────────────────── -->
   <div class="hero-bg" aria-hidden="true">
     <div class="absolute inset-0 bg-void/60 z-10 mix-blend-multiply"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-void via-void/40 to-transparent z-20"></div>
-    <img src="/images/bee_factory_background_clean_2048x1034.png" alt="Beekeeping Background" class="w-full h-full object-cover object-[80%_center] md:object-center opacity-80" />
+    <div class="absolute inset-0 bg-gradient-to-t from-void via-void/40 to-transparent z-20 md:via-void/20"></div>
+    <img src="/images/bee_factory_background_clean_2048x1034.png" alt="Beekeeping Background" class="w-full h-[85vh] md:h-full object-cover object-[65%_center] md:object-center opacity-80" />
+    <!-- Gradient overlay to blend the bottom of the shorter mobile image into the void background -->
+    <div class="absolute inset-0 bg-gradient-to-t from-void via-void/80 to-transparent opacity-100 md:opacity-0 z-15" style="background: linear-gradient(to top, var(--color-void) 15vh, transparent 40vh);"></div>
   </div>
 
   <!-- ── Floating Bee Animation ───────────────────────────── -->
